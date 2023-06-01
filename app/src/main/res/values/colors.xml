@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--    default     -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +8,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+<!--    color in app    -->
+    <color name="main_green">#57786A</color>
+    <color name="background">#FAFFF8</color>
+    <color name="gray_item">#FAFAFA</color>
+    <color name="get_start_gray">#D9D9D9</color>
+    <color name="get_start_green_button">#9EAD7E</color>
+    <color name="water">#526FB8</color>
+    <color name="sleep">#3EA862</color>
+    <color name="exercise">#B26E52</color>
+    <color name="all_goal">#4DC591</color>
+    <color name="orange">#FF7648</color>
+    <color name="light_orange">#FFC278</color>
+    <color name="purple">#AC1F7C</color>
+    <color name="light_purple">#C78FFF</color>
 </resources>
