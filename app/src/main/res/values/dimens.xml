@@ -9,6 +9,8 @@
     <dimen name="big_item_height_plus">136dp</dimen>
     <dimen name="left_title_margin_left">20dp</dimen>
     <dimen name="left_title_margin_top">27dp</dimen>
+    <dimen name="has_border_width">1sp</dimen>
+    <dimen name="item_border_radius">20sp</dimen>
 
 <!--    ExerciseScreens-->
     <dimen name="small_ex_text_size">14sp</dimen>
