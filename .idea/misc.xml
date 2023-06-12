@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.124" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/border.xml" value="0.124" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/font/lato_fonts.xml" value="0.14427083333333332" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_exercise_main.xml" value="0.16799999999999998" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_main.xml" value="0.22327898550724637" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/main_exercise_item.xml" value="0.2" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/small_exercise_item.xml" value="0.2" />
       </map>
     </option>
   </component>
