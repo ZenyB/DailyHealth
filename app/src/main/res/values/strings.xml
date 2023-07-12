@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Daily Health</string>
+    <string name="status_play">Bắt đầu</string>
+    <string name="status_pause">Tạm ngưng</string>
 </resources>
