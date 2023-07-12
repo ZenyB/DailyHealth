@@ -15,9 +15,7 @@ public class MainExercise {
         return name;
     }
 
-    public String getTime() {
-        return time;
-    }
+    public String getTime() { return time; }
 
     public String getKcal() {
         return kcal;
