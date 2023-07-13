@@ -20,7 +20,7 @@
             android:name=".MoonCalendar"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainStatistic"
             android:exported="false" />
         <activity
             android:name=".WaterDaily"
@@ -37,9 +37,11 @@
         <activity
             android:name=".MoonSettingScreen1"
             android:exported="false" />
+        <activity android:name=".DetailExerciseActivity">
+
+        </activity>
         <activity
-            android:name=".DetailExerciseActivity"
-            android:name=".MainStatistic"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,9 +49,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SleepStatistics"></activity>
-        <activity android:name=".ExerciseStatistics"></activity>
-        <activity android:name=".WaterStatistics"></activity>
+        <activity android:name=".SleepStatistics" android:exported="false"></activity>
+        <activity android:name=".ExerciseStatistics" android:exported="false"></activity>
+        <activity android:name=".WaterStatistics" android:exported="false"></activity>
     </application>
 
 </manifest>
