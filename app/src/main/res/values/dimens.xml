@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-<!--    Constants-->
+    <!--    Constants-->
     <dimen name="title_font_size">24sp</dimen>
     <dimen name="title_line_height">29sp</dimen>
     <dimen name="big_item_width">291dp</dimen>
     <dimen name="big_item_height">92dp</dimen>
+<!--    plus is item height plus space between them-->
     <dimen name="big_item_height_plus">136dp</dimen>
     <dimen name="left_title_margin_left">20dp</dimen>
     <dimen name="left_title_margin_top">27dp</dimen>
     <dimen name="has_border_width">1sp</dimen>
     <dimen name="item_border_radius">20sp</dimen>
 
-<!--    ExerciseScreens-->
+    <!--    ExerciseScreens-->
     <dimen name="small_ex_text_size">14sp</dimen>
-    <dimen name="small_ex_line_height">17sp</dimen>
-    <dimen name="small_ex_item_width">329sp</dimen>
-    <dimen name="small_ex_item_height">64sp</dimen>
-    <dimen name="small_ex_item_height_plus">90sp</dimen>
+    <dimen name="small_ex_line_height">17dp</dimen>
+    <dimen name="small_ex_item_width">329dp</dimen>
+    <dimen name="small_ex_item_height">64dp</dimen>
+    <dimen name="small_ex_item_height_plus">90dp</dimen>
+    <dimen name="small_ex_item_height_activated">186dp</dimen>
+    <dimen name="large_border_radius_ex2">50dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Moon Setting Screens-->
+    <dimen name="img_editor_absoluteY">100dp</dimen>
+    <dimen name="question_margin_top">20dp</dimen>
+    <dimen name="question_size">24sp</dimen>
+    <dimen name="date_picker_text_size">30sp</dimen>
+    <dimen name="date_picker_margin_top">80dp</dimen>
 
 </resources>

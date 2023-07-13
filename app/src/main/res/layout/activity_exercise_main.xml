@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ExerciseMainActivity">
 
     <TextView
@@ -14,7 +15,7 @@
         android:layout_marginTop="@dimen/left_title_margin_top"
         android:layout_marginLeft="@dimen/left_title_margin_left"
         android:fontFamily="@font/lato_bold_2"
-        android:lineHeight="17px"
+        android:lineHeight="17dp"
         android:text="Lựa chọn bài tập"
         android:textColor="@color/black"
         android:textSize="@dimen/title_font_size"

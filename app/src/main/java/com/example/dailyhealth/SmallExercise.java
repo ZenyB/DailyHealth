@@ -1,24 +1,20 @@
 package com.example.dailyhealth;
 
-public class MainExercise {
+public class SmallExercise {
     private String name;
     private String time;
-    private String kcal;
 
-    public MainExercise(String name, String time, String kcal) {
+    public SmallExercise(String name, String time) {
         this.name = name;
         this.time = time;
-        this.kcal = kcal;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getTime() { return time; }
-
-    public String getKcal() {
-        return kcal;
+    public String getTime() {
+        return time;
     }
 
     public void setName(String name) {
@@ -27,9 +23,5 @@ public class MainExercise {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public void setKcal(String kcal) {
-        this.kcal = kcal;
     }
 }
