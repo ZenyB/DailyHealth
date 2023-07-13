@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Daily Health</string>
+    <string name="status_play">Bắt đầu</string>
+    <string name="status_pause">Tạm ngưng</string>
     <string name="title_activity_main_setting_screen3">MainSettingScreen3</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
