@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Daily Health</string>
+    <string name="hello_blank_fragment">Heloo</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="status_play">Bắt đầu</string>
     <string name="status_pause">Tạm ngưng</string>
     <string name="title_activity_main_setting_screen3">MainSettingScreen3</string>
