@@ -31,10 +31,10 @@ public class MoonSettingScreen1 extends AppCompatActivity {
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
         month = month + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
         return makeDateString(day, month, year);
     }
 

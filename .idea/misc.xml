@@ -3,13 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2165" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_exercise_main.xml" value="0.25" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_calendar.xml" value="0.264" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen1.xml" value="0.20153985507246377" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen2.xml" value="0.1" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen3.xml" value="0.1" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen4.xml" value="0.1" />
+        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_water_daily.xml" value="0.25" />
+        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/calendar_cell.xml" value="0.109375" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/main_exercise_item.xml" value="0.176" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.124" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/border.xml" value="0.124" />
