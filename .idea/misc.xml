@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2165" />
+        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/circle.xml" value="0.1055" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/exercise2_large_border.xml" value="0.1055" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/ic_back_layout.xml" value="0.1055" />
+        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/ic_black_back_layout.xml" value="0.2165" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/ic_play_foreground.xml" value="0.1055" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_detail_exercise.xml" value="0.1" />
@@ -16,6 +18,7 @@
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen2.xml" value="0.1" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen3.xml" value="0.1" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen4.xml" value="0.1" />
+        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_schedule_calendar.xml" value="0.25" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_water_daily.xml" value="0.25" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/calendar_cell.xml" value="0.109375" />
         <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/main_exercise_item.xml" value="0.176" />

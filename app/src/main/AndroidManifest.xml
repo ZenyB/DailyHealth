@@ -14,13 +14,16 @@
         android:theme="@style/Theme.DailyHealth"
         tools:targetApi="31">
         <activity
+            android:name=".ScheduleCalendar"
+            android:exported="false" />
+        <activity
             android:name=".ExerciseMainActivity"
             android:exported="false" />
         <activity
-            android:name=".MoonCalendar"
+            android:name=".DetailExerciseActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MoonCalendar"
             android:exported="false" />
         <activity
             android:name=".WaterDaily"
@@ -38,7 +41,7 @@
             android:name=".MoonSettingScreen1"
             android:exported="false" />
         <activity
-            android:name=".DetailExerciseActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
