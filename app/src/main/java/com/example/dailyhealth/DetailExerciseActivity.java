@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,5 +27,8 @@ public class DetailExerciseActivity extends AppCompatActivity {
         r.setLayoutManager(new LinearLayoutManager(this));
         //Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
         r.setAdapter(new SmallExerciseAdapter(this, arrayList));
+
+        String s = getIntent().getExtras().getString("Name");
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
     }
 }

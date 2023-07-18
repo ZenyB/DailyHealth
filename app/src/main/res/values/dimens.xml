@@ -20,6 +20,7 @@
     <dimen name="small_ex_item_height">64dp</dimen>
     <dimen name="small_ex_item_height_plus">90dp</dimen>
     <dimen name="small_ex_item_height_activated">186dp</dimen>
+    <dimen name="small_ex_item_height_activated_plus">222dp</dimen>
     <dimen name="large_border_radius_ex2">50dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 

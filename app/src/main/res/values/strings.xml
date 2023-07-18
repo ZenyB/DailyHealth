@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Daily Health</string>
+<!--    Exercise-->
     <string name="status_play">Bắt đầu</string>
     <string name="status_pause">Tạm ngưng</string>
     <string name="title_activity_main_setting_screen3">MainSettingScreen3</string>
@@ -11,4 +12,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+<!--    Setting-->
+    <string name="first_item_setting_title">Lời nhắc</string>
+    <string name="second_item_setting_title">Giấc ngủ</string>
+    <string name="third_item_setting_title">Lượng nước</string>
+    <string name="fourth_item_setting_title">Kinh nguyệt</string>
+    <string name="fifth_item_setting_title">Thông số</string>
 </resources>
