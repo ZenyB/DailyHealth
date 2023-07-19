@@ -65,6 +65,9 @@
             android:name=".MainActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".NavigationActivity"
+            android:exported="false"/>
         <activity android:name=".SleepStatistics" android:exported="false"></activity>
         <activity android:name=".ExerciseStatistics" android:exported="false"></activity>
         <activity android:name=".WaterStatistics" android:exported="false"></activity>
