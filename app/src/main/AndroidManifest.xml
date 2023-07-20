@@ -18,8 +18,7 @@
             android:exported="false" />
         <activity
             android:name=".GetStart"
-            android:exported="false">
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".GetInfor"
             android:exported="false"/>
