@@ -27,45 +27,43 @@ public class NavigationActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.property_1_exercise));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.property_1_setting));
         bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.property_1_user));
-
-        bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
-            @Override
-            public Unit invoke(MeowBottomNavigation.Model model) {
-                // YOUR CODES
-                switch (model.getId()){
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                }
-                return null;
+        bottomNavigation.show(1, true);
+        bottomNavigation.setOnClickMenuListener(model -> {
+            // YOUR CODES
+            switch (model.getId()){
+                case 1:
+                    loadFragment(new HomeFragment());
+                    break;
+                case 2:
+                    loadFragment(new ExerciseFragment());
+                    break;
+                case 3:
+                    loadFragment(new SettingFragment());
+                    break;
+                case 4:
+                    loadFragment(new UserFragment());
+                    break;
             }
+            return null;
         });
 
-        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
-            @Override
-            public Unit invoke(MeowBottomNavigation.Model model) {
-                // YOUR CODES
-                switch (model.getId()){
-                    case 1:
-                        loadFragment(new HomeFragment());
-                        break;
-                    case 2:
-                        loadFragment(new ExerciseFragment());
-                        break;
-                    case 3:
-                        loadFragment(new SettingFragment());
-                        break;
-                    case 4:
-                        loadFragment(new UserFragment());
-                        break;
-                }
-                return null;
+        bottomNavigation.setOnShowListener(model -> {
+            // YOUR CODES
+            switch (model.getId()){
+                case 1:
+                    loadFragment(new HomeFragment());
+                    break;
+                case 2:
+                    loadFragment(new ExerciseFragment());
+                    break;
+                case 3:
+                    loadFragment(new SettingFragment());
+                    break;
+                case 4:
+                    loadFragment(new UserFragment());
+                    break;
             }
+            return null;
         });
 
     }

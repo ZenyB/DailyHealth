@@ -20,10 +20,15 @@ public class ExerciseMainActivity extends AppCompatActivity implements MainExerc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_main);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         arrayList.add(new MainExercise("Bài tập chính", "5 phút", "200KCAL"));
         arrayList.add(new MainExercise("Bài tập cơ tay", "5 phút", "200KCAL"));
+
+        final RecyclerView r1 = (RecyclerView) findViewById(R.id.suggestExerciseRecyclerView);
+        r1.setLayoutManager(new LinearLayoutManager(this));
+//        Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
+        r1.setAdapter(new MainExerciseAdapter(this, arrayList, this));
 
         final RecyclerView r = (RecyclerView) findViewById(R.id.mainExerciseRecyclerView);
         r.setLayoutManager(new LinearLayoutManager(this));

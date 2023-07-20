@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements HorizontalExercis
 
     private ArrayList<MainExercise> arrayList = new ArrayList<>();
     private ArrayList<Schedule> schedules = new ArrayList<>();
-    private ArrayList<BottleInfo> bottleInfos = new ArrayList<>();
+//    private ArrayList<BottleInfo> bottleInfos = new ArrayList<>();
 
     TextView drinkTV;
 
@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements HorizontalExercis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getSupportActionBar().hide();
 
         arrayList.add(new MainExercise("Bài tập chính", "5 phút", "200KCAL"));
         arrayList.add(new MainExercise("Bài tập cơ tay", "5 phút", "200KCAL"));
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements HorizontalExercis
     @Override
     public void onClick(int position) {
         MainExercise i = arrayList.get(position);
-        Intent intent1 = new Intent(this, DetailExerciseActivity.class);
+        Intent intent1 = new Intent(MainActivity.this, DetailExerciseActivity.class);
         intent1.putExtra("Name", new String(i.getName()));
 //                    intent1.putExtra("Name", new String(s.getName()));
 //                    intent1.putExtra("Students", new Integer(s.getStudents()));
