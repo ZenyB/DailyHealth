@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_black_back_layout"
+        android:src="@drawable/ellipse"
         app:layout_constraintTop_toBottomOf="@+id/layout"></ImageView>
 
     <LinearLayout

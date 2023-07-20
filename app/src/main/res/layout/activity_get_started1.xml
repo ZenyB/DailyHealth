@@ -13,7 +13,7 @@
         android:id="@+id/started"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_black_back_layout"
+        android:src="@drawable/started"
         tools:layout_editor_absoluteX="0dp"></ImageView>
 
     <TextView
