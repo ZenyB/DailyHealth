@@ -57,7 +57,7 @@
             android:name=".DetailExerciseActivity"
             android:exported="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".NavigationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,11 +70,11 @@
             android:name=".ScheduleCalendar"
             android:exported="false"/>
         <activity
-            android:name=".NavigationActivity"
+            android:name=".MainActivity"
             android:exported="false"/>
-        <activity android:name=".SleepStatistics" android:exported="false"></activity>
-        <activity android:name=".ExerciseStatistics" android:exported="false"></activity>
-        <activity android:name=".WaterStatistics" android:exported="false"></activity>
+        <activity android:name=".SleepStatistics" android:exported="false"/>
+        <activity android:name=".ExerciseStatistics" android:exported="false"/>
+        <activity android:name=".WaterStatistics" android:exported="false"/>
     </application>
 
 </manifest>
