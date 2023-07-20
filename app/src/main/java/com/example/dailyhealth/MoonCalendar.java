@@ -33,17 +33,18 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     }
     private void initWidgets()
     {
-        calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
+        calendarRecyclerView = findViewById(R.id.moonCalendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
     }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setMonthView()
     {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
-
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, (CalendarAdapter.OnItemListener) this);
+        ArrayList<String> highlightedDays = new ArrayList<>();
+        highlightedDays.add("3");
+        highlightedDays.add("5");
+        CalendarAdapter calendarAdapter = new CalendarAdapter(highlightedDays, (CalendarAdapter.OnItemListener) this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
