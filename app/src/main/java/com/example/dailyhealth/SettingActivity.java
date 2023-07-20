@@ -18,8 +18,6 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        getSupportActionBar().hide();
-
         arrayList.add(0);
         arrayList.add(1);
         arrayList.add(2);
