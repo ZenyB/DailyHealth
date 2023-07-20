@@ -1,23 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/background">
+    android:background="@color/main_green">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hi World!"
-        android:textColor="@color/main_green"
-        android:textSize="20sp"
-        android:fontFamily="@font/lato_bold_2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.564" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="40dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/helloNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="0dp"
+                android:fontFamily="@font/lato_bold_2"
+                android:text="Xin chào, Nguyen Van B"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/avatar_temp" />
+        </RelativeLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ProgressBar
+                android:id="@+id/allGoalProgress"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="42dp"
+                android:layout_toStartOf="@+id/imgHome"
+                android:indeterminateOnly="false"
+                android:progress="74"
+                android:progressDrawable="@drawable/circle_custom_progress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgHome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgHome"
+                android:layout_width="wrap_content"
+                android:layout_height="171dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/home_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/allGoalProgress"
+                app:layout_constraintEnd_toEndOf="@+id/allGoalProgress"
+                app:layout_constraintStart_toStartOf="@+id/allGoalProgress"
+                app:layout_constraintTop_toTopOf="@+id/allGoalProgress"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/allGoalPercentTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold_2"
+                    android:text="74%"
+                    android:textColor="@color/all_goal"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_medium_0"
+                    android:lineHeight="24sp"
+                    android:text="Mục tiêu hằng ngày"
+                    android:textColor="@color/all_goal"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:background="@drawable/main_border"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                    <ProgressBar
+                        android:id="@+id/waterProgress"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:indeterminateOnly="false"
+                        android:progress="74"
+                        android:progressDrawable="@drawable/water_custom_progress"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/exerciseProgress"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ProgressBar
+                        android:id="@+id/sleepProgress"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:indeterminateOnly="false"
+                        android:progress="74"
+                        android:progressDrawable="@drawable/sleep_custom_progress"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ProgressBar
+                        android:id="@+id/exerciseProgress"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:indeterminateOnly="false"
+                        android:progress="74"
+                        android:progressDrawable="@drawable/exercise_custom_progress"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/sleepProgress"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        android:id="@+id/waterPercentTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold_2"
+                        android:text="87%"
+                        android:textColor="@color/water"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/waterProgress"
+                        app:layout_constraintEnd_toEndOf="@+id/waterProgress"
+                        app:layout_constraintStart_toStartOf="@+id/waterProgress"
+                        app:layout_constraintTop_toTopOf="@+id/waterProgress" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lato_bold_2"
+                        android:text="Ngủ"
+                        android:textAlignment="center"
+                        android:textColor="@color/sleep"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="@+id/sleepProgress"
+                        app:layout_constraintTop_toBottomOf="@+id/sleepProgress"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteX="51dp" />
+
+                    <TextView
+                        android:id="@+id/sleepPercentTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold_2"
+                        android:text="87%"
+                        android:textColor="@color/sleep"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/sleepProgress"
+                        app:layout_constraintEnd_toEndOf="@+id/sleepProgress"
+                        app:layout_constraintStart_toStartOf="@+id/sleepProgress"
+                        app:layout_constraintTop_toTopOf="@+id/sleepProgress" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lato_bold_2"
+                        android:text="Nước"
+                        android:textAlignment="center"
+                        android:textColor="@color/water"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="@+id/waterProgress"
+                        app:layout_constraintTop_toBottomOf="@+id/waterProgress"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteX="295dp" />
+
+                    <TextView
+                        android:id="@+id/exercisePercentTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold_2"
+                        android:text="87%"
+                        android:textColor="@color/exercise"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/exerciseProgress"
+                        app:layout_constraintEnd_toEndOf="@+id/exerciseProgress"
+                        app:layout_constraintStart_toStartOf="@+id/exerciseProgress"
+                        app:layout_constraintTop_toTopOf="@+id/exerciseProgress" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lato_bold_2"
+                        android:text="Luyện tập"
+                        android:textAlignment="center"
+                        android:textColor="@color/exercise"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="@+id/exerciseProgress"
+                        app:layout_constraintTop_toBottomOf="@+id/exerciseProgress"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteX="176dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/left_title_margin_left"
+                    android:fontFamily="@font/lato_bold_2"
+                    android:lineHeight="@dimen/title_line_height"
+                    android:text="Uống nước nào!"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_font_size" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/left_title_margin_left">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraint"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/border"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints">
+
+                        <ImageView
+                            android:id="@+id/bottleImageView"
+                            android:layout_width="70dp"
+                            android:layout_height="100dp"
+                            android:src="@mipmap/ic_bottle_full"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/amountWaterTV"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bold_2"
+                            android:maxLines="2"
+                            android:text="Uống nước"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/bottleImageView"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="@color/water"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/left_title_margin_left"
+                    android:fontFamily="@font/lato_bold_2"
+                    android:lineHeight="@dimen/title_line_height"
+                    android:text="Lịch trình"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_font_size" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/scheduleMainRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/left_title_margin_left"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/left_title_margin_left"
+                    android:fontFamily="@font/lato_bold_2"
+                    android:lineHeight="@dimen/title_line_height"
+                    android:text="Gợi ý bài tập"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_font_size" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/left_title_margin_left">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/exMainRV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

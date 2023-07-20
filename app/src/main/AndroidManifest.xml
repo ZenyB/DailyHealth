@@ -32,19 +32,13 @@
             android:name=".GetTime"
             android:exported="false"/>
         <activity
-            android:name=".ScheduleCalendar"
-            android:exported="false" />
-        <activity
             android:name=".ExerciseMainActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailExerciseActivity"
+            android:name=".MoonCalendar"
             android:exported="false" />
         <activity
             android:name=".MainStatistic"
-            android:exported="false"/>
-        <activity
-            android:name=".MoonCalendar"
             android:exported="false" />
         <activity
             android:name=".WaterDaily"
@@ -61,6 +55,9 @@
         <activity
             android:name=".MoonSettingScreen1"
             android:exported="false" />
+        <activity
+            android:name=".DetailExerciseActivity"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
