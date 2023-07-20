@@ -27,7 +27,7 @@ public class NavigationActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.property_1_exercise));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.property_1_setting));
         bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.property_1_user));
-
+        bottomNavigation.show(1, true);
         bottomNavigation.setOnClickMenuListener(model -> {
             // YOUR CODES
             switch (model.getId()){
@@ -47,24 +47,24 @@ public class NavigationActivity extends AppCompatActivity {
             return null;
         });
 
-//        bottomNavigation.setOnShowListener(model -> {
-//            // YOUR CODES
-//            switch (model.getId()){
-//                case 1:
-//                    loadFragment(new HomeFragment());
-//                    break;
-//                case 2:
-//                    loadFragment(new ExerciseFragment());
-//                    break;
-//                case 3:
-//                    loadFragment(new SettingFragment());
-//                    break;
-//                case 4:
-//                    loadFragment(new UserFragment());
-//                    break;
-//            }
-//            return null;
-//        });
+        bottomNavigation.setOnShowListener(model -> {
+            // YOUR CODES
+            switch (model.getId()){
+                case 1:
+                    loadFragment(new HomeFragment());
+                    break;
+                case 2:
+                    loadFragment(new ExerciseFragment());
+                    break;
+                case 3:
+                    loadFragment(new SettingFragment());
+                    break;
+                case 4:
+                    loadFragment(new UserFragment());
+                    break;
+            }
+            return null;
+        });
 
     }
 
