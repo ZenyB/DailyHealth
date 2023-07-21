@@ -9,6 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 <!--    color in app    -->
+    <color name="lighter_main_green">#659B7B</color>
     <color name="main_green">#57786A</color>
     <color name="background">#FAFFF8</color>
     <color name="gray_item">#FAFAFA</color>

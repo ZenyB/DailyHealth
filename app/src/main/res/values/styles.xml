@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomNumberPickerStyle">
+        <!-- Thiết lập màu sắc cho số -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Thiết lập font chữ -->
+        <item name="android:textSize">45sp</item>
+        <!-- Đặt tên font chữ -->
+        <item name="android:fontFamily">@font/lato_bold_2</item>
+    </style>
+</resources>
