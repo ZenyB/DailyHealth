@@ -1,130 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MoonCalendar">
 
     <LinearLayout
+        android:id="@+id/linearLayoutMoon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
+            android:onClick="previousMonthAction"
             android:text="@string/back"
             android:textColor="@color/main_green"
-            android:background="@null"
-            android:textStyle="bold"
-            android:onClick="previousMonthAction"
             android:textSize="20sp"
+            android:textStyle="bold"
             tools:ignore="OnClick" />
 
         <TextView
             android:id="@+id/monthYearTV"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="Feb 2021"
-            android:textSize="20sp"
-            android:textAlignment="center"
+            android:layout_weight="2"
             android:fontFamily="@font/lato_bold_2"
-            android:textColor="@color/main_green"/>
+            android:text="Feb 2021"
+            android:textAlignment="center"
+            android:textColor="@color/main_green"
+            android:textSize="20sp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
+            android:onClick="nextMonthAction"
             android:text="@string/forward"
             android:textColor="@color/main_green"
-            android:background="@null"
-            android:textStyle="bold"
-            android:onClick="nextMonthAction"
             android:textSize="20sp"
+            android:textStyle="bold"
             tools:ignore="OnClick" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayoutMoon2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutMoon">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SUN"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="MON"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TUE"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="WED"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="THUR"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="FRI"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SAT"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
 
     </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/calendarRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:id="@+id/moonCalendarRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutMoon2" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

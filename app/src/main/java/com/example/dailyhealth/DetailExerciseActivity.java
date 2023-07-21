@@ -4,20 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class DetailExerciseActivity extends AppCompatActivity {
 
     private ArrayList<SmallExercise> arrayList = new ArrayList<>();
+    ImageButton imgButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_exercise);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         arrayList.add(new SmallExercise("Bài tập chính", "5 phút"));
         arrayList.add(new SmallExercise("Bài tập cơ tay", "5 phút"));
@@ -26,5 +31,16 @@ public class DetailExerciseActivity extends AppCompatActivity {
         r.setLayoutManager(new LinearLayoutManager(this));
         //Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
         r.setAdapter(new SmallExerciseAdapter(this, arrayList));
+
+        String s = getIntent().getExtras().getString("Name");
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+
+        imgButton=findViewById(R.id.btnBack);
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DetailExerciseActivity.super.finish();
+            }
+        });
     }
 }

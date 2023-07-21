@@ -62,9 +62,10 @@
             android:gravity="center"
             android:background="#768A82"
             android:layout_marginTop="10dp"
-            android:paddingVertical="5dp">
+            android:paddingVertical="5dp"
+            android:orientation="vertical">
             <CheckBox
-                android:id="@+id/weekT2"
+                android:id="@+id/weekMon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold_2"
@@ -75,7 +76,7 @@
                 android:buttonTint="#ffffff"
                 android:text="T2"/>
             <CheckBox
-                android:id="@+id/weekT3"
+                android:id="@+id/weekTue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold_2"
@@ -86,7 +87,7 @@
                 android:buttonTint="#ffffff"
                 android:text="T3"/>
             <CheckBox
-                android:id="@+id/weekT4"
+                android:id="@+id/weekWen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold_2"
@@ -97,7 +98,7 @@
                 android:buttonTint="#ffffff"
                 android:text="T4"/>
             <CheckBox
-                android:id="@+id/weekT5"
+                android:id="@+id/weekThu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold_2"
@@ -108,7 +109,7 @@
                 android:buttonTint="#ffffff"
                 android:text="T5"/>
             <CheckBox
-                android:id="@+id/weekT6"
+                android:id="@+id/weekFri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold_2"
@@ -119,7 +120,7 @@
                 android:buttonTint="#ffffff"
                 android:text="T6"/>
             <CheckBox
-                android:id="@+id/weekT7"
+                android:id="@+id/weekSat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold_2"
@@ -130,7 +131,7 @@
                 android:buttonTint="#ffffff"
                 android:text="T7"/>
             <CheckBox
-                android:id="@+id/weekCN"
+                android:id="@+id/weekSun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold_2"
@@ -140,6 +141,17 @@
                 android:textStyle="bold"
                 android:buttonTint="#ffffff"
                 android:text="CN"/>
+            <CheckBox
+                android:id="@+id/allWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold_2"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:buttonTint="#ffffff"
+                android:text="All"/>
         </LinearLayout>
 
         <Button

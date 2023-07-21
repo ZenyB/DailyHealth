@@ -17,28 +17,24 @@
         tools:targetApi="31">
         <receiver android:name=".AlarmReceiver" />
         <activity
-            android:name=".SleepManagement"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:name=".SettingActivity"
+            android:exported="false" />
         <activity
             android:name=".GetStart"
-            android:exported="false">
+            android:exported="false"/>
+        <activity
+            android:name=".SleepManagement"
+            android:exported="false" >
         </activity>
         <activity
             android:name=".GetInfor"
             android:exported="false" />
         <activity
             android:name=".GetHeightWeight"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".GetTime"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".ExerciseMainActivity"
             android:exported="false" />
@@ -63,9 +59,11 @@
         <activity
             android:name=".MoonSettingScreen1"
             android:exported="false" />
-        <activity android:name=".DetailExerciseActivity"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".DetailExerciseActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".NavigationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,6 +71,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ScheduleCalendar"
+            android:exported="false"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".SleepStatistics"
             android:exported="false" />
