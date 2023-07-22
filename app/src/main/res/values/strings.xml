@@ -20,5 +20,8 @@
     <string name="third_item_setting_title">Lượng nước</string>
     <string name="fourth_item_setting_title">Kinh nguyệt</string>
     <string name="fifth_item_setting_title">Thông số</string>
+<!--    Notification-->
+    <string name="moon_channel_name">Moon Notification</string>
+    <string name="moon_channel_description">Moon Notification</string>
     <string name="_200_ml">200 ml</string>
 </resources>
