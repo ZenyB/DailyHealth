@@ -38,6 +38,7 @@ public class MainScheduleAdapter extends RecyclerView.Adapter<MainScheduleAdapte
         if (position % 2 != 0)
             holder.constraintLayout.setBackgroundResource(R.drawable.purple_right);
         holder.titleTV.setText(schedule.getTitle());
+
     }
 
     @Override

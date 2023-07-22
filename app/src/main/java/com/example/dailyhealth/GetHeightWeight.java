@@ -14,13 +14,13 @@ public class GetHeightWeight extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_started3);
-        Button myButton = findViewById(R.id.nextButton2);
-        myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GetHeightWeight.this, GetTime.class);
-                startActivity(intent);
-            }
-        });
+//        Button myButton = findViewById(R.id.nextButton2);
+//        myButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(GetHeightWeight.this, GetTime.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

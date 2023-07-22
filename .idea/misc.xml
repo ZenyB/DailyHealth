@@ -41,6 +41,7 @@
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/exercise2_large_border.xml" value="0.119" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/exercise_custom_progress.xml" value="0.123" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_back_foreground.xml" value="0.125" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_back_layout.xml" value="0.128" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_calendar_foreground.xml" value="0.123" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_glass_foreground.xml" value="0.124" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
@@ -52,11 +53,14 @@
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/main_schedule_item.xml" value="0.122" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/property_1_exercise.xml" value="0.124" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/property_1_home.xml" value="0.125" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/rounded_card_bg.xml" value="0.123" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/sleep_custom_progress.xml" value="0.123" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/splash_background.xml" value="0.2595" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/water_custom_progress.xml" value="0.123" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/font/lato_fonts.xml" value="0.14427083333333332" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_detail_exercise.xml" value="0.2" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_exercise_main.xml" value="0.16799999999999998" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_get_started3.xml" value="0.2" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_get_started4.xml" value="0.11302083333333333" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_moon_setting_screen1.xml" value="0.11302083333333333" />
@@ -64,6 +68,7 @@
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_setting.xml" value="0.1140625" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_exercise.xml" value="0.11302083333333333" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_setting.xml" value="0.1140625" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_user.xml" value="0.25416666666666665" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/horizontal_exercise_item.xml" value="0.264" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/main_drink_item.xml" value="0.264" />
