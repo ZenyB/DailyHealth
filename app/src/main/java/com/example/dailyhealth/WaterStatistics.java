@@ -139,7 +139,7 @@ public class WaterStatistics extends AppCompatActivity {
         entries.add(new BarEntry(6, 7.2f));   // Thời gian tập chủ nhật: 7h12
 
 
-        BarDataSet dataSet = new BarDataSet(entries, "Thời gian tập");
+        BarDataSet dataSet = new BarDataSet(entries, "Nước uống");
         dataSet.setColor(Color.BLUE);
         dataSet.setValueTextSize(12f);
         float barWidth = 0.6f; // Độ rộng của mỗi cột (tỷ lệ phần trăm so với mặc định)
