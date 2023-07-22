@@ -20,7 +20,7 @@
             android:name=".SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".GetStart"
+            android:name=".NavigationActivity"
             android:exported="false"/>
         <activity
             android:name=".SleepManagement"
@@ -63,7 +63,7 @@
             android:name=".DetailExerciseActivity"
             android:exported="false"/>
         <activity
-            android:name=".NavigationActivity"
+            android:name=".GetStart"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
