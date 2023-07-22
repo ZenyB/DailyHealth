@@ -6,83 +6,44 @@
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1205" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/drawable/border.xml" value="0.1205" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/drawable/circle_background.xml" value="0.12" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/drawable/ic_button_awake.xml" value="0.1325" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/drawable/ic_button_sleeping.xml" value="0.1325" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1205" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/drawable/rounded_card_bg.xml" value="0.2" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_detail_exercise.xml" value="0.20516304347826086" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_exercise_main.xml" value="0.25" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_get_started1.xml" value="0.15677083333333333" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_get_started2.xml" value="0.15677083333333333" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_get_started3.xml" value="0.15677083333333333" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_get_started4.xml" value="0.176" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_moon_calendar.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen1.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen2.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen3.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen4.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_sleep_management.xml" value="0.25" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_water_daily.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/calendar_cell.xml" value="0.20516304347826086" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/exercise_statistics.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/fragment_exercise.xml" value="0.16485507246376813" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/fragment_home.xml" value="0.16485507246376813" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/fragment_setting.xml" value="0.16485507246376813" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/fragment_statistics.xml" value="0.176" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/fragment_user.xml" value="0.2056159420289855" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/main_exercise_item.xml" value="0.2" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/setting_item.xml" value="0.16485507246376813" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/sleep_statistics.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/small_exercise_item.xml" value="0.20516304347826086" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/statistic_main.xml" value="0.2" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/water_statistics.xml" value="0.20516304347826086" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/widget_chart.xml" value="0.10885416666666667" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2165" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/exercise2_large_border.xml" value="0.1055" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/ic_back_layout.xml" value="0.1055" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/drawable/ic_play_foreground.xml" value="0.1055" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_detail_exercise.xml" value="0.1" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_exercise_main.xml" value="0.25" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_calendar.xml" value="0.264" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen1.xml" value="0.20153985507246377" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen2.xml" value="0.1" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen3.xml" value="0.1" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen4.xml" value="0.1" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/activity_water_daily.xml" value="0.25" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/calendar_cell.xml" value="0.109375" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/main_exercise_item.xml" value="0.176" />
-        <entry key="..\:/HocKi4/UDDD/DailyHealth/app/src/main/res/layout/small_exercise_item.xml" value="0.1" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.124" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/border.xml" value="0.124" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/circle_custom_progress.xml" value="0.123" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/exercise2_activated_border.xml" value="0.123" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/exercise2_large_border.xml" value="0.119" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/exercise_custom_progress.xml" value="0.123" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_back_foreground.xml" value="0.125" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_back_layout.xml" value="0.128" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_calendar_foreground.xml" value="0.123" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_glass_foreground.xml" value="0.124" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_play_backgound.xml" value="0.125" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_play_foreground.xml" value="0.125" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_sleep_foreground.xml" value="0.123" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/main_border.xml" value="0.123" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/main_schedule_border.xml" value="0.122" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/main_schedule_item.xml" value="0.122" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/property_1_exercise.xml" value="0.124" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/property_1_home.xml" value="0.125" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/rounded_card_bg.xml" value="0.123" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/sleep_custom_progress.xml" value="0.123" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/splash_background.xml" value="0.2595" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/water_custom_progress.xml" value="0.123" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/font/lato_fonts.xml" value="0.14427083333333332" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_detail_exercise.xml" value="0.2" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_exercise_main.xml" value="0.16799999999999998" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_get_started3.xml" value="0.2" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_get_started4.xml" value="0.11302083333333333" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_moon_setting_screen1.xml" value="0.11302083333333333" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_navigation.xml" value="0.11302083333333333" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_setting.xml" value="0.1140625" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_exercise.xml" value="0.11302083333333333" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_setting.xml" value="0.1140625" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_user.xml" value="0.25416666666666665" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/horizontal_exercise_item.xml" value="0.264" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/main_drink_item.xml" value="0.264" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/main_exercise_item.xml" value="0.2" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/main_schedule_item.xml" value="0.6" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/setting_item.xml" value="0.4" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/setting_item_activated.xml" value="0.11197916666666667" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/small_exercise_item.xml" value="0.2" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/small_exercise_item_activated.xml" value="0.4" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/statistic_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/activity_main.xml" value="0.22327898550724637" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -23,4 +23,5 @@
 <!--    Notification-->
     <string name="moon_channel_name">Moon Notification</string>
     <string name="moon_channel_description">Moon Notification</string>
+    <string name="_200_ml">200 ml</string>
 </resources>

@@ -141,10 +141,10 @@ public class SleepStatistics extends AppCompatActivity {
         List<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, 8.4f));   // Thời gian ngủ thứ 2: 8h24
         entries.add(new BarEntry(1, 7.5f));   // Thời gian ngủ thứ 3: 7h30
-        entries.add(new BarEntry(2, 6.9f));   // Thời gian ngủ thứ 4: 6h54
-        entries.add(new BarEntry(3, 7.8f));   // Thời gian ngủ thứ 5: 7h48
-        entries.add(new BarEntry(4, 6.1f));   // Thời gian ngủ thứ 6: 6h06
-        entries.add(new BarEntry(5, 8.3f));   // Thời gian ngủ thứ 7: 8h18
+        entries.add(new BarEntry(2, 9.9f));   // Thời gian ngủ thứ 4: 6h54
+        entries.add(new BarEntry(3, 9.8f));   // Thời gian ngủ thứ 5: 7h48
+        entries.add(new BarEntry(4, 9.1f));   // Thời gian ngủ thứ 6: 6h06
+        entries.add(new BarEntry(5, 9.3f));   // Thời gian ngủ thứ 7: 8h18
         entries.add(new BarEntry(6, 7.2f));   // Thời gian ngủ chủ nhật: 7h12
 
 
