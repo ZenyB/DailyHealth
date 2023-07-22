@@ -55,12 +55,12 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
             case 0:
                 ViewHolder1 type1ViewHolder = (ViewHolder1) holder;
                 type1ViewHolder.nameTextView.setText(smallExercise.getName());
-                type1ViewHolder.timeTextView.setText(smallExercise.getTime());
+                type1ViewHolder.timeTextView.setText(smallExercise.getDuration());
                 break;
             case 1:
                 ViewHolderActivated type2ViewHolder = (ViewHolderActivated) holder;
                 type2ViewHolder.nameTextView.setText(smallExercise.getName());
-                type2ViewHolder.timeTextView.setText(smallExercise.getTime());
+                type2ViewHolder.timeTextView.setText(smallExercise.getDuration());
                 type2ViewHolder.imageView.setImageResource(R.mipmap.ic_person);
                 type2ViewHolder.pb.setProgress(50);
                 break;

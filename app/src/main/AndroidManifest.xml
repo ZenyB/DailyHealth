@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dailyhealth">
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DailyHealth"
         tools:targetApi="31">
+        <receiver android:name=".AlarmReceiver" />
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
@@ -20,8 +23,12 @@
             android:name=".NavigationActivity"
             android:exported="false"/>
         <activity
+            android:name=".SleepManagement"
+            android:exported="false" >
+        </activity>
+        <activity
             android:name=".GetInfor"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".GetHeightWeight"
             android:exported="false"/>
@@ -63,7 +70,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ScheduleCalendar"
@@ -71,9 +77,15 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"/>
-        <activity android:name=".SleepStatistics" android:exported="false"/>
-        <activity android:name=".ExerciseStatistics" android:exported="false"/>
-        <activity android:name=".WaterStatistics" android:exported="false"/>
+        <activity
+            android:name=".SleepStatistics"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseStatistics"
+            android:exported="false" />
+        <activity
+            android:name=".WaterStatistics"
+            android:exported="false" />
     </application>
 
 </manifest>
