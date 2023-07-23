@@ -1,11 +1,14 @@
 package com.example.dailyhealth;
 
 import static com.example.dailyhealth.CalendarUtils.daysInWeekArray;
+import static com.example.dailyhealth.CalendarUtils.highlightDate;
 import static com.example.dailyhealth.CalendarUtils.monthYearFromDate;
+import static com.example.dailyhealth.CalendarUtils.yearFromDate;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -18,11 +21,16 @@ import android.widget.TextView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener{
+@RequiresApi(api = Build.VERSION_CODES.O)
+public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener, ScheduleEventAdapter.OnItemClick{
 
+    private ArrayList<ScheduleEvent> scheduleEvents = new ArrayList<>();
     private TextView monthYearText;
+    private TextView YearText;
     private RecyclerView calendarRecyclerView;
-//    private ListView eventListView;
+    private RecyclerView r;
+    //    private ListView eventListView;
+    private LocalDate today = LocalDate.now();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -31,6 +39,13 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_calendar);
         CalendarUtils.selectedDate = LocalDate.now();
+
+        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
+        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
+
+        r = (RecyclerView) findViewById(R.id.scheduleCalendarRV);
+        r.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        r.setAdapter(new ScheduleEventAdapter(this, scheduleEvents, this));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -45,12 +60,14 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     {
         calendarRecyclerView = findViewById(R.id.moonCalendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
+        YearText = findViewById(R.id.YearTV);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setWeekView()
     {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        YearText.setText(yearFromDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
@@ -80,6 +97,10 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     {
         CalendarUtils.selectedDate = date;
         setWeekView();
+        //Get su kien tu database va cap nhat lai UI o day
+        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
+        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
+        r.setAdapter(new ScheduleEventAdapter(this, scheduleEvents, this));
     }
 
     @Override
@@ -87,6 +108,17 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     {
         super.onResume();
 //        setEventAdpater();
+    }
+
+    public void todayGoback(View view) {
+        CalendarUtils.selectedDate = today;
+        setWeekView();
+    }
+
+
+    @Override
+    public void onScheduleClick(int position) {
+
     }
 
 //    private void setEventAdpater()

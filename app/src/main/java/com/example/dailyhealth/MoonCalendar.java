@@ -110,6 +110,7 @@ package com.example.dailyhealth;
 
 
 import static com.example.dailyhealth.CalendarUtils.daysInMonthArray;
+import static com.example.dailyhealth.CalendarUtils.highlightDate;
 import static com.example.dailyhealth.CalendarUtils.monthYearFromDate;
 
 import androidx.annotation.RequiresApi;
@@ -142,7 +143,6 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moon_calendar);
-
         CalendarUtils.selectedDate = LocalDate.now();
 
     }
