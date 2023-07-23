@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class DetailExerciseActivity extends AppCompatActivity {
 
     private ArrayList<SmallExercise> arrayList = new ArrayList<>();
+    public static MainExercise mainExercise;
     ImageButton imgButton;
     public static ImageButton startBtn;
     public static TextView relaxTV;
@@ -36,10 +37,12 @@ public class DetailExerciseActivity extends AppCompatActivity {
         relaxTV = findViewById(R.id.relaxTimeTV);
 
         if (getIntent().getStringExtra("type").equals("all")) {
+            mainExercise = ExerciseFragment.allMainExercise.get(position);
             mainNameTV.setText(ExerciseFragment.allMainExercise.get(position).getName());
             mainTimeTV.setText(Integer.toString(ExerciseFragment.allMainExercise.get(position).getDuration()) + " phút");
             arrayList = ExerciseFragment.allMainExercise.get(position).getSmallExercises();
         } else {
+            mainExercise = ExerciseFragment.suggestMainExercises.get(position);
             arrayList = ExerciseFragment.suggestMainExercises.get(position).getSmallExercises();
             mainNameTV.setText(ExerciseFragment.suggestMainExercises.get(position).getName());
             mainTimeTV.setText(Integer.toString(ExerciseFragment.suggestMainExercises.get(position).getDuration()) + " phút");
