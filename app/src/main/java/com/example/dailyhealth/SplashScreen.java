@@ -52,38 +52,38 @@ public class SplashScreen extends AppCompatActivity {
             WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
             weekInfoHelper.QueryData(query);
 
+//            // Start start activity
+//            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(SplashScreen.this, GetStart.class));
+//            return;
+        }
+        // Start home activity
+//        Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+//        startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
+//        return;
+
+        //Kiểm tra users có dữ liệu nào chưa
+        String query = "SELECT * FROM users";
+
+        UserHelper userHelper = new UserHelper(this);
+        Cursor cursor = userHelper.GetData(query);
+
+        if (cursor.getCount() > 0) {
+            //Get các loại dữ liệu cần dùng chung
+
+            //User đã cài đặt thông tin ban đầu => Home
+            // Start home activity
+            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
+            return;
+        }
+        else {
+            //User chưa cài đặt thông tin ban đầu => Start
             // Start start activity
             Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SplashScreen.this, GetStart.class));
             return;
         }
-        // Start home activity
-        Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
-        return;
-
-        //Kiểm tra users có dữ liệu nào chưa
-//        String query = "SELECT * FROM users";
-
-//        UserHelper userHelper = new UserHelper(this);
-//        Cursor cursor = userHelper.GetData(query);
-//
-//        if (cursor.getCount() > 0) {
-//            //Get các loại dữ liệu cần dùng chung
-//
-//            //User đã cài đặt thông tin ban đầu => Home
-//            // Start home activity
-//            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
-//            return;
-//        }
-//        else {
-//            //User chưa cài đặt thông tin ban đầu => Start
-//            // Start start activity
-//            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(SplashScreen.this, GetStart.class));
-//            return;
-//        }
     }
 
     boolean isTableExist(SQLiteDatabase db, String table) {

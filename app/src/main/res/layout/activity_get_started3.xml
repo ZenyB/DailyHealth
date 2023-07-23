@@ -72,10 +72,11 @@
             tools:ignore="MissingConstraints"></TextView>
 
         <EditText
-            android:id="@+id/my_edit_text"
+            android:id="@+id/height_text"
             android:layout_width="249dp"
             android:layout_height="40dp"
-            android:hint="Nhập cân nặng"
+            android:hint="Nhập cân nặng (kg)"
+            android:inputType="numberDecimal"
             android:layout_marginTop="15dp"
             android:paddingLeft="10dp"
             android:fontFamily="@font/lato_regular_2"
@@ -110,10 +111,11 @@
             tools:ignore="MissingConstraints"></TextView>
 
         <EditText
-            android:id="@+id/my_edit_text2"
+            android:id="@+id/weight_text"
             android:layout_width="249dp"
             android:layout_height="40dp"
-            android:hint="Nhập chiều cao"
+            android:hint="Nhập chiều cao (cm)"
+            android:inputType="numberDecimal"
             android:layout_marginTop="15dp"
             android:paddingLeft="10dp"
             android:fontFamily="@font/lato_regular_2"
