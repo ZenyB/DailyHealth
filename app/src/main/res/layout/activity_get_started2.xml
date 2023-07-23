@@ -72,7 +72,7 @@
                 tools:ignore="MissingConstraints"></TextView>
 
             <EditText
-                android:id="@+id/my_edit_text"
+                android:id="@+id/nameEditText"
                 android:layout_width="249dp"
                 android:layout_height="40dp"
                 android:hint="Nhập tên"
@@ -127,6 +127,7 @@
                     android:buttonTint="#ffffff"
                     android:fontFamily="@font/lato_bold_2"
                     android:text="Nam"
+                    android:checked="true"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
@@ -157,7 +158,7 @@
                 android:layout_marginTop="18dp"
                 android:paddingLeft="20dp"
                 android:fontFamily="@font/lato_bold_2"
-                android:text="Tuổi :"
+                android:text="Năm sinh :"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
@@ -168,14 +169,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/title3"></TextView>
 
             <EditText
-                android:id="@+id/age_edit_text"
+                android:id="@+id/birthEditText"
                 android:layout_width="325dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 android:digits="0123456789"
                 android:fontFamily="@font/lato_fonts"
-                android:hint="Nhập tuổi"
-                android:inputType="number"
+                android:hint="Nhập năm sinh"
+                android:inputType="numberDecimal"
                 android:paddingLeft="10dp"
                 android:textColor="#000000"
                 android:textSize="20sp"

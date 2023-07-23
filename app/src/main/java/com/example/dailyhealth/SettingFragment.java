@@ -67,8 +67,8 @@ public class SettingFragment extends Fragment implements SettingAdapter.OnSettin
                 startActivity(intent);
                 break;
             case 4:
-//                intent = new Intent(getActivity(), SleepManagement.class);
-//                startActivity(intent);
+                intent = new Intent(getActivity(), UserSetting.class);
+                startActivity(intent);
                 break;
         }
     }

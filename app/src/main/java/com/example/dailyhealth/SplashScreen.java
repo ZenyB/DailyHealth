@@ -82,7 +82,17 @@ public class SplashScreen extends AppCompatActivity {
 
             WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
             weekInfoHelper.QueryData(query);
+
+//            // Start start activity
+//            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(SplashScreen.this, GetStart.class));
+//            return;
         }
+        // Start home activity
+//        Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+//        startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
+//        return;
+
         //Kiểm tra users có dữ liệu nào chưa
         String query = "SELECT * FROM users";
 
@@ -92,11 +102,6 @@ public class SplashScreen extends AppCompatActivity {
         if (cursor.getCount() > 0) {
             //Get các loại dữ liệu cần dùng chung
 
-//            // Schedule the WorkManager to run CheckNewDayWorker once a day
-//            OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(CheckNewDayWorker.class)
-//                    .setInitialDelay(getMillisUntilNextMidnight(), TimeUnit.MILLISECONDS)
-//                    .build();
-//            WorkManager.getInstance(this).enqueue(workRequest);
             //User đã cài đặt thông tin ban đầu => Home
             // Start home activity
             Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
