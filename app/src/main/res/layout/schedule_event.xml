@@ -42,7 +42,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/lato_bold_2"
             android:text="Đi ăn cưới"
-            android:textColor="@color/white"
+            android:textColor="@color/lighter_main_green"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +56,7 @@
             android:lineHeight="24sp"
             android:maxLines="3"
             android:text="Note lại đi 500k"
-            android:textColor="@color/white"
+            android:textColor="@color/main_green"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/scheduleEventTitleTV" />
@@ -79,10 +79,19 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/lato_fonts"
             android:text="Xóm 100, phường hcm"
-            android:textColor="@color/white"
+            android:textColor="@color/lighter_main_green"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageView3" />
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/scheduleEventDelete"
+            android:background="@drawable/ic_x_white_foreground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/scheduleEventTitleTV"
+            tools:layout_editor_absoluteY="5dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
