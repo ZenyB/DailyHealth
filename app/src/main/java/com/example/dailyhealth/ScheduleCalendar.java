@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     private RecyclerView calendarRecyclerView;
     private RecyclerView r;
     //    private ListView eventListView;
+    private String[] item = {"Sửa", "Xóa"};
     private LocalDate today = LocalDate.now();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -46,6 +49,11 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         r = (RecyclerView) findViewById(R.id.scheduleCalendarRV);
         r.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         r.setAdapter(new ScheduleEventAdapter(this, scheduleEvents, this));
+        ObjectAnimator animator = ObjectAnimator.ofFloat(findViewById(R.id.floatingActionButton), "translationY", -40f);
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setDuration(2000);
+        animator.start();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -118,7 +126,12 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
 
     @Override
     public void onScheduleClick(int position) {
+        scheduleEvents.get(position);
+    }
 
+    public void addEventBtn(View view) {
+        Intent i = new Intent(getBaseContext(), ScheduleEventSetting.class);
+        startActivity(i);
     }
 
 //    private void setEventAdpater()
