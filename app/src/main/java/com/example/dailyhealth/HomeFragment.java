@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,8 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        arrayList.add(new MainExercise("Bài tập chính", "5 phút", "200KCAL"));
-        arrayList.add(new MainExercise("Bài tập cơ tay", "5 phút", "200KCAL"));
+
+        arrayList = JSONFileHandler.readMainExercisesFromJSON(getActivity());
 
         final RecyclerView r = (RecyclerView) view.findViewById(R.id.exMainRV);
         r.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -106,7 +107,8 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
     public void onClick(int position) {
         MainExercise i = arrayList.get(position);
         Intent intent1 = new Intent(getActivity(), DetailExerciseActivity.class);
-        intent1.putExtra("Name", new String(i.getName()));
+        intent1.putExtra("position", position);
+        intent1.putExtra("type", "suggest");
 //                    intent1.putExtra("Name", new String(s.getName()));
 //                    intent1.putExtra("Students", new Integer(s.getStudents()));
         startActivity(intent1);
@@ -158,11 +160,11 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
 //        }
 //
 ////         Intent để gửi tới BroadcastReceiver
-////        Intent intent = new Intent(getActivity(), TestReceiver.class);
-////        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+//        Intent intent = new Intent(getActivity(), TestReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 //
 ////         Lấy AlarmManager
 //        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-////        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 //    }
 }

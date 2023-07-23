@@ -38,20 +38,8 @@ public class MainExerciseAdapter extends RecyclerView.Adapter<MainExerciseAdapte
         MainExercise mainExercise = mainExercises.get(position);
 
         holder.nameTextView.setText(mainExercise.getName());
-        holder.timeTextView.setText(mainExercise.getTime());
+        holder.timeTextView.setText(Integer.toString(mainExercise.getDuration()) + " phút");
         holder.kcalTextView.setText(mainExercise.getKcal());
-
-//        holder.setItemClickListener(new ItemClickListener() {
-//            @Override
-//            public void onClick(View view, int position, boolean isLongClick) {
-//                if(isLongClick) {
-//
-//                }
-//                else {
-//
-//                }
-//            }
-//        });
     }
 
     @Override

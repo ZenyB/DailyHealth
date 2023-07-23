@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.dailyhealth.database.UserHelper;
 import com.example.dailyhealth.database.WeekInfoHelper;
 
+import java.util.ArrayList;
+
 public class SplashScreen extends AppCompatActivity {
 
     public String databaseName = "DAILYHEATH";
@@ -49,7 +51,17 @@ public class SplashScreen extends AppCompatActivity {
 
             WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
             weekInfoHelper.QueryData(query);
+
+//            // Start start activity
+//            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(SplashScreen.this, GetStart.class));
+//            return;
         }
+        // Start home activity
+//        Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+//        startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
+//        return;
+
         //Kiểm tra users có dữ liệu nào chưa
         String query = "SELECT * FROM users";
 
