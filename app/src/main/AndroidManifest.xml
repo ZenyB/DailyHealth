@@ -22,17 +22,20 @@
             android:name=".NavigationActivity"
             android:exported="false" />
 
-        <receiver
-            android:name=".TestReceiver"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="myapp.DAILY_ALARM" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver-->
+<!--            android:name=".TestReceiver"-->
+<!--            android:exported="true" >-->
+<!--            <intent-filter>-->
+<!--                <action android:name="myapp.DAILY_ALARM" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
 
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
+        <activity
+            android:name=".UserSetting"
+            android:exported="false"/>
         <activity
             android:name=".GetStart"
             android:exported="false"/>

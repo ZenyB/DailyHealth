@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,9 +33,29 @@ public class WaterDaily extends AppCompatActivity {
         EditText inputAmountWater = findViewById(R.id.inputAmount);
         Button amountWater = findViewById(R.id.buttonAmoutWater);
 
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         amountWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String text = inputAmountWater.getText().toString();
+
+                if (text.isEmpty()){
+                    String errorMessage = "Vui lòng nhập lượng nước đã uống!";
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WaterDaily.this);
+                    builder.setTitle("Warning!!!")
+                            .setMessage(errorMessage)
+                            .setPositiveButton("OK", null)
+                            .show();
+                    return;
+                }
+
                 int temp = Integer.parseInt(inputAmountWater.getText().toString());
 
                 if (temp > 0 && temp < 1000) {
