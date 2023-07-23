@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserSetting">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        android:background="@color/main_green"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="5">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_back_layout"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="3">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/lato_bold_2"
+                    android:text="Thông tin người dùng"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_font_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/property_1_setting"
+                android:backgroundTint="#ffffff"
+                android:layout_marginLeft="30dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/lato_bold_2"
+                android:text="Cài đặt"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_font_size"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:background="@drawable/exercise2_large_border">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="@dimen/big_item_height"
+                android:gravity="center"
+                android:layout_marginTop="15dp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/avatar_temp"
+                        android:layout_marginLeft="26dp"/>
+                    <EditText
+                        android:id="@+id/userNameText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:fontFamily="@font/lato_bold_2"
+                        android:lineHeight="@dimen/title_line_height"
+                        android:text="Username"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/title_font_size" />
+                    <ImageButton
+                        android:id="@+id/userNameButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_pencil"
+                        android:layout_marginLeft="15dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:clickable="true"
+                        android:id="@+id/saveButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular_2"
+                        android:text="Save"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/title_font_size"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingVertical="5dp">
+                <TextView
+                    android:layout_width="@dimen/small_ex_item_width"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/lato_bold_2"
+                    android:text="Cài đặt cá nhân"
+                    android:textColor="#ADADAD"
+                    android:textSize="@dimen/small_ex_text_size" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Năm sinh"
+                        android:fontFamily="@font/lato_fonts"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/title_font_size"
+                        android:layout_marginLeft="20dp"
+                        android:layout_gravity="center_vertical"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingRight="25dp">
+                        <EditText
+                            android:id="@+id/userBirthText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2003"
+                            android:fontFamily="@font/lato_fonts"
+                            android:textColor="#ADADAD"
+                            android:textSize="@dimen/title_font_size"
+                            android:layout_marginLeft="20dp"/>
+
+                        <ImageButton
+                            android:id="@+id/userBirthButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_pencil"
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Giới tinh"
+                        android:fontFamily="@font/lato_fonts"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/title_font_size"
+                        android:layout_marginLeft="20dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingRight="25dp">
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RadioButton
+                                android:id="@+id/userGenderMale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nam"
+                                android:fontFamily="@font/lato_fonts"
+                                android:textColor="#ADADAD"
+                                android:textSize="@dimen/title_font_size"
+                                android:layout_marginLeft="20dp"/>
+                            <RadioButton
+                                android:id="@+id/userGenderFemale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nữ"
+                                android:fontFamily="@font/lato_fonts"
+                                android:textColor="#ADADAD"
+                                android:textSize="@dimen/title_font_size"
+                                android:layout_marginLeft="20dp"/>
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chiều cao"
+                        android:fontFamily="@font/lato_fonts"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/title_font_size"
+                        android:layout_marginLeft="20dp"
+                        android:layout_gravity="center_vertical"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingRight="25dp">
+                        <EditText
+                            android:id="@+id/userHeightText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2003"
+                            android:fontFamily="@font/lato_fonts"
+                            android:textColor="#ADADAD"
+                            android:textSize="@dimen/title_font_size"
+                            android:layout_marginLeft="20dp"/>
+
+                        <ImageButton
+                            android:id="@+id/userHeightButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_pencil"
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cân nặng"
+                        android:fontFamily="@font/lato_fonts"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/title_font_size"
+                        android:layout_marginLeft="20dp"
+                        android:layout_gravity="center_vertical"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingRight="25dp">
+                        <EditText
+                            android:id="@+id/userWeightText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2003"
+                            android:fontFamily="@font/lato_fonts"
+                            android:textColor="#ADADAD"
+                            android:textSize="@dimen/title_font_size"
+                            android:layout_marginLeft="20dp"/>
+
+                        <ImageButton
+                            android:id="@+id/userWeightButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_pencil"
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
