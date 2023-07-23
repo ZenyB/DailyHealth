@@ -6,16 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".WaterDaily">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="?attr/actionBarTheme"
+        android:contentInsetStart="0dp">
+        <ImageView
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/backButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_back_arrow"
+            android:contentDescription="Back Button" />
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_marginRight="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Nhắc nhở uống nước"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:gravity="center" />
+
+    </androidx.appcompat.widget.Toolbar>
+
     <ProgressBar
         android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:indeterminateOnly="false"
         android:max="1000"
-        android:paddingHorizontal="20dp"
         android:progress="100"
-        android:layout_marginTop="30dp"
-        android:indeterminate="false"/>
+        android:progressDrawable="@drawable/circle_progress_water" />
 
     <TextView
         android:id="@+id/water"
@@ -62,7 +90,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:paddingTop="25dp"
         android:gravity="center"
         android:layout_below="@id/water">
 

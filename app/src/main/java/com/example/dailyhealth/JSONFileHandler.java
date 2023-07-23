@@ -2,7 +2,6 @@ package com.example.dailyhealth;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,8 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class JSONFileHandler {
-
-    // Phương thức để đọc dữ liệu từ file JSON và trả về một danh sách các bài tập lớn
     private static final String FILE_NAME = "exercise.json";
 
     // Phương thức để đọc dữ liệu từ file JSON và trả về một danh sách các bài tập lớn
@@ -73,7 +70,6 @@ public class JSONFileHandler {
 
         return mainExercises;
     }
-
     // Phương thức để ghi dữ liệu vào file JSON từ danh sách các bài tập lớn
 //    public static void writeMainExercisesToJSON(ArrayList<MainExercise> mainExercises) {
 //        JSONArray jsonArray = new JSONArray();

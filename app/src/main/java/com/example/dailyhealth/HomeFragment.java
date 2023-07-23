@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
                 notificationManager.notify(notificationId, builder.build());
             }
         });
-        scheduleNotification();
+        //scheduleNotification();
 //        getActivity().registerReceiver(new TestReceiver(), new IntentFilter());
         return view;
     }
@@ -142,29 +142,29 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
         }
     }
 
-    private void scheduleNotification() {
-        // Tạo Calendar để lên lịch vào 12:00 AM hàng ngày
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.YEAR, 2023);
-        calendar.set(Calendar.MONTH, Calendar.JULY);
-        calendar.set(Calendar.DAY_OF_MONTH, 21);
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 20);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-
-//        // Nếu thời gian đã qua 12:00 AM hôm nay, lên lịch vào ngày mai
-        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-        }
-
-//         Intent để gửi tới BroadcastReceiver
-        Intent intent = new Intent(getActivity(), TestReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
-//         Lấy AlarmManager
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-    }
+//    private void scheduleNotification() {
+//        // Tạo Calendar để lên lịch vào 12:00 AM hàng ngày
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeInMillis(System.currentTimeMillis());
+//        calendar.set(Calendar.YEAR, 2023);
+//        calendar.set(Calendar.MONTH, Calendar.JULY);
+//        calendar.set(Calendar.DAY_OF_MONTH, 21);
+//        calendar.set(Calendar.HOUR_OF_DAY, 8);
+//        calendar.set(Calendar.MINUTE, 20);
+//        calendar.set(Calendar.SECOND, 0);
+//        calendar.set(Calendar.MILLISECOND, 0);
+//
+////        // Nếu thời gian đã qua 12:00 AM hôm nay, lên lịch vào ngày mai
+//        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+//            calendar.add(Calendar.DAY_OF_MONTH, 1);
+//        }
+//
+////         Intent để gửi tới BroadcastReceiver
+//        Intent intent = new Intent(getActivity(), TestReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+//
+////         Lấy AlarmManager
+//        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+//    }
 }

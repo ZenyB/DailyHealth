@@ -244,7 +244,7 @@
         "exerciseType": 0,
         "imageFileName": "xoay_tay_dong_ho_nguoc",
         "exerciseDuration": 30
-        },
+      },
       {
         "smallExerciseCode": 6,
         "smallExerciseName": "Chống đẩy tay hình kim cương",
@@ -345,7 +345,7 @@
       }
     ]
   },
-    {
+  {
     "id": "A004",
     "largeExerciseName": "Bài tập chân cơ bản",
     "exerciseDuration": 26,
@@ -385,7 +385,7 @@
         "exerciseType": 1,
         "imageFileName": "nam_nghien_trai",
         "exerciseRepetitions": 12
-        },
+      },
       {
         "smallExerciseCode": 6,
         "smallExerciseName": "Nằm nghiên phải nâng chân trái",
@@ -399,7 +399,7 @@
         "exerciseType": 1,
         "imageFileName": "nam_nghien_trai",
         "exerciseRepetitions": 12
-        },
+      },
       {
         "smallExerciseCode": 8,
         "smallExerciseName": "Tấn sau",
@@ -507,6 +507,1526 @@
       },
       {
         "smallExerciseCode": 23,
+        "smallExerciseName": "Căng bắp chân phải",
+        "exerciseType": 0,
+        "imageFileName": "cang_bap_chan_phai",
+        "exerciseDuration": 30
+      }
+    ]
+  },
+  {
+    "id": "A005",
+    "largeExerciseName": "Bài tập bụng trung bình",
+    "exerciseDuration": 29,
+    "exerciseDifficulty": 2,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Bật nhảy",
+        "exerciseType": 0,
+        "imageFileName": "bat_nhay",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Chạm gót chân",
+        "exerciseType": 1,
+        "imageFileName": "cham_got_chan",
+        "exerciseRepetitions": 26
+      },
+      {
+        "smallExerciseCode": 3,
+        "smallExerciseName": "Vặn chéo",
+        "exerciseType": 1,
+        "imageFileName": "van_cheo",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 4,
+        "smallExerciseName": "Leo núi",
+        "exerciseType": 1,
+        "imageFileName": "leo_nui",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 5,
+        "smallExerciseName": "Cây cầu nghiêng trái",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_nghieng_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 6,
+        "smallExerciseName": "Cây cầu nghiêng phải",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_nghieng_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 7,
+        "smallExerciseName": "Cây cầu mông",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_mong",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 8,
+        "smallExerciseName": "Gập bụng đạp xe",
+        "exerciseType": 1,
+        "imageFileName": "gap_bung_dap_xe",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 9,
+        "smallExerciseName": "Nâng người chữ V",
+        "exerciseType": 1,
+        "imageFileName": "nang_nguoi_chu_v",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 10,
+        "smallExerciseName": "Tập cơ bụng",
+        "exerciseType": 1,
+        "imageFileName": "tap_co_bung",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 11,
+        "smallExerciseName": "Đo sàn",
+        "exerciseType": 0,
+        "imageFileName": "do_san",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 12,
+        "smallExerciseName": "Vặn chéo",
+        "exerciseType": 1,
+        "imageFileName": "van_cheo",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 13,
+        "smallExerciseName": "Nâng chân",
+        "exerciseType": 1,
+        "imageFileName": "nang_chan",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 14,
+        "smallExerciseName": "Gập bụng đạp xe",
+        "exerciseType": 1,
+        "imageFileName": "gap_bung_dap_xe",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 15,
+        "smallExerciseName": "Chống đẩy và xoay người",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_xoay_nguoi",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 16,
+        "smallExerciseName": "Ván nghiêng phải",
+        "exerciseType": 0,
+        "imageFileName": "van_nghieng_phai",
+        "exerciseDuration": 20
+      },
+      {
+        "smallExerciseCode": 17,
+        "smallExerciseName": "Ván nghiêng trái",
+        "exerciseType": 0,
+        "imageFileName": "van_nghieng_trai",
+        "exerciseDuration": 20
+      },
+      {
+        "smallExerciseCode": 18,
+        "smallExerciseName": "Duỗi người kiểu hổ mang",
+        "exerciseType": 0,
+        "imageFileName": "duoi_nguoi",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 19,
+        "smallExerciseName": "Duỗi vặn sống lưng bên trái",
+        "exerciseType": 0,
+        "imageFileName": "duoi_van_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 20,
+        "smallExerciseName": "Duỗi vặn sống lưng bên phải",
+        "exerciseType": 0,
+        "imageFileName": "duoi_van_phai",
+        "exerciseDuration": 30
+      }
+    ]
+  },
+  {
+    "id": "A006",
+    "largeExerciseName": "Bài tập ngực trung bình",
+    "exerciseDuration": 15,
+    "exerciseDifficulty": 2,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Bật nhảy",
+        "exerciseType": 0,
+        "imageFileName": "bat_nhay",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Chạm gót chân",
+        "exerciseType": 1,
+        "imageFileName": "cham_got_chan",
+        "exerciseRepetitions": 26
+      },
+      {
+        "smallExerciseCode": 3,
+        "smallExerciseName": "Vặn chéo",
+        "exerciseType": 1,
+        "imageFileName": "van_cheo",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 4,
+        "smallExerciseName": "Leo núi",
+        "exerciseType": 1,
+        "imageFileName": "leo_nui",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 5,
+        "smallExerciseName": "Cây cầu nghiêng trái",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_nghieng_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 6,
+        "smallExerciseName": "Cây cầu nghiêng phải",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_nghieng_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 7,
+        "smallExerciseName": "Cây cầu mông",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_mong",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 8,
+        "smallExerciseName": "Gập bụng đạp xe",
+        "exerciseType": 1,
+        "imageFileName": "gap_bung_dap_xe",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 9,
+        "smallExerciseName": "Nâng người chữ V",
+        "exerciseType": 1,
+        "imageFileName": "nang_nguoi_chu_v",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 10,
+        "smallExerciseName": "Tập cơ bụng",
+        "exerciseType": 1,
+        "imageFileName": "tap_co_bung",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 11,
+        "smallExerciseName": "Đo sàn",
+        "exerciseType": 0,
+        "imageFileName": "do_san",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 12,
+        "smallExerciseName": "Vặn chéo",
+        "exerciseType": 1,
+        "imageFileName": "van_cheo",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 13,
+        "smallExerciseName": "Nâng chân",
+        "exerciseType": 1,
+        "imageFileName": "nang_chan",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 14,
+        "smallExerciseName": "Gập bụng đạp xe",
+        "exerciseType": 1,
+        "imageFileName": "gap_bung_dap_xe",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 15,
+        "smallExerciseName": "Chống đẩy và xoay người",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_xoay_nguoi",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 16,
+        "smallExerciseName": "Ván nghiêng phải",
+        "exerciseType": 0,
+        "imageFileName": "van_nghieng_phai",
+        "exerciseDuration": 20
+      },
+      {
+        "smallExerciseCode": 17,
+        "smallExerciseName": "Ván nghiêng trái",
+        "exerciseType": 0,
+        "imageFileName": "van_nghieng_trai",
+        "exerciseDuration": 20
+      },
+      {
+        "smallExerciseCode": 18,
+        "smallExerciseName": "Duỗi người kiểu hổ mang",
+        "exerciseType": 0,
+        "imageFileName": "duoi_nguoi",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 19,
+        "smallExerciseName": "Duỗi vặn sống lưng bên trái",
+        "exerciseType": 0,
+        "imageFileName": "duoi_van_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 20,
+        "smallExerciseName": "Duỗi vặn sống lưng bên phải",
+        "exerciseType": 0,
+        "imageFileName": "duoi_van_phai",
+        "exerciseDuration": 30
+      }
+    ]
+  },
+  {
+    "id": "A007",
+    "largeExerciseName": "Bài tập cánh tay trung bình",
+    "exerciseDuration": 26,
+    "exerciseDifficulty": 2,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Xoay tay vòng tròn theo chiều kim đồng hồ",
+        "exerciseType": 0,
+        "imageFileName": "xoay_tay_dong_ho",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Vòng tay ngược chiều kim đồng hồ",
+        "exerciseType": 0,
+        "imageFileName": "xoay_tay_dong_ho_nguoc",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 3,
+        "smallExerciseName": "Đẩy tay sau trên sàn",
+        "exerciseType": 1,
+        "imageFileName": "day_tay_sau_tren_san",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 4,
+        "smallExerciseName": "Chống đẩy quân đội",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_quan_doi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 5,
+        "smallExerciseName": "Đấm móc luân phiên",
+        "exerciseType": 0,
+        "imageFileName": "dam_moc_luan_phien",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 6,
+        "smallExerciseName": "Chống đẩy và xoay người",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_xoay_nguoi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 7,
+        "smallExerciseName": "Cuốn tạ chân trái",
+        "exerciseType": 1,
+        "imageFileName": "cuon_ta_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 8,
+        "smallExerciseName": "Cuốn tạ chân phải",
+        "exerciseType": 1,
+        "imageFileName": "cuon_ta_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 9,
+        "smallExerciseName": "Đẩy tay sau trên sàn",
+        "exerciseType": 1,
+        "imageFileName": "day_tay_sau_tren_san",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 10,
+        "smallExerciseName": "Chống đẩy quân đổi",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_quan_doi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 11,
+        "smallExerciseName": "Đấm móc luân phiên",
+        "exerciseType": 0,
+        "imageFileName": "dam_moc_luan_phien",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 12,
+        "smallExerciseName": "Chống đẩy và xoay người",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_xoay_nguoi",
+        "exerciseRepetitions": 10
+      },
+      {
+        "smallExerciseCode": 13,
+        "smallExerciseName": "Cuốn tạ chân trái",
+        "exerciseType": 1,
+        "imageFileName": "cuon_ta_chan_trai",
+        "exerciseRepetitions": 10
+      },
+      {
+        "smallExerciseCode": 14,
+        "smallExerciseName": "Cuốn tạ chân phải",
+        "exerciseType": 1,
+        "imageFileName": "cuon_ta_chan_phai",
+        "exerciseRepetitions": 10
+      },
+      {
+        "smallExerciseCode": 15,
+        "smallExerciseName": "Nhảy dây không dùng dây",
+        "exerciseType": 0,
+        "imageFileName": "nhay_day_khong_dung_day",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 16,
+        "smallExerciseName": "Chống đẩy",
+        "exerciseType": 1,
+        "imageFileName": "chong_day",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 17,
+        "smallExerciseName": "Giảm mỡ toàn thân",
+        "exerciseType": 1,
+        "imageFileName": "giam_mo_toan_than",
+        "exerciseRepetitions": 10
+      },
+      {
+        "smallExerciseCode": 18,
+        "smallExerciseName": "Tay cắt kéo",
+        "exerciseType": 0,
+        "imageFileName": "tay_cat_keo",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 19,
+        "smallExerciseName": "Nhảy dây không dùng dây",
+        "exerciseType": 0,
+        "imageFileName": "nhay_day_khong_dung_day",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 20,
+        "smallExerciseName": "Chống đẩy",
+        "exerciseType": 1,
+        "imageFileName": "chong_day",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 21,
+        "smallExerciseName": "Giảm mỡ toàn thân",
+        "exerciseType": 1,
+        "imageFileName": "giam_mo_toan_than",
+        "exerciseRepetitions": 8
+      },
+      {
+        "smallExerciseCode": 22,
+        "smallExerciseName": "Căng cơ tay trái",
+        "exerciseType": 0,
+        "imageFileName": "cang_co_tay_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 23,
+        "smallExerciseName": "Căng cơ tay phải",
+        "exerciseType": 0,
+        "imageFileName": "cang_co_tay_phai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 24,
+        "smallExerciseName": "Đứng duỗi cơ tay trước bên trái",
+        "exerciseType": 0,
+        "imageFileName": "dung_duoi_tay_phai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 25,
+        "smallExerciseName": "Đứng duỗi cơ tay trước bên phải",
+        "exerciseType": 0,
+        "imageFileName": "dung_duoi_tay_phai",
+        "exerciseDuration": 30
+      }
+    ]
+  },
+  {
+    "id": "A008",
+    "largeExerciseName": "Bài tập chân trung bình",
+    "exerciseDuration": 41,
+    "exerciseDifficulty": 2,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Bật nhảy",
+        "exerciseType": 0,
+        "imageFileName": "bat_nhay",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Gánh đùi",
+        "exerciseType": 1,
+        "imageFileName": "ganh_dui",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 3,
+        "smallExerciseName": "Gánh đùi",
+        "exerciseType": 1,
+        "imageFileName": "ganh_dui",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 4,
+        "smallExerciseName": "Gánh đùi",
+        "exerciseType": 1,
+        "imageFileName": "ganh_dui",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 5,
+        "smallExerciseName": "Gánh đùi",
+        "exerciseType": 1,
+        "imageFileName": "ganh_dui",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 6,
+        "smallExerciseName": "Vòi cứu hỏa bên trái",
+        "exerciseType": 1,
+        "imageFileName": "voi_cuu_hoa_ben_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 7,
+        "smallExerciseName": "Vòi cứu hỏa bên phải",
+        "exerciseType": 1,
+        "imageFileName": "voi_cuu_hoa_ben_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 8,
+        "smallExerciseName": "Vòi cứu hỏa bên trái",
+        "exerciseType": 1,
+        "imageFileName": "voi_cuu_hoa_ben_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 9,
+        "smallExerciseName": "Vòi cứu hỏa bên phải",
+        "exerciseType": 1,
+        "imageFileName": "voi_cuu_hoa_ben_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 10,
+        "smallExerciseName": "Vòi cứu hỏa bên trái",
+        "exerciseType": 1,
+        "imageFileName": "voi_cuu_hoa_ben_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 11,
+        "smallExerciseName": "Vòi cứu hỏa bên phải",
+        "exerciseType": 1,
+        "imageFileName": "voi_cuu_hoa_ben_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 12,
+        "smallExerciseName": "Bước gập gối",
+        "exerciseType": 1,
+        "imageFileName": "buoc_gap_goi",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 13,
+        "smallExerciseName": "Bước gập gối",
+        "exerciseType": 1,
+        "imageFileName": "buoc_gap_goi",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 14,
+        "smallExerciseName": "Nằm nghiên xoay chân trái",
+        "exerciseType": 1,
+        "imageFileName": "nam_nghien_xoay_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 15,
+        "smallExerciseName": "Nằm nghiên xoay chân phải",
+        "exerciseType": 1,
+        "imageFileName": "nam_nghien_xoay_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 16,
+        "smallExerciseName": "Nằm nghiên xoay chân trái",
+        "exerciseType": 1,
+        "imageFileName": "nam_nghien_xoay_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 17,
+        "smallExerciseName": "Nằm nghiên xoay chân phải",
+        "exerciseType": 1,
+        "imageFileName": "nam_nghien_xoay_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 18,
+        "smallExerciseName": "Đứng tấn",
+        "exerciseType": 1,
+        "imageFileName": "dung_tan",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 19,
+        "smallExerciseName": "Đứng tấn",
+        "exerciseType": 1,
+        "imageFileName": "dung_tan",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 20,
+        "smallExerciseName": "Đứng tấn",
+        "exerciseType": 1,
+        "imageFileName": "dung_tan",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 21,
+        "smallExerciseName": "Đứng tấn",
+        "exerciseType": 1,
+        "imageFileName": "dung_tan",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 22,
+        "smallExerciseName": "Nằm đá chân cắt kéo",
+        "exerciseType": 1,
+        "imageFileName": "nam_da_chan_cat_keo",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 23,
+        "smallExerciseName": "Nằm đá chân cắt kéo",
+        "exerciseType": 1,
+        "imageFileName": "nam_da_chan_cat_keo",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 24,
+        "smallExerciseName": "Nằm đá chân cắt kéo",
+        "exerciseType": 1,
+        "imageFileName": "nam_da_chan_cat_keo",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 25,
+        "smallExerciseName": "Nằm đá chân cắt kéo",
+        "exerciseType": 1,
+        "imageFileName": "nam_da_chan_cat_keo",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 26,
+        "smallExerciseName": "Ngồi dựa tường",
+        "exerciseType": 0,
+        "imageFileName": "ngoi_dua_tuong",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 27,
+        "smallExerciseName": "Dựa tường duỗi cơ đùi trước trái",
+        "exerciseType": 0,
+        "imageFileName": "dua_tuong_co_dui_truoc_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 28,
+        "smallExerciseName": "Dựa tường duỗi cơ đùi trước phải",
+        "exerciseType": 0,
+        "imageFileName": "dua_tuong_co_dui_truoc_phai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 29,
+        "smallExerciseName": "Ép đầu gối trái lên ngực",
+        "exerciseType": 0,
+        "imageFileName": "ep_dau_goi_nguc_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 30,
+        "smallExerciseName": "Ép đầu gối phải lên ngực",
+        "exerciseType": 0,
+        "imageFileName": "ep_dau_goi_nguc_phai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 31,
+        "smallExerciseName": "Nâng bắp chân với bài chân mở ra ngoài",
+        "exerciseType": 1,
+        "imageFileName": "nang_bap_chan_voi_bai_chan_mo_ra_ngoai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 32,
+        "smallExerciseName": "Nâng bắp chân với bài chân mở ra ngoài",
+        "exerciseType": 1,
+        "imageFileName": "nang_bap_chan_voi_bai_chan_mo_ra_ngoai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 33,
+        "smallExerciseName": "Nâng bắp chân với bài chân mở ra ngoài",
+        "exerciseType": 1,
+        "imageFileName": "nang_bap_chan_voi_bai_chan_mo_ra_ngoai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 34,
+        "smallExerciseName": "Nâng bắp chân với bài chân mở ra ngoài",
+        "exerciseType": 1,
+        "imageFileName": "nang_bap_chan_voi_bai_chan_mo_ra_ngoai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 35,
+        "smallExerciseName": "Nhảy một chân trái",
+        "exerciseType": 1,
+        "imageFileName": "nhay_mot_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 36,
+        "smallExerciseName": "Nhảy một chân phải",
+        "exerciseType": 1,
+        "imageFileName": "nhay_mot_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 37,
+        "smallExerciseName": "Nhảy một chân trái",
+        "exerciseType": 1,
+        "imageFileName": "nhay_mot_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 38,
+        "smallExerciseName": "Nhảy một chân phải",
+        "exerciseType": 1,
+        "imageFileName": "nhay_mot_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 39,
+        "smallExerciseName": "Căng bắp chân trái",
+        "exerciseType": 0,
+        "imageFileName": "cang_bap_chan_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 40,
+        "smallExerciseName": "Căng bắp chân phải",
+        "exerciseType": 0,
+        "imageFileName": "cang_bap_chan_phai",
+        "exerciseDuration": 30
+      }
+    ]
+  },
+  {
+    "id": "A009",
+    "largeExerciseName": "Bài tập bụng nâng cao",
+    "exerciseDuration": 36,
+    "exerciseDifficulty": 3,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Bật nhảy",
+        "exerciseType": 0,
+        "imageFileName": "bat_nhay",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Gập bụng",
+        "exerciseType": 1,
+        "imageFileName": "gap_bung",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 3,
+        "smallExerciseName": "Cây cầu nghiêng trái",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_nghieng_trai",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 4,
+        "smallExerciseName": "Cây cầu nghiêng phải",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_nghieng_phai",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 5,
+        "smallExerciseName": "Tập cơ bụng",
+        "exerciseType": 1,
+        "imageFileName": "tap_co_bung",
+        "exerciseRepetitions": 30
+      },
+      {
+        "smallExerciseCode": 6,
+        "smallExerciseName": "Gập bụng đạp xe",
+        "exerciseType": 1,
+        "imageFileName": "gap_bung_dap_xe",
+        "exerciseRepetitions": 24
+      },
+      {
+        "smallExerciseCode": 7,
+        "smallExerciseName": "Ván nghiêng phải",
+        "exerciseType": 0,
+        "imageFileName": "van_nghieng_phai",
+        "exerciseDuration": 20
+      },
+      {
+        "smallExerciseCode": 8,
+        "smallExerciseName": "Ván nghiêng trái",
+        "exerciseType": 0,
+        "imageFileName": "van_nghieng_trai",
+        "exerciseDuration": 20
+      },
+      {
+        "smallExerciseCode": 9,
+        "smallExerciseName": "Nâng người chữ V",
+        "exerciseType": 1,
+        "imageFileName": "nang_nguoi_chu_v",
+        "exerciseRepetitions": 18
+      },
+      {
+        "smallExerciseCode": 10,
+        "smallExerciseName": "Chống đẩy và xoay người",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_xoay_nguoi",
+        "exerciseRepetitions": 24
+      },
+      {
+        "smallExerciseCode": 11,
+        "smallExerciseName": "Gập bụng chéo kiểu nga",
+        "exerciseType": 1,
+        "imageFileName": "gap_bung_nga",
+        "exerciseRepetitions": 48
+      },
+      {
+        "smallExerciseCode": 12,
+        "smallExerciseName": "Tập cơ bụng",
+        "exerciseType": 1,
+        "imageFileName": "tap_co_bung",
+        "exerciseRepetitions": 28
+      },
+      {
+        "smallExerciseCode": 13,
+        "smallExerciseName": "Cây cầu mông",
+        "exerciseType": 1,
+        "imageFileName": "cay_cau_mong",
+        "exerciseRepetitions": 30
+      },
+      {
+        "smallExerciseCode": 14,
+        "smallExerciseName": "Chạm gót chân",
+        "exerciseType": 1,
+        "imageFileName": "cham_got_chan",
+        "exerciseRepetitions": 34
+      },
+      {
+        "smallExerciseCode": 15,
+        "smallExerciseName": "Leo núi",
+        "exerciseType": 1,
+        "imageFileName": "leo_nui",
+        "exerciseRepetitions": 30
+      },
+      {
+        "smallExerciseCode": 16,
+        "smallExerciseName": "Vặn chéo",
+        "exerciseType": 1,
+        "imageFileName": "van_cheo",
+        "exerciseRepetitions": 24
+      },
+      {
+        "smallExerciseCode": 17,
+        "smallExerciseName": "Nâng người chữ V",
+        "exerciseType": 1,
+        "imageFileName": "nang_nguoi_chu_v",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 18,
+        "smallExerciseName": "Đo sàn",
+        "exerciseType": 0,
+        "imageFileName": "do_san",
+        "exerciseDuration": 60
+      },
+      {
+        "smallExerciseCode": 19,
+        "smallExerciseName": "Duỗi người kiểu hổ mang",
+        "exerciseType": 0,
+        "imageFileName": "duoi_nguoi",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 20,
+        "smallExerciseName": "Duỗi vặn sống lưng bên trái",
+        "exerciseType": 0,
+        "imageFileName": "duoi_van_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 21,
+        "smallExerciseName": "Duỗi vặn sống lưng bên phải",
+        "exerciseType": 0,
+        "imageFileName": "duoi_van_phai",
+        "exerciseDuration": 30
+      }
+    ]
+  },
+  {
+    "id": "A010",
+    "largeExerciseName": "Bài tập ngực nâng cao",
+    "exerciseDuration": 19,
+    "exerciseDifficulty": 3,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Bật nhảy",
+        "exerciseType": 0,
+        "imageFileName": "bat_nhay",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Xoay tay",
+        "exerciseType": 1,
+        "imageFileName": "xoay_tay",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 3,
+        "smallExerciseName": "Căng vai",
+        "exerciseType": 0,
+        "imageFileName": "cang_vai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 4,
+        "smallExerciseName": "Giảm mỡ toàn thân",
+        "exerciseType": 1,
+        "imageFileName": "giam_mo_toan_than",
+        "exerciseRepetitions": 10
+      },
+      {
+        "smallExerciseCode": 5,
+        "smallExerciseName": "Chống đẩy tay đặt chéo",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_tay_dat_cheo",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 6,
+        "smallExerciseName": "Chống đẩy kiểu hindu",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_kieu_hindu",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 7,
+        "smallExerciseName": "Chống đẩy và xoay người",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_xoay_nguoi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 8,
+        "smallExerciseName": "Chống đẩy tay hình kim cương",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_tay_kim_cuong",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 9,
+        "smallExerciseName": "Chống đẩy kiểu hộp",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_kieu_hop",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 10,
+        "smallExerciseName": "Chống đẩy kiểu hindu",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_kieu_hindu",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 11,
+        "smallExerciseName": "Chống đẩy người nhện",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_nguoi_nhen",
+        "exerciseRepetitions": 20
+      },
+      {
+        "smallExerciseCode": 12,
+        "smallExerciseName": "Chống đẩy dốc xuống",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_doc_xuong",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 13,
+        "smallExerciseName": "Giảm mỡ toàn thân",
+        "exerciseType": 1,
+        "imageFileName": "giam_mo_toan_than",
+        "exerciseRepetitions": 10
+      },
+      {
+        "smallExerciseCode": 14,
+        "smallExerciseName": "Căng vai",
+        "exerciseType": 0,
+        "imageFileName": "cang_vai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 15,
+        "smallExerciseName": "Duỗi người kiểu hổ mang",
+        "exerciseType": 0,
+        "imageFileName": "duoi_nguoi",
+        "exerciseDuration": 30
+      }
+    ]
+  },
+  {
+    "id": "A011",
+    "largeExerciseName": "Bài tập cánh tay nâng cao",
+    "exerciseDuration": 32,
+    "exerciseDifficulty": 3,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Xoay tay vòng tròn theo chiều kim đồng hồ",
+        "exerciseType": 0,
+        "imageFileName": "xoay_tay_dong_ho",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Vòng tay ngược chiều kim đồng hồ",
+        "exerciseType": 0,
+        "imageFileName": "xoay_tay_dong_ho_nguoc",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 3,
+        "smallExerciseName": "Nhảy dây không dùng dây",
+        "exerciseType": 0,
+        "imageFileName": "nhay_day_khong_dung_day",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 4,
+        "smallExerciseName": "Cuốn tạ chân trái",
+        "exerciseType": 1,
+        "imageFileName": "cuon_ta_chan_trai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 5,
+        "smallExerciseName": "Cuốn tạ chân phải",
+        "exerciseType": 1,
+        "imageFileName": "cuon_ta_chan_phai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 6,
+        "smallExerciseName": "Giảm mỡ toàn thân",
+        "exerciseType": 1,
+        "imageFileName": "giam_mo_toan_than",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 7,
+        "smallExerciseName": "Cuốn tay gập người trái",
+        "exerciseType": 1,
+        "imageFileName": "cuon_tay_gap_nguoi_trai",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 8,
+        "smallExerciseName": "Cuốn tay gập người phải",
+        "exerciseType": 1,
+        "imageFileName": "cuon_tay_gap_nguoi_phai",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 9,
+        "smallExerciseName": "Đẩy tay sau trên sàn",
+        "exerciseType": 1,
+        "imageFileName": "day_tay_sau_tren_san",
+        "exerciseRepetitions": 18
+      },
+      {
+        "smallExerciseCode": 10,
+        "smallExerciseName": "Đấm móc luân phiên",
+        "exerciseType": 0,
+        "imageFileName": "dam_moc_luan_phien",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 11,
+        "smallExerciseName": "Chống đẩy quân đội",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_quan_doi",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 12,
+        "smallExerciseName": "Xoay vai",
+        "exerciseType": 1,
+        "imageFileName": "xoay_vai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 13,
+        "smallExerciseName": "Đẩy tay sau trên sàn",
+        "exerciseType": 1,
+        "imageFileName": "day_tay_sau_tren_san",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 14,
+        "smallExerciseName": "Đấm móc luân phiên",
+        "exerciseType": 0,
+        "imageFileName": "dam_moc_luan_phien",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 15,
+        "smallExerciseName": "Giảm mỡ toàn thân",
+        "exerciseType": 1,
+        "imageFileName": "giam_mo_toan_than",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 16,
+        "smallExerciseName": "Cuộn tay gập người trái",
+        "exerciseType": 1,
+        "imageFileName": "cuon_tay_gap_nguoi_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 17,
+        "smallExerciseName": "Cuộn tay gập người phải",
+        "exerciseType": 1,
+        "imageFileName": "cuon_tay_gap_nguoi_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 18,
+        "smallExerciseName": "Chống đẩy quân đội",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_quan_doi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 19,
+        "smallExerciseName": "Xoay vai",
+        "exerciseType": 1,
+        "imageFileName": "xoay_vai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 20,
+        "smallExerciseName": "Cuốn tay trái tại khung cửa",
+        "exerciseType": 1,
+        "imageFileName": "cuon_tay_trai_tai_khung_cua",
+        "exerciseRepetitions": 8
+      },
+      {
+        "smallExerciseCode": 21,
+        "smallExerciseName": "Cuốn tay phải tại khung cửa",
+        "exerciseType": 1,
+        "imageFileName": "cuon_tay_phai_tai_khung_cua",
+        "exerciseRepetitions": 8
+      },
+      {
+        "smallExerciseCode": 22,
+        "smallExerciseName": "Chống đẩy và xoay người",
+        "exerciseType": 1,
+        "imageFileName": "chong_day_xoay_nguoi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 23,
+        "smallExerciseName": "Căng cơ tay trái",
+        "exerciseType": 0,
+        "imageFileName": "cang_co_tay_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 24,
+        "smallExerciseName": "Căng cơ tay phải",
+        "exerciseType": 0,
+        "imageFileName": "cang_co_tay_phai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 25,
+        "smallExerciseName": "Đứng duỗi cơ tay trước bên trái",
+        "exerciseType": 0,
+        "imageFileName": "dung_duoi_tay_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 26,
+        "smallExerciseName": "Đứng duỗi cơ tay trước bên phải",
+        "exerciseType": 0,
+        "imageFileName": "dung_duoi_tay_phai",
+        "exerciseDuration": 30
+      }
+    ]
+  },
+  {
+    "id": "A012",
+    "largeExerciseName": "Bài tập chân nâng cao",
+    "exerciseDuration": 53,
+    "exerciseDifficulty": 3,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Giảm mỡ toàn thân",
+        "exerciseType": 1,
+        "imageFileName": "giam_mo_toan_than",
+        "exerciseRepetitions": 10
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Gánh đùi",
+        "exerciseType": 1,
+        "imageFileName": "ganh_dui",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 3,
+        "smallExerciseName": "Gánh đùi",
+        "exerciseType": 1,
+        "imageFileName": "ganh_dui",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 4,
+        "smallExerciseName": "Gánh đùi",
+        "exerciseType": 1,
+        "imageFileName": "ganh_dui",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 5,
+        "smallExerciseName": "Nâng chân trái ở dưới",
+        "exerciseType": 1,
+        "imageFileName": "nang_chan_trai_o_duoi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 6,
+        "smallExerciseName": "Nâng chân phải ở dưới",
+        "exerciseType": 1,
+        "imageFileName": "nang_chan_phai_o_duoi",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 7,
+        "smallExerciseName": "Nâng chân trái ở dưới",
+        "exerciseType": 1,
+        "imageFileName": "nang_chan_trai_o_duoi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 8,
+        "smallExerciseName": "Nâng chân phải ở dưới",
+        "exerciseType": 1,
+        "imageFileName": "nang_chan_phai_o_duoi",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 9,
+        "smallExerciseName": "Nâng chân trái ở dưới",
+        "exerciseType": 1,
+        "imageFileName": "nang_chan_trai_o_duoi",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 10,
+        "smallExerciseName": "Nâng chân phải ở dưới",
+        "exerciseType": 1,
+        "imageFileName": "nang_chan_phai_o_duoi",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 11,
+        "smallExerciseName": "Chùng chân chéo",
+        "exerciseType": 1,
+        "imageFileName": "chung_chan_cheo",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 12,
+        "smallExerciseName": "Chùng chân chéo",
+        "exerciseType": 1,
+        "imageFileName": "chung_chan_cheo",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 13,
+        "smallExerciseName": "Chùng chân chéo",
+        "exerciseType": 1,
+        "imageFileName": "chung_chan_cheo",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 14,
+        "smallExerciseName": "Nằm nghiên xoay chân trái",
+        "exerciseType": 1,
+        "imageFileName": "nam_nghien_xoay_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 15,
+        "smallExerciseName": "Nằm nghiên xoay chân phải",
+        "exerciseType": 1,
+        "imageFileName": "nam_nghien_xoay_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 16,
+        "smallExerciseName": "Nằm nghiên xoay chân trái",
+        "exerciseType": 1,
+        "imageFileName": "nam_nghien_xoay_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 17,
+        "smallExerciseName": "Nằm nghiên xoay chân phải",
+        "exerciseType": 1,
+        "imageFileName": "nam_nghien_xoay_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 18,
+        "smallExerciseName": "Gánh tạ nhảy",
+        "exerciseType": 1,
+        "imageFileName": "ganh_ta_nhay",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 19,
+        "smallExerciseName": "Gánh tạ nhảy",
+        "exerciseType": 1,
+        "imageFileName": "ganh_ta_nhay",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 20,
+        "smallExerciseName": "Gánh tạ nhảy",
+        "exerciseType": 1,
+        "imageFileName": "ganh_ta_nhay",
+        "exerciseRepetitions": 14
+      },
+      {
+        "smallExerciseCode": 21,
+        "smallExerciseName": "Quỳ gối đá chân trái",
+        "exerciseType": 1,
+        "imageFileName": "quy_goi_da_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 22,
+        "smallExerciseName": "Quỳ gối đá chân phải",
+        "exerciseType": 1,
+        "imageFileName": "quy_goi_da_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 23,
+        "smallExerciseName": "Quỳ gối đá chân trái",
+        "exerciseType": 1,
+        "imageFileName": "quy_goi_da_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 24,
+        "smallExerciseName": "Quỳ gối đá chân phải",
+        "exerciseType": 1,
+        "imageFileName": "quy_goi_da_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 25,
+        "smallExerciseName": "Quỳ gối đá chân trái",
+        "exerciseType": 1,
+        "imageFileName": "quy_goi_da_chan_trai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 26,
+        "smallExerciseName": "Quỳ gối đá chân phải",
+        "exerciseType": 1,
+        "imageFileName": "quy_goi_da_chan_phai",
+        "exerciseRepetitions": 12
+      },
+      {
+        "smallExerciseCode": 27,
+        "smallExerciseName": "Ngồi dựa tường",
+        "exerciseType": 0,
+        "imageFileName": "ngoi_dua_tuong",
+        "exerciseDuration": 40
+      },
+      {
+        "smallExerciseCode": 28,
+        "smallExerciseName": "Dựa tường duỗi cơ đùi trước trái",
+        "exerciseType": 0,
+        "imageFileName": "dua_tuong_co_dui_truoc_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 29,
+        "smallExerciseName": "Dựa tường duỗi cơ đùi trước phải",
+        "exerciseType": 0,
+        "imageFileName": "dua_tuong_co_dui_truoc_phai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 30,
+        "smallExerciseName": "Nằm duỗi người con bướm",
+        "exerciseType": 0,
+        "imageFileName": "nam_duoi_nguoi_con_buom",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 31,
+        "smallExerciseName": "Nâng cáng dựa tường",
+        "exerciseType": 1,
+        "imageFileName": "nang_cang_dua_tuong",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 32,
+        "smallExerciseName": "Nâng cáng dựa tường",
+        "exerciseType": 1,
+        "imageFileName": "nang_cang_dua_tuong",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 33,
+        "smallExerciseName": "Nâng cáng dựa tường",
+        "exerciseType": 1,
+        "imageFileName": "nang_cang_dua_tuong",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 34,
+        "smallExerciseName": "Dựa tường nâng một bắp chân trái",
+        "exerciseType": 1,
+        "imageFileName": "dua_tuong_nang_mot_bap_chan_trai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 35,
+        "smallExerciseName": "Dựa tường nâng một bắp chân phải",
+        "exerciseType": 1,
+        "imageFileName": "dua_tuong_nang_mot_bap_chan_phai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 36,
+        "smallExerciseName": "Dựa tường nâng một bắp chân trái",
+        "exerciseType": 1,
+        "imageFileName": "dua_tuong_nang_mot_bap_chan_trai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 37,
+        "smallExerciseName": "Dựa tường nâng một bắp chân phải",
+        "exerciseType": 1,
+        "imageFileName": "dua_tuong_nang_mot_bap_chan_phai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 38,
+        "smallExerciseName": "Dựa tường nâng một bắp chân trái",
+        "exerciseType": 1,
+        "imageFileName": "dua_tuong_nang_mot_bap_chan_trai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 39,
+        "smallExerciseName": "Dựa tường nâng một bắp chân phải",
+        "exerciseType": 1,
+        "imageFileName": "dua_tuong_nang_mot_bap_chan_phai",
+        "exerciseRepetitions": 16
+      },
+      {
+        "smallExerciseCode": 40,
+        "smallExerciseName": "Căng bắp chân trái",
+        "exerciseType": 0,
+        "imageFileName": "cang_bap_chan_trai",
+        "exerciseDuration": 30
+      },
+      {
+        "smallExerciseCode": 41,
         "smallExerciseName": "Căng bắp chân phải",
         "exerciseType": 0,
         "imageFileName": "cang_bap_chan_phai",
