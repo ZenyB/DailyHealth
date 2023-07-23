@@ -28,12 +28,6 @@ public class MainExercise {
         this.smallExercises = smallExercises;
     }
 
-    // Constructor với tham số
-    public MainExercise(String name, String time, String kcal) {
-        this.name = name;
-        this.time = time;
-        this.kcal = kcal;
-    }
 
     // Các phương thức getter và setter
     public String getId() {

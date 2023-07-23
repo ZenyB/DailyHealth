@@ -27,6 +27,7 @@
 
                 <ImageButton
                     android:id="@+id/imageButton"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/exercise"/>
@@ -46,18 +47,29 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="4">
+                android:orientation="horizontal"
+                android:layout_weight="4"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/exerciseNameTextView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold_2"
+                    android:maxLines="2"
+                    android:textAlignment="center"
                     android:lineHeight="@dimen/title_line_height"
                     android:text="Hít đất"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/title_font_size" />
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/doneBtn"
+                    android:enabled="false"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/ic_done_foreground"
+                    />
             </LinearLayout>
         </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,7 +78,7 @@
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="@id/progressBar"
                 app:layout_constraintEnd_toEndOf="parent"
