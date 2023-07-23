@@ -1,5 +1,9 @@
 package com.example.dailyhealth;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,17 +11,37 @@ import org.json.JSONObject;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class JSONFileHandler {
-    private static final String FILE_NAME = "exercises.json";
 
     // Phương thức để đọc dữ liệu từ file JSON và trả về một danh sách các bài tập lớn
-    public static ArrayList<MainExercise> readMainExercisesFromJSON() {
+    private static final String FILE_NAME = "exercise.json";
+
+    // Phương thức để đọc dữ liệu từ file JSON và trả về một danh sách các bài tập lớn
+    public static ArrayList<MainExercise> readMainExercisesFromJSON(Context context) {
         ArrayList<MainExercise> mainExercises = new ArrayList<>();
 
-        try (FileReader fileReader = new FileReader(FILE_NAME)) {
-            JSONArray jsonArray = new JSONArray(fileReader);
+        try {
+            // Lấy AssetManager từ context
+            AssetManager assetManager = context.getAssets();
+
+            // Mở file "exercise.json" trong thư mục assets
+            InputStream inputStream = assetManager.open(FILE_NAME);
+
+            // Đọc dữ liệu từ InputStream
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+
+            // Chuyển đổi dữ liệu từ byte[] thành chuỗi JSON
+            String jsonString = new String(buffer, StandardCharsets.UTF_8);
+
+            // Đọc dữ liệu từ chuỗi JSON
+            JSONArray jsonArray = new JSONArray(jsonString);
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -33,7 +57,7 @@ public class JSONFileHandler {
                     int smallExerciseCode = smallExerciseObject.getInt("smallExerciseCode");
                     String smallExerciseName = smallExerciseObject.getString("smallExerciseName");
                     int exerciseType = smallExerciseObject.getInt("exerciseType");
-                    String imageFileName = smallExerciseObject.getString("imageFileName");
+                    String imageFileName = smallExerciseObject.optString("imageFileName", smallExerciseName + ".jpg");
                     Integer exerciseDurationSmall = smallExerciseObject.optInt("exerciseDuration", 0);
                     Integer exerciseRepetitions = smallExerciseObject.optInt("exerciseRepetitions", 0);
                     SmallExercise smallExercise = new SmallExercise(smallExerciseCode, smallExerciseName, exerciseType,

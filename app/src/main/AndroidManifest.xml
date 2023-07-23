@@ -11,9 +11,8 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_exercise"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DailyHealth"
         tools:targetApi="31">
@@ -29,10 +28,6 @@
                 <action android:name="myapp.DAILY_ALARM" />
             </intent-filter>
         </receiver>
-
-        <activity
-            android:name=".SettingActivity"
-            android:exported="false" />
         <activity
             android:name=".GetStart"
             android:exported="false"/>
@@ -79,6 +74,7 @@
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashTheme"
+            android:icon="@drawable/icon_exercise"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

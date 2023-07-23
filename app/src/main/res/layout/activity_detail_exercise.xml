@@ -9,16 +9,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints"
         android:background="@color/main_green"
-        android:weightSum="10">
+        android:orientation="vertical"
+        android:weightSum="10"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
             android:layout_weight="1"
+            android:orientation="horizontal"
             android:weightSum="5">
 
             <LinearLayout
@@ -37,8 +37,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="3">
+                android:layout_weight="3"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/textView2"
@@ -48,45 +48,50 @@
                     android:fontFamily="@font/lato_bold_2"
                     android:text="Bài tập chính"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/title_font_size"/>
+                    android:textSize="@dimen/title_font_size" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
             android:layout_height="0dp"
             android:layout_weight="9"
-            android:background="@drawable/exercise2_large_border">
+            android:background="@drawable/exercise2_large_border"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
                 android:layout_height="@dimen/big_item_height"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
-                android:layout_marginTop="15dp">
+                android:orientation="horizontal">
+
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:layout_height="match_parent">
+                    android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/exercise"
-                        android:layout_marginLeft="26dp"/>
+                        android:layout_marginLeft="26dp"
+                        android:background="@drawable/exercise" />
+
                     <TextView
                         android:id="@+id/exerciseNameTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="26dp"
                         android:fontFamily="@font/lato_bold_2"
                         android:lineHeight="@dimen/title_line_height"
+                        android:maxLines="2"
                         android:text="Bài tập chính"
                         android:textColor="@color/black"
                         android:textSize="@dimen/title_font_size" />
@@ -95,75 +100,121 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:layout_marginTop="10dp">
-                    <TextView
-                        android:id="@+id/kcalTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lato_regular_2"
-                        android:lineHeight="@dimen/small_ex_line_height"
-                        android:text="200KCAL"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/small_ex_text_size"/>
+                    android:orientation="horizontal">
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/kcalTextView"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:fontFamily="@font/lato_regular_2"-->
+                    <!--                        android:lineHeight="@dimen/small_ex_line_height"-->
+                    <!--                        android:text="200KCAL"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="@dimen/small_ex_text_size"/>-->
                     <TextView
                         android:id="@+id/timeTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:fontFamily="@font/lato_regular_2"
                         android:lineHeight="@dimen/small_ex_line_height"
                         android:text="5 phút"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/small_ex_text_size"/>
+                        android:textSize="@dimen/small_ex_text_size" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/btnPlayPause"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="26dp"
-                        android:background="@drawable/ic_play_foreground" />
-
-                    <TextView
-                        android:id="@+id/statusTextView"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/lato_regular_2"
-                        android:lineHeight="@dimen/small_ex_line_height"
-                        android:text="@string/status_play"
-                        android:textColor="@color/main_green"
-                        android:textSize="@dimen/small_ex_text_size"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/btnPlayPause"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/ic_play_foreground" />
+
+                        <TextView
+                            android:id="@+id/statusTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/lato_regular_2"
+                            android:lineHeight="@dimen/small_ex_line_height"
+                            android:text="@string/status_play"
+                            android:textColor="@color/main_green"
+                            android:textSize="@dimen/small_ex_text_size" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="@dimen/small_ex_item_width"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/lato_bold_2"
-                    android:lineHeight="@dimen/title_line_height"
-                    android:text="Danh sách các bài tập"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/title_font_size" />
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="@dimen/small_ex_item_width"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:fontFamily="@font/lato_bold_2"
+                            android:lineHeight="@dimen/title_line_height"
+                            android:text="Danh sách các bài tập"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/title_font_size" />
+
+                        <TextView
+                            android:layout_width="@dimen/small_ex_item_width"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/lato_regular_2"
+                            android:lineHeight="@dimen/title_line_height"
+                            android:text="Giữa mỗi bài nghỉ 15 giây"
+                            android:textColor="#4C4F56"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/relaxTimeTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="15 giây"
+                        android:fontFamily="@font/lato_bold_2"
+                        android:textSize="20sp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        />
+                </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/detailExerciseRecyclerView"
                     android:layout_width="@dimen/small_ex_item_width"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="27dp"
                     android:layout_gravity="center"
-                    android:overScrollMode="ifContentScrolls"/>
+                    android:layout_marginTop="27dp"
+                    android:overScrollMode="ifContentScrolls" />
             </LinearLayout>
         </LinearLayout>
 
