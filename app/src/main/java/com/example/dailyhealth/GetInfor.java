@@ -18,7 +18,7 @@ public class GetInfor extends AppCompatActivity {
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GetInfor.this, GetTime.class);
+                Intent intent = new Intent(GetInfor.this, GetHeightWeight.class);
                 startActivity(intent);
             }
         });

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#57786A"
+    android:background="@color/main_green"
     tools:context=".GetHeightWeight">
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
-        android:background="#57786A">
+        android:background="@color/main_green">
         <ProgressBar
             android:id="@+id/progress_bar_horizontal"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:src="@drawable/ellipse"
-        app:layout_constraintTop_toBottomOf="@+id/layout"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/layout"/>
 
     <LinearLayout
         android:id="@+id/weight"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
         android:paddingTop="50dp"
-        android:layout_marginBottom="@+id/image">
+        app:layout_constraintTop_toBottomOf="@+id/image">
         <TextView
             android:id="@+id/title1"
             android:layout_width="wrap_content"
@@ -49,9 +49,8 @@
             android:fontFamily="@font/lato_bold_2"
             android:text="Cân nặng :"
             android:textAlignment="center"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,11 +60,11 @@
             android:id="@+id/my_edit_text"
             android:layout_width="249dp"
             android:layout_height="40dp"
-            android:hint="Nhập vào đây"
+            android:hint="Nhập cân nặng"
             android:layout_marginTop="15dp"
             android:paddingLeft="10dp"
-            android:fontFamily="@font/lato_fonts"
-            android:textColor="#000000"
+            android:fontFamily="@font/lato_regular_2"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@id/title1"
             tools:ignore="MissingConstraints" />
@@ -87,7 +86,7 @@
             android:fontFamily="@font/lato_bold_2"
             android:text="Chiều cao :"
             android:textAlignment="center"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,11 +98,11 @@
             android:id="@+id/my_edit_text2"
             android:layout_width="249dp"
             android:layout_height="40dp"
-            android:hint="Nhập vào đây"
+            android:hint="Nhập chiều cao"
             android:layout_marginTop="15dp"
             android:paddingLeft="10dp"
-            android:fontFamily="@font/lato_fonts"
-            android:textColor="#000000"
+            android:fontFamily="@font/lato_regular_2"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@id/title1"
             tools:ignore="MissingConstraints" />
@@ -117,7 +116,7 @@
         android:layout_marginHorizontal="@dimen/img_editor_absoluteY"
         android:backgroundTint="#D9D9D9"
         android:text="Tiếp theo"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/height"
