@@ -22,8 +22,7 @@ public class ExerciseMainActivity extends AppCompatActivity implements MainExerc
 
 //        getSupportActionBar().hide();
 
-        arrayList.add(new MainExercise("Bài tập chính", "5 phút", "200KCAL"));
-        arrayList.add(new MainExercise("Bài tập cơ tay", "5 phút", "200KCAL"));
+        arrayList = JSONFileHandler.readMainExercisesFromJSON(this);
 
         final RecyclerView r1 = (RecyclerView) findViewById(R.id.suggestExerciseRecyclerView);
         r1.setLayoutManager(new LinearLayoutManager(this));

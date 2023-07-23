@@ -7,7 +7,7 @@
     <dimen name="big_item_width">291dp</dimen>
     <dimen name="big_item_height">92dp</dimen>
 <!--    plus is item height plus space between them-->
-    <dimen name="big_item_height_plus">136dp</dimen>
+    <dimen name="big_item_height_plus">126dp</dimen>
     <dimen name="left_title_margin_left">20dp</dimen>
     <dimen name="left_title_margin_top">27dp</dimen>
     <dimen name="has_border_width">1sp</dimen>
@@ -17,7 +17,7 @@
     <dimen name="small_ex_text_size">14sp</dimen>
     <dimen name="small_ex_line_height">17dp</dimen>
     <dimen name="small_ex_item_width">329dp</dimen>
-    <dimen name="small_ex_item_height">64dp</dimen>
+    <dimen name="small_ex_item_height">74dp</dimen>
     <dimen name="small_ex_item_height_plus">90dp</dimen>
     <dimen name="small_ex_item_height_activated">186dp</dimen>
     <dimen name="small_ex_item_height_activated_plus">222dp</dimen>

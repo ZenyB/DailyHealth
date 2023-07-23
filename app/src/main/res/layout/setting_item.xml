@@ -5,7 +5,6 @@
     android:layout_width="@dimen/big_item_width"
     android:layout_height="@dimen/big_item_height_plus">
     <LinearLayout
-        android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="@dimen/big_item_width"
         android:layout_height="@dimen/big_item_height"

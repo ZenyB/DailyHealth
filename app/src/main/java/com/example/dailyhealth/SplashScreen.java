@@ -19,6 +19,8 @@ import com.example.dailyhealth.database.WeekInfoHelper;
 
 import java.util.concurrent.TimeUnit;
 
+import java.util.ArrayList;
+
 public class SplashScreen extends AppCompatActivity {
 
     public String databaseName = "DAILYHEATH";

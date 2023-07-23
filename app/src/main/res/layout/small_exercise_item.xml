@@ -4,6 +4,7 @@
     android:layout_width="@dimen/small_ex_item_width"
     android:layout_height="@dimen/small_ex_item_height_plus">
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="@dimen/small_ex_item_height"
         android:orientation="horizontal"
@@ -40,17 +41,20 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="10dp"
             android:layout_weight="4">
 
             <TextView
                 android:id="@+id/exerciseNameTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold_2"
                 android:lineHeight="@dimen/title_line_height"
                 android:text="Hít đất"
+                android:textAlignment="textStart"
+                android:maxLines="2"
                 android:textColor="@color/black"
-                android:textSize="@dimen/title_font_size" />
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

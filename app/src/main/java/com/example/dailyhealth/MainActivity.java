@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity implements HorizontalExercis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        arrayList.add(new MainExercise("Bài tập chính", "5 phút", "200KCAL"));
-        arrayList.add(new MainExercise("Bài tập cơ tay", "5 phút", "200KCAL"));
+        arrayList = JSONFileHandler.readMainExercisesFromJSON(this);
 
         final RecyclerView r = (RecyclerView) findViewById(R.id.exMainRV);
         r.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));

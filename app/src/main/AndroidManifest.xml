@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.dailyhealth">
+    package="com.example.dailyhealth" >
 
     <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
@@ -11,7 +11,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_exercise"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -24,17 +24,13 @@
             android:name=".NavigationActivity"
             android:exported="false" />
 
-<!--        <receiver-->
-<!--            android:name=".TestReceiver"-->
-<!--            android:exported="true" >-->
-<!--            <intent-filter>-->
-<!--                <action android:name="myapp.DAILY_ALARM" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
-
-        <activity
-            android:name=".SettingActivity"
-            android:exported="false" />
+        <receiver
+            android:name=".TestReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="myapp.DAILY_ALARM" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".UserSetting"
             android:exported="false"/>
@@ -84,6 +80,7 @@
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashTheme"
+            android:icon="@drawable/icon_exercise"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

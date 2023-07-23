@@ -14,10 +14,12 @@ import java.util.ArrayList;
 public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHolder> {
     Activity activity;
     ArrayList<Integer> mainExercises;
+    private OnSettingItemClick onItemClick;
 
-    public SettingAdapter(Activity activity, ArrayList<Integer> mainExercises) {
+    public SettingAdapter(Activity activity, ArrayList<Integer> mainExercises, OnSettingItemClick onItemClick) {
         this.activity = activity;
         this.mainExercises = mainExercises;
+        this.onItemClick = onItemClick;
         notifyDataSetChanged();
     }
 
@@ -26,7 +28,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
     public SettingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.setting_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, onItemClick);
     }
 
     @Override
@@ -62,30 +64,35 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
         return mainExercises.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
         TextView nameTextView;
         ImageView imageView;
+        private ItemClickListener itemClickListener;
+        private OnSettingItemClick onItemClick;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnSettingItemClick onItemClick) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             imageView = itemView.findViewById(R.id.imageView);
+            this.onItemClick = onItemClick;
 
-            // Thêm OnClickListener cho itemView
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Xử lý sự kiện khi item được click
-                    int position = getAdapterPosition();
-                    Integer mainExercise = mainExercises.get(position);
-
-                    // Kiểm tra nếu item là "Giấc ngủ" (1) thì chuyển sang SleepManagement
-                    if (mainExercise == 1) {
-                        Intent intent = new Intent(activity, SleepManagement.class);
-                        activity.startActivity(intent);
-                    }
-                }
-            });
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+//            itemClickListener.onClick(v,getAdapterPosition(),false);
+            onItemClick.onSettingClick(getAdapterPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            itemClickListener.onClick(v,getAdapterPosition(),true);
+            return true;
+        }
+    }
+    public interface OnSettingItemClick {
+        void onSettingClick(int position);
     }
 }
