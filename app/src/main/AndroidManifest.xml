@@ -5,8 +5,9 @@
 
     <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,43 +18,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DailyHealth"
         tools:targetApi="31">
+        <activity
+            android:name=".ScheduleEventSetting"
+            android:exported="false" />
+
         <receiver android:name=".AlarmReceiver" />
+
         <activity
             android:name=".NavigationActivity"
             android:exported="false" />
-
-        <receiver
-            android:name=".TestReceiver"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="myapp.DAILY_ALARM" />
-            </intent-filter>
-        </receiver>
-
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
         <activity
             android:name=".GetStart"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SleepManagement"
-            android:exported="false" >
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".GetInfor"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".GetHeightWeight"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".GetTime"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ExerciseMainActivity"
             android:exported="false" />
         <activity
-            android:name=".MoonCalendar"
+            android:name=".ScheduleCalendar"
             android:exported="false" />
         <activity
             android:name=".MainStatistic"
@@ -75,11 +71,18 @@
             android:exported="false" />
         <activity
             android:name=".DetailExerciseActivity"
-            android:exported="false" />
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".ScheduleCalendar" -->
+        <!-- android:theme="@style/SplashTheme" -->
+        <!-- android:exported="true" > -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
-            android:name=".SplashScreen"
-            android:theme="@style/SplashTheme"
-            android:exported="true" >
+            android:name=".MoonCalendar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -87,11 +90,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScheduleCalendar"
+            android:name=".SplashScreen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SleepStatistics"
             android:exported="false" />

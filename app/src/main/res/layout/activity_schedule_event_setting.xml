@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFFF8"
+    android:orientation="vertical"
+    tools:context=".ScheduleEventSetting">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_weight="1"
+        android:background="#FAFFF8"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/lato_bold_2"
+            android:onClick="cancelBtn"
+            android:text="Hủy"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/lato_black_2"
+            android:text="Chi Tiết"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/lato_fonts"
+            android:text="Lưu"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/titleEventTV"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_white"
+        android:ems="10"
+        android:fontFamily="@font/lato_bold_2"
+        android:hint="Tên lời nhắc"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/dateEventPickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/rounded_white"
+        android:onClick="openEventDatePicker"
+        android:text="01 Tháng 01 2020   "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleEventTV" />
+
+<!--    <LinearLayout-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_marginBottom="50dp"-->
+<!--        android:id="@+id/numberPickerAlarmTime"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textActualSleep">-->
+
+<!--        <NumberPicker-->
+<!--            android:selectionDividerHeight="0dp"-->
+<!--            android:theme="@style/CustomNumberPickerStyle"-->
+<!--            android:id="@+id/hourPicker"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:editable="false"-->
+<!--            android:max="23"-->
+<!--            android:min="0"-->
+<!--            android:format="%02d" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/dotdot"-->
+<!--            android:fontFamily="@font/lato_bold_2"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text=":"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="45sp"-->
+<!--            android:layout_gravity="center"/>-->
+
+<!--        <NumberPicker-->
+<!--            android:selectionDividerHeight="0dp"-->
+<!--            android:theme="@style/CustomNumberPickerStyle"-->
+<!--            android:id="@+id/minutePicker"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:editable="false"-->
+<!--            android:format="%02d"-->
+<!--            android:max="59"-->
+<!--            android:min="0" />-->
+
+<!--    </LinearLayout>-->
+
+    <Button
+        android:id="@+id/timeEventTV"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="50dp"
+        android:layout_weight="1"
+        android:onClick="openTimePicker"
+        android:background="@drawable/rounded_white"
+        android:text="Thời gian"
+        android:inputType="time"
+        android:textColor="@color/black"
+        android:textAlignment="textStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateEventPickerButton" />
+
+    <EditText
+        android:id="@+id/detailEventTV"
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="50dp"
+        android:layout_weight="5"
+        android:background="@drawable/rounded_white"
+        android:ems="10"
+        android:fontFamily="@font/lato_bold_2"
+        android:gravity="start"
+        android:hint="Ghi chú"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationEventTV" />
+
+    <EditText
+        android:id="@+id/locationEventTV"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/rounded_white"
+        android:ems="10"
+        android:hint="Địa điểm"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeEventTV" />
+</androidx.constraintlayout.widget.ConstraintLayout>
