@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class CalendarUtils
 {
     public static LocalDate selectedDate;
+    public static ArrayList<LocalDate> highlightDate;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String formattedDate(LocalDate date)
@@ -33,6 +34,13 @@ public class CalendarUtils
     public static String monthYearFromDate(LocalDate date)
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return date.format(formatter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String yearFromDate(LocalDate date)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
         return date.format(formatter);
     }
 
