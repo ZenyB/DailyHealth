@@ -8,6 +8,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#AAAAAA</color>
 <!--    color in app    -->
     <color name="lighter_main_green">#659B7B</color>
     <color name="main_green">#57786A</color>
