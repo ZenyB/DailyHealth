@@ -36,8 +36,8 @@
                 android:lineHeight="@dimen/title_line_height"
                 android:text="Bài tập cơ tay"
                 android:textColor="@color/black"
-                android:textSize="@dimen/title_font_size"
-                android:maxLines="1"/>
+                android:textSize="16sp"
+                android:maxLines="2"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

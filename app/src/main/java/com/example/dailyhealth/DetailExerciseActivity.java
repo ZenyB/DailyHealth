@@ -1,9 +1,11 @@
 package com.example.dailyhealth;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,9 +19,10 @@ import java.util.ArrayList;
 public class DetailExerciseActivity extends AppCompatActivity {
 
     private ArrayList<SmallExercise> arrayList = new ArrayList<>();
+    public static MainExercise mainExercise;
     ImageButton imgButton;
     public static ImageButton startBtn;
-    public static TextView relaxTV;
+    public static TextView relaxTV, statusTV;
     TextView mainNameTV, mainTimeTV;
 
     private int positionNow = 0;
@@ -34,15 +37,18 @@ public class DetailExerciseActivity extends AppCompatActivity {
         mainTimeTV = findViewById(R.id.timeTextView);
         startBtn = findViewById(R.id.btnPlayPause);
         relaxTV = findViewById(R.id.relaxTimeTV);
+        statusTV = findViewById(R.id.statusTextView);
 
         if (getIntent().getStringExtra("type").equals("all")) {
-            mainNameTV.setText(ExerciseFragment.allMainExercise.get(position).getName());
-            mainTimeTV.setText(Integer.toString(ExerciseFragment.allMainExercise.get(position).getDuration()) + " phút");
-            arrayList = ExerciseFragment.allMainExercise.get(position).getSmallExercises();
+            mainExercise = HomeFragment.arrayList.get(position);
+            mainNameTV.setText(HomeFragment.arrayList.get(position).getName());
+            mainTimeTV.setText(Integer.toString(HomeFragment.arrayList.get(position).getDuration()) + " phút");
+            arrayList = HomeFragment.arrayList.get(position).getSmallExercises();
         } else {
-            arrayList = ExerciseFragment.suggestMainExercises.get(position).getSmallExercises();
-            mainNameTV.setText(ExerciseFragment.suggestMainExercises.get(position).getName());
-            mainTimeTV.setText(Integer.toString(ExerciseFragment.suggestMainExercises.get(position).getDuration()) + " phút");
+            mainExercise = HomeFragment.suggestArrayList.get(position);
+            arrayList = HomeFragment.suggestArrayList.get(position).getSmallExercises();
+            mainNameTV.setText(HomeFragment.suggestArrayList.get(position).getName());
+            mainTimeTV.setText(Integer.toString(HomeFragment.suggestArrayList.get(position).getDuration()) + " phút");
         }
 
         final RecyclerView r = (RecyclerView) findViewById(R.id.detailExerciseRecyclerView);
@@ -54,8 +60,42 @@ public class DetailExerciseActivity extends AppCompatActivity {
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DetailExerciseActivity.super.finish();
+                showExitConfirmationDialog();
             }
         });
+    }
+
+    private void showExitConfirmationDialog() {
+        // Xây dựng hộp thoại thông báo
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Bạn có chắc chắn muốn thoát?");
+        builder.setMessage("Nếu bạn không hoàn thành tất cả bài tập thì sẽ không được tính giờ luyện tập!");
+
+        // Thiết lập nút "Đồng ý" cho hộp thoại
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Thoát ứng dụng hoặc thực hiện các thao tác khi người dùng đồng ý thoát
+                DetailExerciseActivity.super.finish(); // Kết thúc hoạt động hiện tại
+            }
+        });
+
+        // Thiết lập nút "Hủy" cho hộp thoại
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Đóng hộp thoại khi người dùng chọn "Hủy"
+                dialog.dismiss();
+            }
+        });
+
+        // Hiển thị hộp thoại
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        showExitConfirmationDialog();
     }
 }
