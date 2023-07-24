@@ -26,7 +26,7 @@ public class CheckNewDayWorker extends Worker {
         // Get the last run date from SharedPreferences
         long lastRunDate = prefs.getLong(SplashScreen.KEY_LAST_NEW_DAY_TIME, 0);
 
-        // Get the current date
+        // Get the current dateb
         long todayInMillis = System.currentTimeMillis();
         Calendar lastRunCalendar = Calendar.getInstance();
         lastRunCalendar.setTimeInMillis(lastRunDate);
