@@ -7,6 +7,15 @@
     tools:context=".MoonSettingScreen1">
 
 
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="goBackBtn"
+        android:background="@drawable/ic_black_back_layout"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        tools:visibility="visible" />
+
     <ImageView
         android:id="@+id/calendar1"
         android:layout_width="wrap_content"
@@ -60,6 +69,7 @@
         android:textSize="30sp"
         android:fontFamily="@font/lato_bold_2"
         android:text="Xác nhận"
+        android:onClick="confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="60dp"
@@ -71,6 +81,7 @@
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/lato_bold_2"
         android:text="Không nhớ"
+        android:onClick="notRemember"
         android:textColor="#57786A"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
