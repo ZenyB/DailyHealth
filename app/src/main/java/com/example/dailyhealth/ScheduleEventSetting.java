@@ -23,10 +23,12 @@ public class ScheduleEventSetting extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
-    private Button dateButton;
-    int year;
-    int month;
-    int day;
+    private Button dateButton, saveButton;
+    static int year;
+    static int month;
+    static int day;
+    static int hours;
+    static int totalMinutes;
     private ScheduleEvent scheduleEvent;
     private EditText titleEventText;
     private EditText timeEventText;
@@ -41,10 +43,19 @@ public class ScheduleEventSetting extends AppCompatActivity {
         titleEventText = findViewById(R.id.titleEventTV);
         locationEventText = findViewById(R.id.locationEventTV);
         detailEventText = findViewById(R.id.detailEventTV);
+        saveButton = findViewById(R.id.saveButton);
         dateButton = findViewById(R.id.dateEventPickerButton);
         dateButton.setText(getTodaysDate());
         ((Button)findViewById(R.id.timeEventTV)).setText(getNowTime());
         initDatePicker();
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScheduleCalendar.schedule.add(new ScheduleEvent(titleEventText.getText().toString(),detailEventText.getText().toString(), locationEventText.getText().toString(), day, month, year , hours, totalMinutes));
+                finish();
+            }
+        });
     }
     private String getTodaysDate()
     {
@@ -57,6 +68,8 @@ public class ScheduleEventSetting extends AppCompatActivity {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private String getNowTime(){
+        hours = LocalTime.now().getHour();
+        totalMinutes = hours * 60 + LocalTime.now().getMinute();
         return (LocalTime.now().getHour() < 10? "0":"") + LocalTime.now().getHour() + ":" + (LocalTime.now().getMinute() < 10? "0":"") + LocalTime.now().getMinute();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -70,6 +83,10 @@ public class ScheduleEventSetting extends AppCompatActivity {
                 month = month + 1;
                 String date = makeDateString(day, month, year);
                 dateButton.setText(date);
+
+                ScheduleEventSetting.day = day;
+                ScheduleEventSetting.month = month;
+                ScheduleEventSetting.year = year;
             }
         };
 
@@ -88,10 +105,15 @@ public class ScheduleEventSetting extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 ((Button)findViewById(R.id.timeEventTV)).setText((hourOfDay < 10? "0":"") + hourOfDay + ":" + (minute < 10? "0":"") + minute);
+
+                ScheduleEventSetting.hours = hourOfDay;
+                ScheduleEventSetting.totalMinutes = hourOfDay * 60 + minute;
             }
         };
 
         LocalTime time = LocalTime.now();
+        hours = time.getHour();
+        totalMinutes = hours * 60 + time.getMinute();
         timePickerDialog = new TimePickerDialog(this, timeSetListener, time.getHour(), time.getMinute(), true);
     }
 
