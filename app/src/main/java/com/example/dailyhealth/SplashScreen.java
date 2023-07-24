@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.dailyhealth.database.ScheduleHelper;
 import com.example.dailyhealth.database.UserHelper;
 import com.example.dailyhealth.database.WeekInfoHelper;
 
@@ -33,6 +34,7 @@ public class SplashScreen extends AppCompatActivity {
 //        listProduct.clear();
         SQLiteDatabase db = openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
 
+
         if (!isTableExist(db, "users")) {
             //Khởi tạo các loại bảng trong lần đầu tiên vào app
             //Tạo bảng users
@@ -43,6 +45,13 @@ public class SplashScreen extends AppCompatActivity {
 
             UserHelper userHelper = new UserHelper(this);
             userHelper.QueryData(query);
+
+            //Tạo bảng schedule
+            query = "CREATE TABLE IF NOT EXISTS schedule" +
+                    "(ID TEXT PRIMARY KEY, TIEUDE TEXT, GHICHU TEXT, DIADIEM TEXT, " +
+                    "NGAY INTEGER, THANG INTEGER, NAM INTEGER, TIENG INTEGER, TONGPHUT INTEGER)";
+            ScheduleHelper scheduleHelper = new ScheduleHelper(this);
+            scheduleHelper.QueryData(query);
 
             //Tạo bảng weekInfo
             query = "CREATE TABLE IF NOT EXISTS weekInfo" +

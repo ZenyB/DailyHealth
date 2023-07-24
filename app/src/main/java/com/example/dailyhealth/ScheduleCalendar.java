@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener, ScheduleEventAdapter.OnItemClick{
 
     private ArrayList<ScheduleEvent> scheduleEvents = new ArrayList<>();
+    protected  static ArrayList<ScheduleEvent> schedule = new ArrayList<>();
     private TextView monthYearText;
     private TextView YearText;
     private RecyclerView calendarRecyclerView;
@@ -43,8 +44,8 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         setContentView(R.layout.activity_schedule_calendar);
         CalendarUtils.selectedDate = LocalDate.now();
 
-        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
-        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
+//        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
+//        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
 
         r = (RecyclerView) findViewById(R.id.scheduleCalendarRV);
         r.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -105,9 +106,16 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     {
         CalendarUtils.selectedDate = date;
         setWeekView();
-        //Get su kien tu database va cap nhat lai UI o day
-        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
-        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
+        scheduleEvents.clear();
+
+        for (ScheduleEvent scheduleEvent: schedule){
+            if (scheduleEvent.getDay() == CalendarUtils.selectedDate.getDayOfMonth()){
+                scheduleEvents.add(scheduleEvent);
+            }
+        }
+//        //Get su kien tu database va cap nhat lai UI o day
+//        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
+//        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
         r.setAdapter(new ScheduleEventAdapter(this, scheduleEvents, this));
     }
 
@@ -133,6 +141,8 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         Intent i = new Intent(getBaseContext(), ScheduleEventSetting.class);
         startActivity(i);
     }
+
+    private void backButton(View view) { finish();}
 
 //    private void setEventAdpater()
 //    {
