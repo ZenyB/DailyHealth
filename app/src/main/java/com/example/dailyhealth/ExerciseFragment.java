@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ public class ExerciseFragment extends Fragment implements MainExerciseAdapter.On
 
     public static ArrayList<MainExercise> suggestMainExercises = new ArrayList<>();
     public static ArrayList<MainExercise> allMainExercise = new ArrayList<>();
-    private UserHelper userHelper = new UserHelper(getActivity());
+    private UserHelper userHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,19 +35,19 @@ public class ExerciseFragment extends Fragment implements MainExerciseAdapter.On
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise, container, false);
+        userHelper = new UserHelper(getActivity().getApplicationContext());
         allMainExercise = JSONFileHandler.readMainExercisesFromJSON(getActivity());
+
         //Tính toán BMI các kiểu
-//        String query = "SELECT * FROM USER";
-//        Cursor cursor = userHelper.GetData(query);
-//        if (cursor.getCount() > 0) {
-//            while (cursor.moveToNext()) {
-//                Integer chieucao = cursor.getInt(4);
-//                Integer cannang = cursor.getInt(5);
-//                Float BMI = Float.valueOf(cannang / ((chieucao / 100) * (chieucao / 100)));
-//            }
-//        }
-
-
+        String query = "SELECT CHIEUCAO, CANNANG FROM USERS";
+        Cursor cursor = userHelper.GetData(query);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                Integer chieucao = cursor.getInt(0);
+                Integer cannang = cursor.getInt(1);
+                getSuggestExerciseBaseOnBMI(chieucao, cannang);
+            }
+        }
 
         final RecyclerView r1 = (RecyclerView) view.findViewById(R.id.suggestExerciseRecyclerView);
         r1.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -58,6 +59,27 @@ public class ExerciseFragment extends Fragment implements MainExerciseAdapter.On
 //        Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
         r.setAdapter(new MainExerciseAdapter(getActivity(), allMainExercise, this));
         return view;
+    }
+
+    public static void getSuggestExerciseBaseOnBMI(int chieucao, int cannang) {
+        if (chieucao == 0)
+            chieucao = 1;
+//        Log.i("BMICC", Integer.toString(chieucao));
+//        Log.i("BMICN", Integer.toString(cannang));
+//        Float BMI = 0f;
+        float BMI = cannang / ((chieucao / 100.0f) * (chieucao / 100.0f));
+        int level = 1;
+        if (BMI < 18.5 || BMI >= 30) {
+            level = 1;
+        } else if (BMI >= 18.5 && BMI <= 29.9) {
+            level = 2;
+        };
+        suggestMainExercises.clear();
+        for (int i = 0; i < allMainExercise.size(); i++) {
+            if (allMainExercise.get(i).getDifficulty() == level) {
+                suggestMainExercises.add(allMainExercise.get(i));
+            }
+        }
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.example.dailyhealth;
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Looper;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,12 +31,13 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
     ArrayList<SmallExercise> smallExercises;
     int index = -1;
     int indexReal = -1;
-    private int totalTimeInSeconds = 1;
+    private int totalTimeInSeconds = 5;
     private int intervalInSeconds = 1;
-    private int totalRelaxSeconds = 1;
+    private int totalRelaxSeconds = 15;
     private int current = 0;
     private CountDownTimer countDownTimer;
-    private UserHelper userHelper = new UserHelper(activity);
+    private UserHelper userHelper;
+    private Context context;
 //    private Handler handler;
 
     public SmallExerciseAdapter(Activity activity, ArrayList<SmallExercise> smallExercises) {
@@ -45,11 +49,15 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getRootView().getContext();
+        userHelper = new UserHelper(context);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         RecyclerView.ViewHolder viewHolder;
         DetailExerciseActivity.startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DetailExerciseActivity.startBtn.setBackgroundResource(R.drawable.ic_play_disable);
+                DetailExerciseActivity.statusTV.setTextColor(context.getResources().getColor(R.color.gray));
                 index = 0;
                 indexReal = index;
                 notifyDataSetChanged();
@@ -69,7 +77,6 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
             default:
                 throw new IllegalArgumentException("Invalid view type: " + viewType);
         }
-
         return viewHolder;
     }
 
@@ -106,28 +113,36 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
                         notifyItemChanged(indexReal);
                         indexReal = indexReal + 1;
                         if (position == smallExercises.size() - 1) {
-                            String query = "SELECT TAPLUYENHOMNAY FROM users";
+                            String query = "SELECT TAPLUYENHOMNAY FROM USERS";
                             Cursor cursor = userHelper.GetData(query);
-                            int time = cursor.getInt(0);
-                            time = time + DetailExerciseActivity.mainExercise.getDuration();
-                            query = "UPDATE users SET TAPLUYENHOMNAY = " + time;
-                            userHelper.QueryData(query);
+                            int time = 0;
+                            if (cursor.getCount() > 0) {
+                                while (cursor.moveToNext()) {
+                                    time = cursor.getInt(0);
+                                    time = time + DetailExerciseActivity.mainExercise.getDuration();
+                                    query = "UPDATE USERS SET TAPLUYENHOMNAY = " + Integer.toString(time);
+                                    userHelper.QueryData(query);
+                                }
+                            } else {
+                                Log.i("NO USER", "Fail");
+                            }
 
-                            query = "SELECT TAPLUYENHOMNAY FROM users";
-                            cursor = userHelper.GetData(query);
-                            Log.i("TAPLUYENHOMNAY", Integer.toString(cursor.getInt(0)));
+
                         } else {
                             type2ViewHolder.doneBtn.setEnabled(false);
+                            type2ViewHolder.doneBtn.setBackgroundResource(R.drawable.ic_done_disable);
                             startRelaxTimer(temp);
                         }
 
                     }
                 });
                 if (smallExercise.getExerciseType() == 0) {
-                    if (countDownTimer == null)
+                    if (countDownTimer == null) {
                         type2ViewHolder.doneBtn.setEnabled(false);
+                        type2ViewHolder.doneBtn.setBackgroundResource(R.drawable.ic_done_disable);
+                    }
                     type2ViewHolder.timeTextView.setText(Integer.toString(smallExercise.getExerciseDuration()) + " giây");
-//                    totalTimeInSeconds = smallExercise.getExerciseDuration();
+                    totalTimeInSeconds = smallExercise.getExerciseDuration();
                     type2ViewHolder.pb.setMax(totalTimeInSeconds * 1000);
                     if (countDownTimer == null) {
                         startTimer(type2ViewHolder.pb, type2ViewHolder.doneBtn);
@@ -137,6 +152,7 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
                 } else {
                     type2ViewHolder.pb.setProgress(0);
                     type2ViewHolder.doneBtn.setEnabled(true);
+                    type2ViewHolder.doneBtn.setBackgroundResource(R.drawable.ic_done_foreground);
                     type2ViewHolder.timeTextView.setText(Integer.toString(smallExercise.getExerciseRepetitions()) + " lần");
                 }
                 String variableValue = smallExercise.getImageFileName();
@@ -193,20 +209,32 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     private void startTimer(ProgressBar progressBar, Button doneBtn) {
-        countDownTimer = new CountDownTimer(totalTimeInSeconds * 1000, intervalInSeconds) {
+        new CountDownTimer(8000, 1000) {
+            @Override
             public void onTick(long millisUntilFinished) {
-                progressBar.setProgress((totalTimeInSeconds * 1000) - Integer.parseInt(Long.toString(millisUntilFinished)));
-//                Log.i("Timer", "tăng 1 giây");
-//                textViewTimer.setText(String.valueOf(secondsRemaining));
+                if (millisUntilFinished / 1000 > 4)
+                    Toast.makeText(context, "Bắt đầu trong " + Long.toString(millisUntilFinished / 1000 - 4), Toast.LENGTH_SHORT).show();
             }
 
+            @Override
             public void onFinish() {
-                progressBar.setProgress(totalTimeInSeconds * 1000);
-                doneBtn.setEnabled(true);
+                countDownTimer = new CountDownTimer(totalTimeInSeconds * 1000, intervalInSeconds) {
+                    public void onTick(long millisUntilFinished) {
+                        progressBar.setProgress((totalTimeInSeconds * 1000) - Integer.parseInt(Long.toString(millisUntilFinished)));
+//                Log.i("Timer", "tăng 1 giây");
+//                textViewTimer.setText(String.valueOf(secondsRemaining));
+                    }
+
+                    public void onFinish() {
+                        progressBar.setProgress(totalTimeInSeconds * 1000);
+                        doneBtn.setEnabled(true);
+                        doneBtn.setBackgroundResource(R.drawable.ic_done_foreground);
 //                textViewTimer.setText("Hết giờ!");
+                    }
+                };
+                countDownTimer.start();
             }
-        };
-        countDownTimer.start();
+        }.start();
     }
 
     private void startRelaxTimer(int temp) {
