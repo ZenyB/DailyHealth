@@ -3,7 +3,9 @@ package com.example.dailyhealth;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,11 +13,18 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.dailyhealth.database.UserHelper;
+
+import java.util.Currency;
+
 public class WaterDaily extends AppCompatActivity {
 
+    private UserHelper userHelper = new UserHelper(this);
     private ProgressBar progressBar;
     private int amountDrink = 200;
     private int progressValue = 0;
+    private int progressMax = 0;
+    private String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +43,11 @@ public class WaterDaily extends AppCompatActivity {
         Button amountWater = findViewById(R.id.buttonAmoutWater);
 
         ImageView backButton = findViewById(R.id.backButton);
+
+        InitWaterProgress();
+
+        water.setText(progressValue + "/" + progressBar.getMax() +"ml");
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,13 +90,15 @@ public class WaterDaily extends AppCompatActivity {
         drinkWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int maxWater = progressBar.getMax();
 
                 progressBar.setProgress(progressBar.getProgress() + amountDrink,true);
                 amount.setText(cup_1.getText());
 
                 progressValue = progressBar.getProgress();
-                water.setText(progressValue + "/" + maxWater +"ml");
+                water.setText(progressValue + "/" + progressBar.getMax() +"ml");
+
+                String query = "UPDATE users SET LUONGNUOCHOMNAY = " + Integer.toString(progressValue) + " WHERE TEN = '" + name + "'";
+                userHelper.QueryData(query);
             }
         });
 
@@ -125,5 +141,20 @@ public class WaterDaily extends AppCompatActivity {
                 amountDrink = 500;
             }
         });
+    }
+
+    private void InitWaterProgress() {
+        String query = "SELECT LUONGNUOCHOMNAY, LUONGNUOCMUCTIEU, TEN FROM USERS";
+        Cursor cursor = userHelper.GetData(query);
+
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                progressBar.setProgress(cursor.getInt(0), true);
+                Log.i(cursor.getString(2), Integer.toString(cursor.getInt(1)));
+                progressBar.setMax(cursor.getInt(1));
+                name = cursor.getString(2);
+                progressValue = cursor.getInt(0);
+            }
+        }
     }
 }

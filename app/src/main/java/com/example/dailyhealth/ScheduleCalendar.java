@@ -14,11 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.dailyhealth.database.ScheduleHelper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ import java.util.ArrayList;
 public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener, ScheduleEventAdapter.OnItemClick{
 
     private ArrayList<ScheduleEvent> scheduleEvents = new ArrayList<>();
+    protected  static ArrayList<ScheduleEvent> schedule = new ArrayList<>();
+    private ScheduleHelper scheduleHelper = new ScheduleHelper(this);
     private TextView monthYearText;
     private TextView YearText;
     private RecyclerView calendarRecyclerView;
@@ -34,6 +40,13 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     //    private ListView eventListView;
     private String[] item = {"Sửa", "Xóa"};
     private LocalDate today = LocalDate.now();
+    protected static String id = "";
+    private void removedata(){
+        if (!id.isEmpty()) {
+            String query = "DELETE FROM schedule WHERE ID = '" + id + "'";
+            scheduleHelper.QueryData(query);
+        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -43,8 +56,8 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         setContentView(R.layout.activity_schedule_calendar);
         CalendarUtils.selectedDate = LocalDate.now();
 
-        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
-        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
+//        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
+//        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
 
         r = (RecyclerView) findViewById(R.id.scheduleCalendarRV);
         r.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -105,9 +118,28 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     {
         CalendarUtils.selectedDate = date;
         setWeekView();
-        //Get su kien tu database va cap nhat lai UI o day
-        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
-        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
+        scheduleEvents.clear();
+
+        String query = "SELECT * FROM schedule";
+        Cursor cursor = scheduleHelper.GetData(query);
+
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                Log.i("aaaaaa", cursor.getString(0));
+                if (CalendarUtils.selectedDate.getDayOfMonth() == cursor.getInt(4) && cursor.getInt(5) == CalendarUtils.selectedDate.getMonthValue() && cursor.getInt(6) == CalendarUtils.selectedDate.getYear()){
+                    scheduleEvents.add(new ScheduleEvent(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7), cursor.getInt(8)));
+                }
+            }
+        }
+
+//        for (ScheduleEvent scheduleEvent: schedule){
+//            if (scheduleEvent.getDay() == CalendarUtils.selectedDate.getDayOfMonth()){
+//                scheduleEvents.add(scheduleEvent);
+//            }
+//        }
+//        //Get su kien tu database va cap nhat lai UI o day
+//        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
+//        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
         r.setAdapter(new ScheduleEventAdapter(this, scheduleEvents, this));
     }
 
@@ -127,12 +159,20 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     @Override
     public void onScheduleClick(int position) {
         scheduleEvents.get(position);
+
+        ScheduleEvent schedule = scheduleEvents.get(position);
+        ScheduleEventSetting.idSave = schedule.getId().toString();
+        Log.i("AaAaaaa", ScheduleEventSetting.idSave);
+        Intent i = new Intent(getBaseContext(), ScheduleEventSetting.class);
+        startActivity(i);
     }
 
     public void addEventBtn(View view) {
         Intent i = new Intent(getBaseContext(), ScheduleEventSetting.class);
         startActivity(i);
     }
+
+    private void backButton(View view) { finish();}
 
 //    private void setEventAdpater()
 //    {

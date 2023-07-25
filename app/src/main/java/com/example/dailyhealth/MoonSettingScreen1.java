@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -101,5 +102,21 @@ public class MoonSettingScreen1 extends AppCompatActivity {
     public void openDatePicker(View view)
     {
         datePickerDialog.show();
+    }
+
+    public void goBackBtn(View view) {
+        finish();
+    }
+
+    public void confirmBtn(View view)
+    {
+        Intent i = new Intent(getBaseContext(), MoonSettingScreen2.class);
+        startActivity(i);
+    }
+
+    public void notRemember(View view)
+    {
+        Intent i = new Intent(getBaseContext(), MoonSettingScreen2.class);
+        startActivity(i);
     }
 }
