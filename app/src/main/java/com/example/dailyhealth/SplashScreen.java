@@ -18,6 +18,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.dailyhealth.database.UserHelper;
@@ -59,16 +60,40 @@ public class SplashScreen extends AppCompatActivity {
             //Tạo bảng weekInfo
             query = "CREATE TABLE IF NOT EXISTS weekInfo" +
                     "(ID TEXT PRIMARY KEY, THU TEXT, " +
-                    "LUONGNUOC INTEGER, GIONGU INTEGER, TAPLUYEN INTEGER)";
+                    "LUONGNUOC INTEGER, GIONGU INTEGER, TAPLUYEN INTEGER,SHOWABLE INTEGER)";
 
             WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
             weekInfoHelper.QueryData(query);
 
+            String[] days = {"THU HAI", "THU BA", "THU TU", "THU NAM", "THU SAU", "THU BAY", "CHU NHAT"};
+            for (int i = 0; i < days.length; i++) {
+                String insertQuery = "INSERT INTO weekInfo (ID, THU, LUONGNUOC, GIONGU, TAPLUYEN, SHOWABLE) " +
+                        "VALUES ('ID_ngay_moi_" + i + "', '" + days[i] + "', 0, 0, 0, 0)";
+                weekInfoHelper.QueryData(insertQuery);
+            }
+
+            String query_temp = "SELECT * FROM weekInfo";
+            Cursor cursor = weekInfoHelper.GetData(query_temp);
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    String id = cursor.getString(0);
+                    String thu = cursor.getString(1);
+                    int luongNuoc = cursor.getInt(2);
+                    int giongU = cursor.getInt(3);
+                    int tapLuyen = cursor.getInt(4);
+                    int showable = cursor.getInt(5);
+
+                    Log.i("WeekInfoData", "ID: " + id + ", THU: " + thu + ", LUONGNUOC: " + luongNuoc +
+                            ", GIONGU: " + giongU + ", TAPLUYEN: " + tapLuyen + ", SHOWABLE: " + showable);
+                }
+            }
 //            // Start start activity
 //            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(SplashScreen.this, GetStart.class));
 //            return;
         }
+
         // Start home activity
 //        Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
 //        startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
@@ -118,6 +143,23 @@ public class SplashScreen extends AppCompatActivity {
                         .build();
                 WorkManager.getInstance(this).enqueue(newDayCheckWork);
             }            //Get các loại dữ liệu cần dùng chung
+            WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
+            String query_temp = "SELECT * FROM weekInfo";
+            Cursor cursor2 = weekInfoHelper.GetData(query_temp);
+
+            if (cursor2.getCount() > 0) {
+                while (cursor2.moveToNext()) {
+                    String id = cursor2.getString(0);
+                    String thu = cursor2.getString(1);
+                    int luongNuoc = cursor2.getInt(2);
+                    int giongU = cursor2.getInt(3);
+                    int tapLuyen = cursor2.getInt(4);
+                    int showable = cursor2.getInt(5);
+
+                    Log.i("WeekInfoData", "ID: " + id + ", THU: " + thu + ", LUONGNUOC: " + luongNuoc +
+                            ", GIONGU: " + giongU + ", TAPLUYEN: " + tapLuyen + ", SHOWABLE: " + showable);
+                }
+            }
 
             //User đã cài đặt thông tin ban đầu => Home
             // Start home activity
@@ -188,11 +230,33 @@ public class SplashScreen extends AppCompatActivity {
                     int giongUHomNay = cursor.getInt(1);
                     int tapLuyenHomNay = cursor.getInt(2);
 
-                    // Lưu thông tin vào bảng weekInfo
+
+                    // Kiểm tra xem ngày hiện tại đã tồn tại trong bảng weekInfo chưa
+                    String checkQuery = "SELECT * FROM weekInfo WHERE THU='" + previousDay + "'";
+                    Cursor checkCursor = db.rawQuery(checkQuery, null);
                     WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
-                    String insertQuery = "INSERT INTO weekInfo (ID, THU, LUONGNUOC, GIONGU, TAPLUYEN) VALUES ('ID_ngay_moi', '"
-                            + previousDay + "', " + luongNuocHomNay + ", " + giongUHomNay + ", " + tapLuyenHomNay + ")";
-                    weekInfoHelper.QueryData(insertQuery);
+                    if (checkCursor.getCount() > 0) {
+                        // Ngày hiện tại đã tồn tại trong bảng weekInfo, thực hiện cập nhật giá trị
+                        String updateQuery = "UPDATE weekInfo SET LUONGNUOC=" + luongNuocHomNay +
+                                ", GIONGU=" + giongUHomNay + ", TAPLUYEN=" + tapLuyenHomNay +
+                                ", SHOWABLE=1 WHERE THU='" + previousDay + "'";
+                        weekInfoHelper.QueryData(updateQuery);
+                    } else {
+                        // Kiểm tra xem ngày hiện tại đã là thứ 2 chưa
+                        Calendar calendar = Calendar.getInstance();
+                        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+                        if (dayOfWeek == Calendar.TUESDAY) {
+                            // Nếu ngày hiện tại là thứ 2 (qua tuần mới), reset tất cả các hàng trừ thứ 2
+                            String resetQuery = "UPDATE weekInfo SET LUONGNUOC = 0, GIONGU = 0, TAPLUYEN = 0 ,SHOWABLE = 0 WHERE THU != 'THU HAI'";
+                            weekInfoHelper.QueryData(resetQuery);
+                        }
+                        // Ngày hiện tại chưa tồn tại trong bảng weekInfo, thêm hàng mới
+                        String insertQuery = "INSERT INTO weekInfo (ID, THU, LUONGNUOC, GIONGU, TAPLUYEN, SHOWABLE) VALUES " +
+                                "('ID_ngay_moi', '" + previousDay + "', " + luongNuocHomNay + ", " + giongUHomNay +
+                                ", " + tapLuyenHomNay + ", 1)";
+                        weekInfoHelper.QueryData(insertQuery);
+                    }
                 }
             }
         }
