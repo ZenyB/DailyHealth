@@ -6,14 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import com.example.dailyhealth.database.ScheduleHelper;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -22,8 +26,10 @@ import java.util.Calendar;
 public class ScheduleEventSetting extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
+    protected static String idSave = "";
     private TimePickerDialog timePickerDialog;
     private Button dateButton, saveButton;
+    private ScheduleHelper scheduleHelper = new ScheduleHelper(this);
     static int year;
     static int month;
     static int day;
@@ -48,15 +54,81 @@ public class ScheduleEventSetting extends AppCompatActivity {
         dateButton.setText(getTodaysDate());
         ((Button)findViewById(R.id.timeEventTV)).setText(getNowTime());
         initDatePicker();
+        setSchedule();
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ScheduleCalendar.schedule.add(new ScheduleEvent(titleEventText.getText().toString(),detailEventText.getText().toString(), locationEventText.getText().toString(), day, month, year , hours, totalMinutes));
-                finish();
+                if (titleEventText.getText().toString().isEmpty()){
+                    String errorMessage = "Vui lòng nhập tiêu đề!";
+                    androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(ScheduleEventSetting.this);
+                    builder.setTitle("Thông báo!!!")
+                            .setMessage(errorMessage)
+                            .setPositiveButton("OK", null)
+                            .show();
+                    return;
+                }
+
+                if (idSave.isEmpty()) {
+                    String query = "SELECT * FROM schedule";
+                    Cursor cursor = scheduleHelper.GetData(query);
+
+                    String id = "00001";
+                    if (cursor.getCount() > 0) {
+                        while (cursor.moveToNext()) {
+                            if (Integer.parseInt(id) < Integer.parseInt(cursor.getString(0)))
+                                id = String.format("%05d", Integer.parseInt(cursor.getString(0)));
+                        }
+                        id = String.format("%05d", Integer.parseInt(id) + 1);
+                    }
+
+                    //ScheduleCalendar.schedule.add(new ScheduleEvent(id, titleEventText.getText().toString(),detailEventText.getText().toString(), locationEventText.getText().toString(), day, month, year , hours, totalMinutes));
+
+                    query = "INSERT INTO schedule (ID, TIEUDE, GHICHU, DIADIEM, NGAY, THANG, NAM, TIENG, TONGPHUT) " +
+                            "VALUES ('" + id + "', '" + titleEventText.getText().toString() + "', '" + detailEventText.getText().toString() + "', '" + locationEventText.getText().toString() + "', " + day + ", " + month + ", " + year + ", " + hours + ", " + totalMinutes + ")";
+                    scheduleHelper.QueryData(query);
+                    finish();
+                }
+                else {
+                    String query = "UPDATE schedule SET TIEUDE = '" + titleEventText.getText().toString() + "', " +
+                            "GHICHU = '" + detailEventText.getText().toString() + "', " +
+                            "DIADIEM = '" + locationEventText.getText().toString() + "', " +
+                            "NGAY = " + day + ", THANG = " + month + ", NAM = " + year + ", " +
+                            "TIENG = " + hours + ", TONGPHUT = " + totalMinutes + " WHERE ID = '" + idSave + "'";
+                    scheduleHelper.QueryData(query);
+                    idSave = "";
+                    finish();
+                }
             }
         });
     }
+
+    private void setSchedule(){
+        Log.i("Cccc", idSave);
+        if (!idSave.isEmpty()){
+            String query = "SELECT * FROM schedule WHERE ID = '" + idSave + "'";
+            Cursor cursor = scheduleHelper.GetData(query);
+
+            Log.i("ABa", idSave);
+
+            if (cursor.getCount() > 0){
+                while (cursor.moveToNext()) {
+                    //id = String.format("%05d", Integer.parseInt(cursor.getString(0)));
+                    titleEventText.setText(cursor.getString(1));
+                    detailEventText.setText(cursor.getString(2));
+                    locationEventText.setText(cursor.getString(3));
+                    Log.i("Aaa", idSave);
+                    dateButton.setText(Integer.toString(cursor.getInt(4)) + " Tháng " + Integer.toString(cursor.getInt(5)) + " " + Integer.toString(cursor.getInt(6)));
+                    String time = (cursor.getInt(7) < 10 ? "0" : "") + Integer.toString(cursor.getInt(7)) + ":" + ((cursor.getInt(8) % 60) < 10 ? "0" : "") + Integer.toString(cursor.getInt(8) % 60);
+                    hours = cursor.getInt(7);
+                    totalMinutes = cursor.getInt(8);
+                    ((Button)findViewById(R.id.timeEventTV)).setText(time);
+                }
+            }
+        }
+    }
+
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();
