@@ -15,6 +15,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
@@ -48,7 +50,6 @@ public class SleepManagement extends AppCompatActivity {
 
     private AlarmManager alarmManager;
     private PendingIntent alarmPendingIntent;
-    private boolean isAlarmActive = false;
     private Ringtone ringtone; // Đã thêm biến ringtone ở đây
     private Calendar startTime; // Khai báo biến startTime
 
@@ -100,6 +101,13 @@ public class SleepManagement extends AppCompatActivity {
         textActualSleep.setText("Thời gian ngủ ~ 7 giờ 30 phút");
         textAlarmTime.setText("Giờ báo thức: 8:00 AM");
 
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         SeekBar seekBarVolume = findViewById(R.id.seekBarVolume);
         seekBarVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -396,8 +404,6 @@ public class SleepManagement extends AppCompatActivity {
         } else {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), alarmPendingIntent);
         }
-        // Gán giá trị true cho biến isAlarmActive
-        isAlarmActive = true;
 
         // Display a toast to inform the user
         Toast.makeText(this, "Báo thức đã được đặt!", Toast.LENGTH_SHORT).show();
@@ -407,26 +413,40 @@ public class SleepManagement extends AppCompatActivity {
         alarmIntent.setAction(AlarmReceiver.START_RINGTONE); // Hành động báo thức
         alarmIntent.putExtra(AlarmReceiver.RINGTONE_URI_EXTRA, selectedRingtoneUri);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
+        alarmPendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
         // Cài đặt thông báo
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), alarmPendingIntent);
         } else {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), alarmPendingIntent);
         }
         // Lấy Uri của tiếng chuông đã chọn
-        Uri selectedRingtone = selectedRingtoneUri; // Lấy Uri của tiếng chuông từ nguồn bạn lựa chọn
+        //Uri selectedRingtone = selectedRingtoneUri; // Lấy Uri của tiếng chuông từ nguồn bạn lựa chọn
 
+        // Lấy giá trị âm lượng từ SeekBar
+        SeekBar seekBarVolume = findViewById(R.id.seekBarVolume);
+        int volume = seekBarVolume.getProgress();
 
+        // Tạo đối tượng AudioManager để điều chỉnh âm lượng
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+        int targetVolume = (int) ((volume / 100.0) * maxVolume);
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, targetVolume, 0);
+
+        // Tạo đối tượng MediaPlayer và chạy tiếng chuông
+//        if (selectedRingtoneUri != null) {
+//            ringtone = RingtoneManager.getRingtone(this, selectedRingtoneUri);
+//            ringtone.setStreamType(AudioManager.STREAM_ALARM);
+//            ringtone.play();
+//        }
     }
 
     private void stopAlarm() {
         // Cancel the alarm using AlarmManager
-
+        alarmManager.cancel(alarmPendingIntent);
         if (alarmManager != null && alarmPendingIntent != null) {
             alarmManager.cancel(alarmPendingIntent);
-            isAlarmActive = false;
             // Dừng âm thanh chuông
             AlarmReceiver alarmReceiver = new AlarmReceiver();
             // Display a toast to inform the user
@@ -438,8 +458,6 @@ public class SleepManagement extends AppCompatActivity {
         Intent intent = new Intent(this, AlarmReceiver.class);
         Intent stopRingtoneIntent = new Intent(AlarmReceiver.STOP_RINGTONE);
         this.sendBroadcast(stopRingtoneIntent);
-        // Gán giá trị false cho biến isAlarmActive
-        isAlarmActive = false;
     }
     // Trong lớp SleepManagement
 
