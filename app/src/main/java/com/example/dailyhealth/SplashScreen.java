@@ -217,7 +217,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     // hàm thực hiện các phương thức reset và lưu thông tin sau khi qua ngày mới
-    private void savePreviousDayData() {
+    public void savePreviousDayData() {
         // Lưu thông tin vào bảng weekInfo
         SQLiteDatabase db = openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
 
@@ -275,7 +275,7 @@ public class SplashScreen extends AppCompatActivity {
         db.close();
     }
 
-    private void resetUserData() {
+    public void resetUserData() {
         // Reset các thông số về 0 trong bảng users
         SQLiteDatabase db = openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
 
@@ -286,7 +286,7 @@ public class SplashScreen extends AppCompatActivity {
         // Đóng database
         db.close();
     }
-    private String getDayOfWeekBeforeReset() {
+    public String getDayOfWeekBeforeReset() {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         String[] days = {"CHU NHAT", "THU HAI", "THU BA", "THU TU", "THU NAM", "THU SAU", "THU BAY"};
