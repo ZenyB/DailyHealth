@@ -15,8 +15,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
+import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
+    // Hằng số cho hành động dừng tiếng chuông
+    public static final String STOP_RINGTONE = "com.example.dailyhealth.STOP_RINGTONE";
+    public static final String START_RINGTONE = "com.example.dailyhealth.START_RINGTONE";
+    public static final String RINGTONE_URI_EXTRA = "ringtone_uri";
 
     private static final int NOTIFICATION_ID = 123;
     private static final String ALARM_CHANNEL_ID = "ALARM_CHANNEL";
@@ -40,12 +45,42 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (notificationManager != null) {
             notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         }
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action != null && action.equals(START_RINGTONE)) {
+                // Nếu nhận thông báo báo thức từ hệ thống và có dữ liệu Uri tiếng chuông
+                Uri alarm = intent.getParcelableExtra(RINGTONE_URI_EXTRA);
+                if (alarm != null) {
+                    // Khởi tạo và phát tiếng chuông với Uri đã nhận được
+                    startRingtone(context, alarm);
+                } else {
+                    // Nếu không nhận được Uri tiếng chuông, sử dụng tiếng chuông mặc định
+                    startDefaultRingtone(context);
+                }
+            } else if (action != null && action.equals(STOP_RINGTONE)) {
+                // Nếu nhận thông báo yêu cầu dừng tiếng chuông từ SleepManagement
+                stopRingtone(context);
 
-        // Chờ 3 giây trước khi dừng tiếng chuông
-        handler = new Handler();
-        handler.postDelayed(this::stopRingtone, 3000);
+            }
+        }
+    }
+
+    private void startRingtone(Context context, Uri alarmUri) {
+        // Dừng tiếng chuông nếu đang phát
+        stopRingtone(context);
 
         // Khởi tạo tiếng chuông
+        ringtone = RingtoneManager.getRingtone(context, alarmUri);
+        if (ringtone != null) {
+            ringtone.play();
+        }
+    }
+
+    private void startDefaultRingtone(Context context) {
+        // Dừng tiếng chuông nếu đang phát
+        stopRingtone(context);
+
+        // Khởi tạo và phát tiếng chuông mặc định
         Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (alarmUri != null) {
             ringtone = RingtoneManager.getRingtone(context, alarmUri);
@@ -54,6 +89,20 @@ public class AlarmReceiver extends BroadcastReceiver {
             }
         }
     }
+
+    private void stopRingtone(Context context) {
+        // Dừng tiếng chuông
+        if (ringtone != null) {
+            ringtone.stop();
+        }
+        else{
+//            Intent intent = new Intent(this, SleepManagement.class);
+//            Intent stopRingtoneIntent = new Intent(AlarmReceiver.STOP_RINGTONE);
+//            this.sendBroadcast(stopRingtoneIntent);
+            Log.i("Lỗi","LỖI");
+        }
+    }
+
 
     private void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -70,9 +119,9 @@ public class AlarmReceiver extends BroadcastReceiver {
             }
         }
     }
-    private void stopRingtone() {
+    private void stopRingtone(Context context, Uri alarmUri) {
         // Dừng tiếng chuông
-        // Đoạn code dừng tiếng chuông, có thể thực hiện bằng cách gọi phương thức trong lớp SleepManagement hoặc AlarmReceiver
+        ringtone = RingtoneManager.getRingtone(context, alarmUri);
         if (ringtone != null && ringtone.isPlaying()) {
             ringtone.stop();
         }

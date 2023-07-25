@@ -18,12 +18,19 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 public class CheckNewDayWorker extends Worker {
+    private Context context;
 
     public CheckNewDayWorker(
             @NonNull Context context,
             @NonNull WorkerParameters params) {
         super(context, params);
+        this.context = context;
     }
+//    public CheckNewDayWorker(
+//            @NonNull Context context,
+//            @NonNull WorkerParameters params) {
+//        super(context, params);
+//    }
 
     @NonNull
     @Override
