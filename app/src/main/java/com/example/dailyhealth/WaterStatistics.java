@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -36,13 +38,12 @@ public class WaterStatistics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_statistics);
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
 //
-//        TextView toolbarTitle = findViewById(R.id.toolbarTitle);
-//        toolbarTitle.setText("Thống kê giấc ngủ");
+        TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("Thống kê lượng nước");
 
 // Khai báo BarChart và Animation
         barChart = findViewById(R.id.barChart);
