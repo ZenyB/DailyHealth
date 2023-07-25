@@ -44,7 +44,7 @@
             android:exported="false" >
         </activity>
         <activity
-            android:name=".MoonCalendar"
+            android:name=".MoonSettingScreen1"
             android:exported="false">
         </activity>
         <activity
@@ -78,8 +78,14 @@
             android:name=".MoonSettingScreen2"
             android:exported="false" />
         <activity
-            android:name=".MoonSettingScreen1"
-            android:exported="false" />
+            android:name=".MoonCalendar"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".DetailExerciseActivity"
             android:exported="false" />
@@ -87,12 +93,8 @@
             android:name=".SplashScreen"
             android:theme="@style/SplashTheme"
             android:icon="@drawable/icon_exercise"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

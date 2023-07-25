@@ -50,7 +50,7 @@ public class SplashScreen extends AppCompatActivity {
             //Tạo bảng moon
             query = "CREATE TABLE IF NOT EXISTS moon" +
                     "(ID TEXT PRIMARY KEY, NGAYBATDAU INTEGER, THANGBATDAU INTEGER, NAMBATDAU INTEGER, TRUNGBINHCHUKY INTEGER, " +
-                    "TRUNGBINHKINHNGUYET INTEGER, THOIGIANNHACTRUOC INTEGER";
+                    "TRUNGBINHKINHNGUYET INTEGER, THOIGIANNHACTRUOC INTEGER)";
             MoonHelper moonHelper = new MoonHelper(this);
             moonHelper.QueryData(query);
 

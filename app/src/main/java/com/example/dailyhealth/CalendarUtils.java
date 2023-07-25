@@ -1,6 +1,9 @@
 package com.example.dailyhealth;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -15,6 +18,10 @@ public class CalendarUtils
 {
     public static LocalDate selectedDate;
     public static LocalDate startDate;
+    public static LocalDate startButtonDate;
+    public static int mooning;
+    public static int moonDays;
+    public static int cycleDays;
     public static ArrayList<LocalDate> highlightDate;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -43,6 +50,34 @@ public class CalendarUtils
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
         return date.format(formatter);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static ArrayList<LocalDate> daysInMoonArray(){
+        ArrayList<LocalDate> daysInMoonArray = new ArrayList<>();
+        LocalDate startNewMoonDay = startDate.plusDays(cycleDays);
+        Log.i("moondays", Integer.toString(moonDays));
+        for(int i = 0; i <= moonDays - 1; i++) {
+            Log.i("daysmoon", Integer.toString(i));
+            daysInMoonArray.add(startNewMoonDay.plusDays(i));
+        }
+        return daysInMoonArray;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static ArrayList<LocalDate> daysMooningArray(){
+        ArrayList<LocalDate> daysMooningArray = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        if(mooning == 1)
+        {
+            int n = (int) DAYS.between(today, startButtonDate);
+            {
+                for(int i = 0; i <= n; i++)
+                    daysMooningArray.add(startButtonDate.plusDays(i));
+            }
+        }
+        return daysMooningArray;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

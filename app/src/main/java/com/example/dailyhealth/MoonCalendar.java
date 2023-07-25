@@ -109,9 +109,17 @@ package com.example.dailyhealth;
 //}
 
 
+import static com.example.dailyhealth.CalendarUtils.cycleDays;
 import static com.example.dailyhealth.CalendarUtils.daysInMonthArray;
 import static com.example.dailyhealth.CalendarUtils.highlightDate;
 import static com.example.dailyhealth.CalendarUtils.monthYearFromDate;
+import static com.example.dailyhealth.CalendarUtils.moonDays;
+import static com.example.dailyhealth.CalendarUtils.mooning;
+import static com.example.dailyhealth.CalendarUtils.selectedDate;
+import static com.example.dailyhealth.CalendarUtils.startButtonDate;
+import static com.example.dailyhealth.CalendarUtils.startDate;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -122,6 +130,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -134,6 +143,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.temporal.ChronoUnit;
 
 
 public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener
@@ -143,6 +153,7 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     private Button startBtn;
     private Button endBtn;
     private static MoonHelper moonHelper;
+    private static CalendarAdapter calendarAdapter;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -151,23 +162,29 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moon_calendar);
+        startBtn = findViewById(R.id.moonStartButton);
+        endBtn = findViewById(R.id.moonEndButton);
         CalendarUtils.selectedDate = LocalDate.now();
-
         moonHelper = new MoonHelper(this);
-        String query = "SELECT NGAYBATDAU, THANGBATDAU, NAMBATDAU, TRUNGBINHCHUKY, TRUNGBINHKINHNGUYET, THOIGIANNHACTRUOC FROM MOON";
+        String query = "SELECT HANHKINH FROM MOON WHERE ID = '1'";
         Cursor cursor = moonHelper.GetData(query);
-//        if(cursor.getCount() > 0)
-//        {
-//            while (cursor.moveToNext()){
-//                Integer ngaybatdau = cursor.getInt(0);
-//                Integer thangbatdau = cursor.getInt(1);
-//                Integer nambatdau = cursor.getInt(2);
-//                Integer tbchuky = cursor.getInt(3);
-//                Integer tbkinhnguyet = cursor.getInt(4);
-//                Integer thoigiannhac = cursor.getInt(5);
-//                CalendarUtils.startDat
-//            }
-//        }
+
+        if(cursor.getCount() > 0)
+        {
+            while (cursor.moveToNext()){
+                mooning = cursor.getInt(0);
+            }
+        }
+        if(mooning == 0)
+        {
+            endBtn.setVisibility(View.GONE);
+            startBtn.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            startBtn.setVisibility(View.GONE);
+            endBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -182,8 +199,6 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     {
         calendarRecyclerView = findViewById(R.id.moonCalendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
-        startBtn = findViewById(R.id.moonStartButton);
-        endBtn = findViewById(R.id.moonEndButton);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -192,7 +207,7 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
@@ -223,14 +238,54 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onStartBtn(View view)
     {
+        LocalDate today = LocalDate.now();
+        CalendarUtils.startButtonDate = today;
+        moonHelper = new MoonHelper(this);
+        String query = "UPDATE MOON SET (HANHKINH) = " + 1 + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        query = "UPDATE MOON SET (NGAY) = " + startButtonDate.getDayOfMonth() + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        query = "UPDATE MOON SET (THANG) = " + startButtonDate.getMonthValue() + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        query = "UPDATE MOON SET (NAM) = " + startButtonDate.getYear() + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        CalendarUtils.mooning = 1;
+        ArrayList<LocalDate> daysInMonth = daysInMonthArray(startButtonDate);
+        calendarAdapter.notifyItemChanged(daysInMonth.indexOf(startButtonDate));
         startBtn.setVisibility(View.GONE);
         endBtn.setVisibility(View.VISIBLE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onEndBtn(View view)
     {
+        ArrayList<LocalDate> daysInMonth = daysInMonthArray(startDate);
+        CalendarUtils.daysMooningArray().clear();
+        CalendarUtils.daysInMoonArray().clear();
+        calendarAdapter.notifyItemRangeChanged(daysInMonth.indexOf(startDate.plusDays(cycleDays)), moonDays);
+        int temp = (int) DAYS.between(startDate, CalendarUtils.startButtonDate);
+        cycleDays = (cycleDays + temp + 1) / 2;
+        int tempo = (int)DAYS.between(LocalDate.now(), startButtonDate) + 5;
+        Log.i("tempo", Integer.toString(tempo));
+        moonDays = (moonDays + tempo + 1) / 2;
+        startDate = startButtonDate;
+        String query = "UPDATE MOON SET (TRUNGBINHKINHNGUYET) = " + moonDays + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        query = "UPDATE MOON SET (HANHKINH) = " + 0 + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        query = "UPDATE MOON SET (NGAYBATDAU) = " + startDate.getDayOfMonth() + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        query = "UPDATE MOON SET (THANGBATDAU) = " + startDate.getMonthValue() + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        query = "UPDATE MOON SET (NAMBATDAU) = " + startDate.getYear() + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        query = "UPDATE MOON SET (TRUNGBINHCHUKY) = " + cycleDays + " WHERE ID = '1'";
+        moonHelper.QueryData(query);
+        CalendarUtils.mooning = 0;
+        calendarAdapter.notifyItemChanged(daysInMonth.indexOf(startDate));
         endBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
     }
