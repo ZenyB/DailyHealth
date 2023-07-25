@@ -72,7 +72,7 @@
             tools:ignore="MissingConstraints"></TextView>
 
         <EditText
-            android:id="@+id/height_text"
+            android:id="@+id/weight_text"
             android:layout_width="249dp"
             android:layout_height="40dp"
             android:hint="Nhập cân nặng (kg)"
@@ -111,7 +111,7 @@
             tools:ignore="MissingConstraints"></TextView>
 
         <EditText
-            android:id="@+id/weight_text"
+            android:id="@+id/height_text"
             android:layout_width="249dp"
             android:layout_height="40dp"
             android:hint="Nhập chiều cao (cm)"
