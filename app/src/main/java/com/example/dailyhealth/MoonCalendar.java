@@ -119,12 +119,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.dailyhealth.database.MoonHelper;
+import com.example.dailyhealth.database.UserHelper;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -138,6 +142,7 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     private RecyclerView calendarRecyclerView;
     private Button startBtn;
     private Button endBtn;
+    private static MoonHelper moonHelper;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -148,6 +153,21 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         setContentView(R.layout.activity_moon_calendar);
         CalendarUtils.selectedDate = LocalDate.now();
 
+        moonHelper = new MoonHelper(this);
+        String query = "SELECT NGAYBATDAU, THANGBATDAU, NAMBATDAU, TRUNGBINHCHUKY, TRUNGBINHKINHNGUYET, THOIGIANNHACTRUOC FROM MOON";
+        Cursor cursor = moonHelper.GetData(query);
+//        if(cursor.getCount() > 0)
+//        {
+//            while (cursor.moveToNext()){
+//                Integer ngaybatdau = cursor.getInt(0);
+//                Integer thangbatdau = cursor.getInt(1);
+//                Integer nambatdau = cursor.getInt(2);
+//                Integer tbchuky = cursor.getInt(3);
+//                Integer tbkinhnguyet = cursor.getInt(4);
+//                Integer thoigiannhac = cursor.getInt(5);
+//                CalendarUtils.startDat
+//            }
+//        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

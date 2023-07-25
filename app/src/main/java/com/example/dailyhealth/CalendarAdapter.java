@@ -89,6 +89,7 @@ package com.example.dailyhealth;
 //    }
 //}
 
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -99,6 +100,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dailyhealth.database.MoonHelper;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -106,6 +109,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
     private final ArrayList<LocalDate> days;
     private final OnItemListener onItemListener;
+    private static MoonHelper moonHelper;
 
     public CalendarAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener)
     {

@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.dailyhealth.database.MoonHelper;
 import com.example.dailyhealth.database.ScheduleHelper;
 import com.example.dailyhealth.database.UserHelper;
 import com.example.dailyhealth.database.WeekInfoHelper;
@@ -45,6 +46,13 @@ public class SplashScreen extends AppCompatActivity {
 
             UserHelper userHelper = new UserHelper(this);
             userHelper.QueryData(query);
+
+            //Tạo bảng moon
+            query = "CREATE TABLE IF NOT EXISTS moon" +
+                    "(ID TEXT PRIMARY KEY, NGAYBATDAU INTEGER, THANGBATDAU INTEGER, NAMBATDAU INTEGER, TRUNGBINHCHUKY INTEGER, " +
+                    "TRUNGBINHKINHNGUYET INTEGER, THOIGIANNHACTRUOC INTEGER";
+            MoonHelper moonHelper = new MoonHelper(this);
+            moonHelper.QueryData(query);
 
             //Tạo bảng schedule
             query = "CREATE TABLE IF NOT EXISTS schedule" +

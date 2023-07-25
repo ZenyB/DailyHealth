@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class CalendarUtils
 {
     public static LocalDate selectedDate;
+    public static LocalDate startDate;
     public static ArrayList<LocalDate> highlightDate;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
