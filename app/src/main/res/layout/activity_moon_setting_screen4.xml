@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MoonSettingScreen4">
 
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="goBackBtn"
+        android:background="@drawable/ic_black_back_layout"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        tools:visibility="visible" />
     <ImageView
         android:id="@+id/calendar4"
         android:layout_width="wrap_content"
@@ -56,6 +64,7 @@
         android:paddingBottom="10dp"
         android:fontFamily="@font/lato_bold_2"
         android:text="Cho phép thông báo"
+        android:onClick="confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="60dp"
@@ -68,6 +77,7 @@
         android:fontFamily="@font/lato_bold_2"
         android:text="Không cho phép thông báo"
         android:textColor="#57786A"
+        android:onClick="notRemember"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

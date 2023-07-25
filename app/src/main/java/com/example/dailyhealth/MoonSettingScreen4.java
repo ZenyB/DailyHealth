@@ -2,7 +2,9 @@ package com.example.dailyhealth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
@@ -28,5 +30,20 @@ public class MoonSettingScreen4 extends AppCompatActivity {
             });
         }
 
+    }
+
+    public void goBackBtn(View view) {
+        finish();
+    }
+    public void confirmBtn(View view)
+    {
+        Intent i = new Intent(getBaseContext(), MoonCalendar.class);
+        startActivity(i);
+    }
+
+    public void notRemember(View view)
+    {
+        Intent i = new Intent(getBaseContext(), MoonCalendar.class);
+        startActivity(i);
     }
 }

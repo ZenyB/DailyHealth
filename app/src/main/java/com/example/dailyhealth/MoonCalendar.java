@@ -122,6 +122,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -135,6 +136,8 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
 {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
+    private Button startBtn;
+    private Button endBtn;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -159,6 +162,8 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     {
         calendarRecyclerView = findViewById(R.id.moonCalendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
+        startBtn = findViewById(R.id.moonStartButton);
+        endBtn = findViewById(R.id.moonEndButton);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -198,8 +203,26 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         }
     }
 
-//    public void weeklyAction(View view)
-//    {
-//        startActivity(new Intent(this, WeekViewActivity.class));
-//    }
+    public void onStartBtn(View view)
+    {
+        startBtn.setVisibility(View.GONE);
+        endBtn.setVisibility(View.VISIBLE);
+    }
+
+    public void onEndBtn(View view)
+    {
+        endBtn.setVisibility(View.GONE);
+        startBtn.setVisibility(View.VISIBLE);
+    }
+
+    public void goBackBtn(View view)
+    {
+        finish();
+    }
+
+    public void restartSetting(View view)
+    {
+        Intent i = new Intent(getBaseContext(), MoonSettingScreen1.class);
+        startActivity(i);
+    }
 }

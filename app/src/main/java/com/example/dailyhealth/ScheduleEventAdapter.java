@@ -74,7 +74,7 @@ public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdap
         holder.delBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, Integer.toString(holder.getPosition()), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(activity, Integer.toString(holder.getPosition()), Toast.LENGTH_SHORT).show();
                 scheduleEvents.remove(holder.getPosition());
                 notifyItemRemoved(holder.getPosition());
                 notifyItemRangeChanged(holder.getPosition(), scheduleEvents.size() - holder.getPosition());
