@@ -1,14 +1,15 @@
 package com.example.dailyhealth;
 
 public class ScheduleEvent {
-    private String title;
+    private String title, id;
     private int day, month, year, hours, totalMinutes;
     private String time;
     private String detail;
     private String location;
 
-    public ScheduleEvent(String title, String detail, String location, int day, int month, int year, int hours, int totalMinutes)
+    public ScheduleEvent(String id,String title, String detail, String location, int day, int month, int year, int hours, int totalMinutes)
     {
+        this.id = id;
         this.title = title;
         //this.time = time;
         this.detail = detail;
@@ -21,6 +22,8 @@ public class ScheduleEvent {
 
         this.time = (hours < 10 ? "0" + Integer.toString(hours): Integer.toString(hours))+ ":" + ((totalMinutes % 60) < 10 ? "0" + Integer.toString(totalMinutes % 60): Integer.toString(totalMinutes % 60));
     }
+
+    public String getId() {return id;}
 
     public String getTitle() {return title;}
 
@@ -41,6 +44,9 @@ public class ScheduleEvent {
     public int getTotalMinutes() {return totalMinutes;}
 
     //public void setTime(String time) {this.time = time;}
+
+
+    public void setId(String id) {this.id = id;}
 
     public void setDetail(String detail) {this.detail = detail;}
 
