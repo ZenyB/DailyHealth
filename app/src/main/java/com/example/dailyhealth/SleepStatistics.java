@@ -200,22 +200,22 @@ public class SleepStatistics extends AppCompatActivity {
         barChart.setData(barData);
         barChart.invalidate();
 
+
+        float averageSleepTime = 0f;
+        float minSleepTime =0f;
+        float maxSleepTime = 0f;
+
+        query = "SELECT AVG(GIONGU) AS AVG_GIONGU, MAX(GIONGU) AS MAX_GIONGU, MIN(GIONGU) AS MIN_GIONGU FROM weekInfo WHERE SHOWABLE=1";
+        cursor = weekInfoHelper.GetData(query);
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                averageSleepTime = cursor.getInt(0);
+                minSleepTime = cursor.getInt(2);
+                maxSleepTime = cursor.getInt(1);
+            }
+        }
         // Tính giá trị trung bình
-        float totalSleepTime = 0f;
-        float minSleepTime = entries.stream().findFirst().get().getY();
-        float maxSleepTime = entries.stream().findFirst().get().getY();
 
-        for (BarEntry entry : entries) {
-            if (entry.getY() < minSleepTime)
-                minSleepTime = entry.getY();
-            if (entry.getY() > maxSleepTime)
-                maxSleepTime = entry.getY();
-        }
-
-        for (BarEntry entry : entries) {
-            totalSleepTime += entry.getY();
-        }
-        float averageSleepTime = totalSleepTime / entries.size();
 
         float muctieu = 0;
         UserHelper userHelper = new UserHelper(this);
