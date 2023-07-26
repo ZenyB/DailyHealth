@@ -190,7 +190,7 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
                 sleepPercentTV.setText(Integer.toString(Math.round((float)ngu / nguMT * 100)) + "%");
                 drinkPercentTV.setText(Integer.toString(Math.round((float)nuoc / nuocMT * 100)) + "%");
                 exercisePercentTV.setText(Integer.toString(Math.round((float)tapluyen / tapluyenMT * 100)) + "%");
-                allGoalPercentTV.setText(Integer.toString(Math.round((float)(ngu + nuoc + tapluyen) / (nguMT + nuocMT + tapluyenMT) * 100)) + "%");
+                allGoalPercentTV.setText(Integer.toString(Math.round((float)ngu / nguMT * 100 + (float)nuoc / nuocMT * 100 + (float)tapluyen / tapluyenMT * 100) / 3) + "%");
             }
         }
     }
