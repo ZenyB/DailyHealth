@@ -178,22 +178,20 @@ public class ExerciseStatistics extends AppCompatActivity {
         barChart.setData(barData);
         barChart.invalidate();
 
-        // Tính giá trị trung bình
-        float totalExerciseTime = 0f;
-        float minExerciseTime = entries.stream().findFirst().get().getY();
-        float maxExerciseTime = entries.stream().findFirst().get().getY();
+        float averageExerciseTime = 0f;
+        float minExerciseTime =0f;
+        float maxExerciseTime = 0f;
 
-        for (BarEntry entry : entries) {
-            if (entry.getY() < minExerciseTime)
-                minExerciseTime = entry.getY();
-            if (entry.getY() > maxExerciseTime)
-                maxExerciseTime = entry.getY();
+        query = "SELECT AVG(GIONGU) AS AVG_GIONGU, MAX(GIONGU) AS MAX_GIONGU, MIN(GIONGU) AS MIN_GIONGU FROM weekInfo WHERE SHOWABLE=1";
+        cursor = weekInfoHelper.GetData(query);
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                averageExerciseTime = cursor.getInt(0);
+                minExerciseTime = cursor.getInt(2);
+                maxExerciseTime = cursor.getInt(1);
+            }
         }
 
-        for (BarEntry entry : entries) {
-            totalExerciseTime += entry.getY();
-        }
-        float averageExerciseTime = totalExerciseTime / entries.size();
         float muctieu = 0;
         UserHelper userHelper = new UserHelper(this);
         query = "SELECT * FROM users ";
