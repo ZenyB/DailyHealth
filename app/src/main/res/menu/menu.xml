@@ -6,7 +6,7 @@
         android:title="Home"/>
     <item
         android:id="@+id/navigation_exercise"
-        android:icon="@drawable/property_1_exercise"
+        android:icon="@drawable/ic_run"
         android:title="Exercise"/>
     <item
         android:id="@+id/navigation_setting"

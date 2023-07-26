@@ -64,15 +64,15 @@
         android:id="@+id/buttonDrink"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:paddingTop="10dp"
+        android:layout_alignBottom="@id/water"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#4A4A4A"
         android:drawableTop="@drawable/ic_papercup_water"
         android:fontFamily="@font/lato_bold_2"
-        android:textSize="15sp"
+        android:paddingTop="10dp"
         android:textColor="#ffffff"
-        android:backgroundTint="#4A4A4A"
-        android:background="@drawable/button_round"
-        android:layout_alignBottom="@id/water"
-        android:layout_centerHorizontal="true"/>
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/amountWaterCup"
@@ -90,37 +90,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="25dp"
+        android:layout_below="@id/water"
         android:gravity="center"
-        android:layout_below="@id/water">
+        android:paddingTop="25dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lượng nước (ml)"
             android:fontFamily="@font/lato_bold_2"
-            android:textSize="20sp"
-            android:textColor="#000000"/>
+            android:text="Lượng nước (ml)"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
         <EditText
             android:id="@+id/inputAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
             android:fontFamily="@font/lato_bold_2"
             android:hint="500 "
             android:inputType="number"
+            android:paddingLeft="20dp"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/buttonAmoutWater"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
             android:backgroundTint="#57786A"
-            android:text="Chọn" />
+            android:text="Chọn"
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 

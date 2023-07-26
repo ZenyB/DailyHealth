@@ -1,7 +1,10 @@
 package com.example.dailyhealth;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 public class SettingFragment extends Fragment implements SettingAdapter.OnSettingItemClick {
 
     private ArrayList<Integer> arrayList = new ArrayList<>();
+    public String databaseName = "DAILYHEATH";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class SettingFragment extends Fragment implements SettingAdapter.OnSettin
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onSettingClick(int position) {
+        SQLiteDatabase db = getActivity().openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
         Log.i("Setting", "abcd");
         Intent intent;
         int a = arrayList.get(position);
@@ -66,7 +71,11 @@ public class SettingFragment extends Fragment implements SettingAdapter.OnSettin
                 startActivity(intent);
                 break;
             case 3:
-                intent = new Intent(getActivity(), MoonCalendar.class);
+                if (SplashScreen.isTableExist(db, "MOON")) {
+                    intent = new Intent(getActivity(), MoonCalendar.class);
+                }
+                else
+                    intent = new Intent(getActivity(), MoonSettingScreen1.class);
                 startActivity(intent);
                 break;
             case 4:

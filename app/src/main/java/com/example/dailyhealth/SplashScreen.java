@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.dailyhealth.database.MoonHelper;
 import com.example.dailyhealth.database.ScheduleHelper;
 import com.example.dailyhealth.database.UserHelper;
 import com.example.dailyhealth.database.WeekInfoHelper;
@@ -58,6 +59,13 @@ public class SplashScreen extends AppCompatActivity {
 
             UserHelper userHelper = new UserHelper(this);
             userHelper.QueryData(query);
+
+            //Tạo bảng moon
+//            query = "CREATE TABLE IF NOT EXISTS moon" +
+//                    "(ID TEXT PRIMARY KEY, NGAYBATDAU INTEGER, THANGBATDAU INTEGER, NAMBATDAU INTEGER, TRUNGBINHCHUKY INTEGER, " +
+//                    "TRUNGBINHKINHNGUYET INTEGER, THOIGIANNHACTRUOC INTEGER)";
+//            MoonHelper moonHelper = new MoonHelper(this);
+//            moonHelper.QueryData(query);
 
             //Tạo bảng schedule
             query = "CREATE TABLE IF NOT EXISTS schedule" +
@@ -107,7 +115,9 @@ public class SplashScreen extends AppCompatActivity {
 //        Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
 //        startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
 //        return;
-
+//        MoonHelper moonHelper = new MoonHelper(this);
+//        String query1 = "DROP TABLE MOON";
+//        moonHelper.QueryData(query1);
         //Kiểm tra users có dữ liệu nào chưa
         String query = "SELECT * FROM users";
 
@@ -179,7 +189,7 @@ public class SplashScreen extends AppCompatActivity {
 
             //User đã cài đặt thông tin ban đầu => Home
             // Start home activity
-            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+       //     Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
             return;
         }
@@ -189,14 +199,14 @@ public class SplashScreen extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putLong(KEY_LAST_NEW_DAY_TIME, currentTime);
             editor.apply();
-            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SplashScreen.this, GetStart.class));
             return;
         }
 
     }
 
-    boolean isTableExist(SQLiteDatabase db, String table) {
+    public static Boolean isTableExist(SQLiteDatabase db, String table) {
         Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{table});
         boolean tableExist = (cursor.getCount() != 0);
         cursor.close();
