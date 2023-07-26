@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dailyhealth.database.ScheduleHelper;
+
 import java.util.ArrayList;
 
 public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdapter.ViewHolder> {
@@ -33,6 +35,7 @@ public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdap
     @NonNull
     @Override
     public ScheduleEventAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.schedule_event, parent, false);
         view.setOnClickListener(new View.OnClickListener() {
@@ -71,11 +74,15 @@ public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdap
         holder.detailTextView.setText(scheduleEvent.getDetail());
         holder.locationTextView.setText(scheduleEvent.getLocation());
         int finalPosition = position;
+        String id = scheduleEvent.getId();
         holder.delBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, Integer.toString(holder.getPosition()), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(activity, Integer.toString(holder.getPosition()), Toast.LENGTH_SHORT).show();
                 scheduleEvents.remove(holder.getPosition());
+                String query = "DELETE FROM schedule WHERE ID = '" + id + "'";
+                ScheduleHelper scheduleHelper = new ScheduleHelper(v.getContext());
+                scheduleHelper.QueryData(query);
                 notifyItemRemoved(holder.getPosition());
                 notifyItemRangeChanged(holder.getPosition(), scheduleEvents.size() - holder.getPosition());
             }
