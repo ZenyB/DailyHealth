@@ -33,39 +33,41 @@ public class MoonReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i("HEHEHEHHEHEHE", "ABCD");
+
         // Lấy ngày được chọn
-        contextt = context;
-        String selectedDateStr = intent.getStringExtra("SELECTED_DATE");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-
-        try {
-//            String query = "SELECT THOIGIANNHACTRUOC FROM MOON";
-//            MoonHelper moonHelper = new MoonHelper(contextt);
-//            Cursor cursor = moonHelper.GetData(query);
-//            if (cursor.getCount() > 0) {
-//                while (cursor.moveToNext()) {
-//                    nhactruoc = cursor.getInt(0);
-//                }
+//        contextt = context;
+//        String selectedDateStr = intent.getStringExtra("SELECTED_DATE");
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+//
+//        try {
+////            String query = "SELECT THOIGIANNHACTRUOC FROM MOON";
+////            MoonHelper moonHelper = new MoonHelper(contextt);
+////            Cursor cursor = moonHelper.GetData(query);
+////            if (cursor.getCount() > 0) {
+////                while (cursor.moveToNext()) {
+////                    nhactruoc = cursor.getInt(0);
+////                }
+////            }
+//            nhactruoc = 2;
+//            // Chuyển đổi ngày được chọn sang đối tượng Date
+//            Date selectedDate = sdf.parse(selectedDateStr);
+//
+//            // Lấy ngày hiện tại
+//            Calendar calendarToday = Calendar.getInstance();
+//            Date currentDate = calendarToday.getTime();
+//
+//            // Tính số ngày giữa ngày hiện tại và ngày được chọn
+//            long timeDiff = selectedDate.getTime() - currentDate.getTime();
+//            long daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+//
+//            // Kiểm tra xem nếu là 2 ngày nữa thì gửi thông báo
+//            if (daysDiff == nhactruoc) {
+//                //showNotification(context, selectedDate);
 //            }
-            nhactruoc = 2;
-            // Chuyển đổi ngày được chọn sang đối tượng Date
-            Date selectedDate = sdf.parse(selectedDateStr);
-
-            // Lấy ngày hiện tại
-            Calendar calendarToday = Calendar.getInstance();
-            Date currentDate = calendarToday.getTime();
-
-            // Tính số ngày giữa ngày hiện tại và ngày được chọn
-            long timeDiff = selectedDate.getTime() - currentDate.getTime();
-            long daysDiff = timeDiff / (1000 * 60 * 60 * 24);
-
-            // Kiểm tra xem nếu là 2 ngày nữa thì gửi thông báo
-            if (daysDiff == nhactruoc) {
-                showNotification(context, selectedDate);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void showNotification(Context context, Date selectedDate) {
@@ -178,9 +180,18 @@ public class MoonReceiver extends BroadcastReceiver {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             try {
                 Date date = sdf.parse(selectedDate);
-                calendar.setTime(date);
-                calendar.add(Calendar.DAY_OF_MONTH, -ngaynhactruoc);
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.YEAR, 2023);
+                calendar.set(Calendar.MONTH, Calendar.AUGUST);
+                calendar.set(Calendar.DAY_OF_MONTH, 1);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+//                calendar.setTime(date);
+//                calendar.add(Calendar.DAY_OF_MONTH, -ngaynhactruoc);
                 long triggerTime = calendar.getTimeInMillis();
+                Log.i("SCHEDULE", calendar.toString());
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
             } catch (Exception e) {
                 e.printStackTrace();
