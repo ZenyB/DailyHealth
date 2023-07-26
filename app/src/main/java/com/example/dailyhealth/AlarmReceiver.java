@@ -74,6 +74,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (ringtone != null) {
             ringtone.play();
         }
+        // Sử dụng Handler để dừng tiếng chuông sau khoảng thời gian xác định
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                stopRingtone(context); // Dừng tiếng chuông sau thời gian xác định
+            }
+        }, 30000);
     }
 
     private void startDefaultRingtone(Context context) {
@@ -88,6 +96,14 @@ public class AlarmReceiver extends BroadcastReceiver {
                 ringtone.play();
             }
         }
+        // Sử dụng Handler để dừng tiếng chuông sau khoảng thời gian xác định
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                stopRingtone(context); // Dừng tiếng chuông sau thời gian xác định
+            }
+        }, 30000);
     }
 
     private void stopRingtone(Context context) {
@@ -100,6 +116,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 //            Intent stopRingtoneIntent = new Intent(AlarmReceiver.STOP_RINGTONE);
 //            this.sendBroadcast(stopRingtoneIntent);
             Log.i("Lỗi","LỖI");
+        }
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
         }
     }
 
@@ -125,6 +145,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (ringtone != null && ringtone.isPlaying()) {
             ringtone.stop();
         }
+        // Sử dụng Handler để dừng tiếng chuông sau khoảng thời gian xác định
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                stopRingtone(context); // Dừng tiếng chuông sau thời gian xác định
+            }
+        }, 30000);
     }
 }
 

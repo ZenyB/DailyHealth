@@ -573,7 +573,7 @@ public class SleepManagement extends AppCompatActivity {
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 String id = cursor.getString(0);
-                int currentGionguHangNgay = cursor.getInt(6);
+                int currentGionguHangNgay = cursor.getInt(7);
                 int newGionguHangNgay = currentGionguHangNgay + minutesSlept;
                 String updateQuery = "UPDATE users SET GIONGUHOMNAY = " + newGionguHangNgay + " WHERE ID = '"+ id + "'"  ; // Thay "your_user_id" bằng ID của người dùng đang sử dụng ứng dụng
                 helper.QueryData(updateQuery);            }
