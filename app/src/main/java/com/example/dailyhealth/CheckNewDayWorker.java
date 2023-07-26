@@ -18,12 +18,19 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 public class CheckNewDayWorker extends Worker {
+    private Context context;
 
     public CheckNewDayWorker(
             @NonNull Context context,
             @NonNull WorkerParameters params) {
         super(context, params);
+        this.context = context;
     }
+//    public CheckNewDayWorker(
+//            @NonNull Context context,
+//            @NonNull WorkerParameters params) {
+//        super(context, params);
+//    }
 
     @NonNull
     @Override
@@ -46,7 +53,17 @@ public class CheckNewDayWorker extends Worker {
                 || (todayCalendar.get(Calendar.YEAR) == lastRunCalendar.get(Calendar.YEAR)
                 && todayCalendar.get(Calendar.DAY_OF_YEAR) > lastRunCalendar.get(Calendar.DAY_OF_YEAR))) {
             // Perform actions that you want to execute when a new day starts.
+
+            // Update weekInfo table with previous day data
+            SplashScreen splashScreen = new SplashScreen();
+            splashScreen.savePreviousDayData();
+
+            // Reset user data in users table
+            splashScreen.resetUserData();
+
+            // Show notification for new day
             showNotificationAndDoWork();
+
 
             // Save the current date as the last run date in SharedPreferences
             SharedPreferences.Editor editor = prefs.edit();
@@ -85,5 +102,6 @@ public class CheckNewDayWorker extends Worker {
         int notificationId = (int) System.currentTimeMillis();
         notificationManager.notify(notificationId, builder.build());
     }
+
 }
 

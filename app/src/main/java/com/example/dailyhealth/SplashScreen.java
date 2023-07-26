@@ -113,14 +113,17 @@ public class SplashScreen extends AppCompatActivity {
 
         UserHelper userHelper = new UserHelper(this);
         Cursor cursor = userHelper.GetData(query);
+        SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        long lastNewDayTime = sharedPref.getLong(KEY_LAST_NEW_DAY_TIME, 0);
+        Log.i("","" + lastNewDayTime);
+        long currentTime = System.currentTimeMillis();
+        Log.i(""," " + currentTime);
 
         if (cursor.getCount() > 0) {
             // Tạo và lưu trữ mốc thời gian khi ngày mới bắt đầu
-            SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            long lastNewDayTime = sharedPref.getLong(KEY_LAST_NEW_DAY_TIME, 0);
-            long currentTime = System.currentTimeMillis();
 
             if (isNewDay(lastNewDayTime, currentTime)) {
+                Log.i("","True, reset data");
                 // Nếu đã qua ngày mới, thực hiện công việc kiểm tra ngày mới ở đây
                 // Ví dụ: lưu trữ dữ liệu mới cho ngày mới, cập nhật thông tin ứng dụng, ...
                 // Sau đó cập nhật lại mốc thời gian ngày mới bắt đầu
@@ -151,7 +154,11 @@ public class SplashScreen extends AppCompatActivity {
                         .addTag(WORK_TAG)
                         .build();
                 WorkManager.getInstance(this).enqueue(newDayCheckWork);
-            }            //Get các loại dữ liệu cần dùng chung
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putLong(KEY_LAST_NEW_DAY_TIME, currentTime);
+                editor.apply();
+            }
+            //Get các loại dữ liệu cần dùng chung
             WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
             String query_temp = "SELECT * FROM weekInfo";
             Cursor cursor2 = weekInfoHelper.GetData(query_temp);
@@ -179,10 +186,14 @@ public class SplashScreen extends AppCompatActivity {
         else {
             //User chưa cài đặt thông tin ban đầu => Start
             // Start start activity
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putLong(KEY_LAST_NEW_DAY_TIME, currentTime);
+            editor.apply();
             Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SplashScreen.this, GetStart.class));
             return;
         }
+
     }
 
     boolean isTableExist(SQLiteDatabase db, String table) {
@@ -217,7 +228,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     // hàm thực hiện các phương thức reset và lưu thông tin sau khi qua ngày mới
-    private void savePreviousDayData() {
+    public void savePreviousDayData() {
         // Lưu thông tin vào bảng weekInfo
         SQLiteDatabase db = openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
 
@@ -275,7 +286,7 @@ public class SplashScreen extends AppCompatActivity {
         db.close();
     }
 
-    private void resetUserData() {
+    public void resetUserData() {
         // Reset các thông số về 0 trong bảng users
         SQLiteDatabase db = openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
 
@@ -286,7 +297,7 @@ public class SplashScreen extends AppCompatActivity {
         // Đóng database
         db.close();
     }
-    private String getDayOfWeekBeforeReset() {
+    public String getDayOfWeekBeforeReset() {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         String[] days = {"CHU NHAT", "THU HAI", "THU BA", "THU TU", "THU NAM", "THU SAU", "THU BAY"};
