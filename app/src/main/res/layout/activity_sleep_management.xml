@@ -251,6 +251,50 @@
                 android:src="@drawable/ic_arrow_right" />
 
         </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/layoutAlarmSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <!-- Add custom ringtone setting -->
+            <TextView
+                android:id="@+id/textRingtone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chọn nhạc chuông:"
+                android:textSize="16sp"
+                android:textColor="#000" />
+
+            <Button
+                android:id="@+id/btnRingtone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chọn nhạc"
+                android:layout_marginTop="8dp"
+                android:onClick="pickRingtone" />
+
+            <!-- Add alarm volume setting -->
+            <TextView
+                android:id="@+id/textVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Âm lượng:"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp" />
+
+            <SeekBar
+                android:id="@+id/seekBarVolume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="100" />
+
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/goalSetting"

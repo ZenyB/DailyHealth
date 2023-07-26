@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     android:padding="16dp">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,7 +34,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/avatar" />
+                        android:src="@drawable/avatar_temp" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -51,13 +52,17 @@
                     android:layout_height="wrap_content"
                     android:text="Chào mừng,"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/lato_bold_2"/>
 
                 <TextView
+
                     android:id="@+id/UserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" Nguyễn Văn A"
+                    android:fontFamily="@font/lato_bold_2"
+                    android:textStyle="bold"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -107,6 +112,7 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        android:fontFamily="@font/lato_bold_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thời gian ngủ hôm nay"
@@ -114,6 +120,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/lato_regular_2"
                         android:id="@+id/SleepTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -121,6 +128,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:fontFamily="@font/lato_bold_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thời gian ngủ trung bình cả tuần"
@@ -128,6 +136,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/lato_regular_2"
                         android:id="@+id/SleepAve"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -171,6 +180,7 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        android:fontFamily="@font/lato_bold_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ngày hành kinh gần nhất"
@@ -178,6 +188,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/lato_regular_2"
                         android:id="@+id/LastMes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -185,6 +196,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:fontFamily="@font/lato_bold_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dự đoán lần hành kinh tiếp theo"
@@ -192,6 +204,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/lato_regular_2"
                         android:id="@+id/preMes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -236,6 +249,7 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        android:fontFamily="@font/lato_bold_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thời gian đã tập hôm nay"
@@ -243,6 +257,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/lato_regular_2"
                         android:id="@+id/ExerciseTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -250,6 +265,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:fontFamily="@font/lato_bold_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thời gian tập trung bình cả tuần"
@@ -257,6 +273,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/lato_regular_2"
                         android:id="@+id/ExerciseAve"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -301,6 +318,7 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        android:fontFamily="@font/lato_bold_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lượng nước đã uống trong ngày"
@@ -308,6 +326,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/lato_regular_2"
                         android:id="@+id/Water"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -315,6 +334,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:fontFamily="@font/lato_bold_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lượng nước đã uống cả tuần"
@@ -322,6 +342,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/lato_regular_2"
                         android:id="@+id/WaterAve"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
