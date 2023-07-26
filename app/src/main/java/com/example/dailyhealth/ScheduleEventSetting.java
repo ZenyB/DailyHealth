@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 import com.example.dailyhealth.database.ScheduleHelper;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
 
@@ -41,6 +42,7 @@ public class ScheduleEventSetting extends AppCompatActivity {
     private EditText locationEventText;
     private EditText detailEventText;
 
+    private ScheduleEventAdapter scheduleEventAdapter;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +75,8 @@ public class ScheduleEventSetting extends AppCompatActivity {
                 if (idSave.isEmpty()) {
                     String query = "SELECT * FROM schedule";
                     Cursor cursor = scheduleHelper.GetData(query);
-
                     String id = "00001";
+
                     if (cursor.getCount() > 0) {
                         while (cursor.moveToNext()) {
                             if (Integer.parseInt(id) < Integer.parseInt(cursor.getString(0)))
@@ -86,7 +88,7 @@ public class ScheduleEventSetting extends AppCompatActivity {
                     //ScheduleCalendar.schedule.add(new ScheduleEvent(id, titleEventText.getText().toString(),detailEventText.getText().toString(), locationEventText.getText().toString(), day, month, year , hours, totalMinutes));
 
                     query = "INSERT INTO schedule (ID, TIEUDE, GHICHU, DIADIEM, NGAY, THANG, NAM, TIENG, TONGPHUT) " +
-                            "VALUES ('" + id + "', '" + titleEventText.getText().toString() + "', '" + detailEventText.getText().toString() + "', '" + locationEventText.getText().toString() + "', " + day + ", " + month + ", " + year + ", " + hours + ", " + totalMinutes + ")";
+                            "VALUES ('" + id + "', '" + titleEventText.getText().toString() + "', '" + detailEventText.getText().toString() + "', '" + locationEventText.getText().toString() + "', " + day + ", " + (month + 1) + ", " + year + ", " + hours + ", " + totalMinutes + ")";
                     scheduleHelper.QueryData(query);
                     finish();
                 }
@@ -94,12 +96,14 @@ public class ScheduleEventSetting extends AppCompatActivity {
                     String query = "UPDATE schedule SET TIEUDE = '" + titleEventText.getText().toString() + "', " +
                             "GHICHU = '" + detailEventText.getText().toString() + "', " +
                             "DIADIEM = '" + locationEventText.getText().toString() + "', " +
-                            "NGAY = " + day + ", THANG = " + month + ", NAM = " + year + ", " +
+                            "NGAY = " + day + ", THANG = " + (month + 1) + ", NAM = " + year + ", " +
                             "TIENG = " + hours + ", TONGPHUT = " + totalMinutes + " WHERE ID = '" + idSave + "'";
                     scheduleHelper.QueryData(query);
                     idSave = "";
                     finish();
                 }
+
+                //scheduleEventAdapter.notifyItemRangeChanged();
             }
         });
     }
@@ -129,13 +133,17 @@ public class ScheduleEventSetting extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        month = month + 1;
-        day = cal.get(Calendar.DAY_OF_MONTH);
+//        year = cal.get(Calendar.YEAR);
+//        month = cal.get(Calendar.MONTH);
+//        month = month + 1;
+//        day = cal.get(Calendar.DAY_OF_MONTH);
+        year = CalendarUtils.selectedDate.getYear();
+        month = CalendarUtils.selectedDate.getMonthValue();
+        day = CalendarUtils.selectedDate.getDayOfMonth();
         return makeDateString(day, month, year);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -163,9 +171,9 @@ public class ScheduleEventSetting extends AppCompatActivity {
         };
 
         Calendar cal = Calendar.getInstance();
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        day = cal.get(Calendar.DAY_OF_MONTH);
+        year = CalendarUtils.selectedDate.getYear();
+        month = CalendarUtils.selectedDate.getMonthValue()-1;
+        day = CalendarUtils.selectedDate.getDayOfMonth();
 
         int style = AlertDialog.THEME_HOLO_LIGHT;
 
