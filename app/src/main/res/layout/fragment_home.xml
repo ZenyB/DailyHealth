@@ -264,62 +264,6 @@
                     android:layout_marginLeft="@dimen/left_title_margin_left"
                     android:fontFamily="@font/lato_bold_2"
                     android:lineHeight="@dimen/title_line_height"
-                    android:text="Uống nước nào!"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/title_font_size" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/left_title_margin_left">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraint"
-                        android:layout_width="150dp"
-                        android:layout_height="100dp"
-                        android:background="@drawable/border"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="MissingConstraints">
-
-                        <ImageView
-                            android:id="@+id/bottleImageView"
-                            android:layout_width="70dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/ic_papercup_water"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                        <TextView
-                            android:id="@+id/amountWaterTV"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato_bold_2"
-                            android:maxLines="2"
-                            android:text="Uống nước"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/bottleImageView"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:background="@color/water"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/left_title_margin_left"
-                    android:fontFamily="@font/lato_bold_2"
-                    android:lineHeight="@dimen/title_line_height"
                     android:text="Lịch trình"
                     android:textColor="@color/black"
                     android:textSize="@dimen/title_font_size" />
@@ -365,6 +309,70 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/left_title_margin_left"
+                    android:fontFamily="@font/lato_bold_2"
+                    android:lineHeight="@dimen/title_line_height"
+                    android:text="Uống nước nào!"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_font_size" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/left_title_margin_left">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraint"
+                        android:layout_width="197dp"
+                        android:layout_height="94dp"
+                        android:background="@drawable/rounded_card_bg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.489"
+                        tools:ignore="MissingConstraints">
+
+                        <ImageView
+                            android:id="@+id/bottleImageView"
+                            android:layout_width="70dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_papercup_water"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/amountWaterTV"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:fontFamily="@font/lato_bold_2"
+                            android:maxLines="2"
+                            android:text="Uống nước"
+                            android:textAlignment="center"
+                            android:textColor="@color/water"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.329"
+                            app:layout_constraintStart_toEndOf="@+id/bottleImageView"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.487" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
