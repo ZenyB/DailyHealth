@@ -37,7 +37,7 @@ public class MainScheduleAdapter extends RecyclerView.Adapter<MainScheduleAdapte
         ScheduleEvent schedule = schedules.get(position);
         if (position % 2 != 0)
             holder.constraintLayout.setBackgroundResource(R.drawable.purple_right);
-        holder.titleTV.setText(schedule.getTitle());
+        holder.titleTV.setText(schedule.getTitle() + " - ngày " + schedule.getDay() + "/" + schedule.getMonth() + "/" + schedule.getYear());
 
     }
 
