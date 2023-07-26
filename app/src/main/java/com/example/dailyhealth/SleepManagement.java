@@ -274,11 +274,11 @@ public class SleepManagement extends AppCompatActivity {
 
         // Initialize AlarmManager and PendingIntent
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        Intent alarmIntent = new Intent(getBaseContext(), AlarmReceiver.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            alarmPendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
+            alarmPendingIntent = PendingIntent.getBroadcast(getBaseContext(), ALARM_REQUEST_CODE, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
         } else {
-            alarmPendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, 0);
+            alarmPendingIntent = PendingIntent.getBroadcast(getBaseContext(), ALARM_REQUEST_CODE, alarmIntent, 0);
         }
     }
 
@@ -408,12 +408,12 @@ public class SleepManagement extends AppCompatActivity {
         // Display a toast to inform the user
         Toast.makeText(this, "Báo thức đã được đặt!", Toast.LENGTH_SHORT).show();
         // Tạo Intent cho BroadcastReceiver
-        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        Intent alarmIntent = new Intent(getBaseContext(), AlarmReceiver.class);
         // Gửi Uri của tiếng chuông qua Intent
         alarmIntent.setAction(AlarmReceiver.START_RINGTONE); // Hành động báo thức
         alarmIntent.putExtra(AlarmReceiver.RINGTONE_URI_EXTRA, selectedRingtoneUri);
 
-        alarmPendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
+        alarmPendingIntent = PendingIntent.getBroadcast(getBaseContext(), ALARM_REQUEST_CODE, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
         // Cài đặt thông báo
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -443,21 +443,24 @@ public class SleepManagement extends AppCompatActivity {
     }
 
     private void stopAlarm() {
+        if (AlarmReceiver.ringtone != null) {
+            AlarmReceiver.ringtone.stop();
+        }
         // Cancel the alarm using AlarmManager
-        alarmManager.cancel(alarmPendingIntent);
-        if (alarmManager != null && alarmPendingIntent != null) {
-            alarmManager.cancel(alarmPendingIntent);
-            // Dừng âm thanh chuông
-            AlarmReceiver alarmReceiver = new AlarmReceiver();
-            // Display a toast to inform the user
-            Toast.makeText(this, "Báo thức đã được hủy!", Toast.LENGTH_SHORT).show();
-        }
-        if (ringtone != null) {
-            ringtone.stop();
-        }
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        Intent stopRingtoneIntent = new Intent(AlarmReceiver.STOP_RINGTONE);
-        this.sendBroadcast(stopRingtoneIntent);
+//        alarmManager.cancel(alarmPendingIntent);
+//        if (alarmManager != null && alarmPendingIntent != null) {
+//            alarmManager.cancel(alarmPendingIntent);
+//            // Dừng âm thanh chuông
+//            AlarmReceiver alarmReceiver = new AlarmReceiver();
+//            // Display a toast to inform the user
+//            Toast.makeText(this, "Báo thức đã được hủy!", Toast.LENGTH_SHORT).show();
+//        }
+//        if (ringtone != null) {
+//            ringtone.stop();
+//        }
+//        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+//        intent.setAction(AlarmReceiver.STOP_RINGTONE);
+//        getBaseContext().sendBroadcast(intent);
     }
     // Trong lớp SleepManagement
 
