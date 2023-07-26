@@ -2,6 +2,7 @@ package com.example.dailyhealth;
 
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 
 import android.graphics.Color;
@@ -72,6 +73,9 @@ public class WaterStatistics extends AppCompatActivity {
     //}
     //return super.onOptionsItemSelected(item);
     //}
+    private float convertToMilliliters(float valueInLiters) {
+        return valueInLiters * 1000; // Chuyển đổi từ L sang ml
+    }
     private void setupBarChart() {
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
@@ -136,6 +140,7 @@ public class WaterStatistics extends AppCompatActivity {
     private void populateBarChart() {
         List<BarEntry> entries = new ArrayList<>();
         boolean isNew = true;
+
         WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
         //String query = "SELECT * FROM weekInfo WHERE SHOWABLE = 1";
         String query = "SELECT * FROM weekInfo ";
@@ -156,9 +161,17 @@ public class WaterStatistics extends AppCompatActivity {
                 i ++;
             }
         }
+        // Tạo một danh sách mới để lưu trữ giá trị Y của các cột đã chuyển đổi sang ml
+        List<BarEntry> entriesInMilliliters = new ArrayList<>();
 
+        // Duyệt qua danh sách các giá trị Y của các cột ban đầu và chuyển đổi sang ml
+        for (BarEntry entry : entries) {
+            float valueInLiters = entry.getY();
+            float valueInMilliliters = convertToMilliliters(valueInLiters);
+            entriesInMilliliters.add(new BarEntry(entry.getX(), valueInMilliliters));
+        }
 
-        BarDataSet dataSet = new BarDataSet(entries, "Nước uống");
+        BarDataSet dataSet = new BarDataSet(entriesInMilliliters, "Nước uống");
         dataSet.setColor(Color.BLUE);
         dataSet.setValueTextSize(12f);
         float barWidth = 0.6f; // Độ rộng của mỗi cột (tỷ lệ phần trăm so với mặc định)
@@ -167,7 +180,7 @@ public class WaterStatistics extends AppCompatActivity {
         dataSet.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return value + "L";
+                return value + "ml";
             }
         });
 
@@ -176,23 +189,19 @@ public class WaterStatistics extends AppCompatActivity {
         barChart.setData(barData);
         barChart.invalidate();
 
-        // Tính giá trị trung bình
-        float totalExerciseTime = 0f;
-        float minExerciseTime = entries.stream().findFirst().get().getY();
-        float maxExerciseTime = entries.stream().findFirst().get().getY();
+        float averageWater = 0f;
+        float minWater =0f;
+        float maxWater = 0f;
 
-        for (BarEntry entry : entries) {
-            if (entry.getY() < minExerciseTime)
-                minExerciseTime = entry.getY();
-            if (entry.getY() > maxExerciseTime)
-                maxExerciseTime = entry.getY();
+        query = "SELECT AVG(GIONGU) AS AVG_GIONGU, MAX(GIONGU) AS MAX_GIONGU, MIN(GIONGU) AS MIN_GIONGU FROM weekInfo WHERE SHOWABLE=1";
+        cursor = weekInfoHelper.GetData(query);
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                averageWater = cursor.getInt(0);
+                minWater = cursor.getInt(2);
+                maxWater = cursor.getInt(1);
+            }
         }
-
-        for (BarEntry entry : entries) {
-            totalExerciseTime += entry.getY();
-        }
-        float averageExerciseTime = totalExerciseTime / entries.size();
-
         int muctieu = 0;
         UserHelper userHelper = new UserHelper(this);
         query = "SELECT * FROM users";
@@ -214,12 +223,12 @@ public class WaterStatistics extends AppCompatActivity {
         }
 
         else {
-            if (averageExerciseTime < muctieu) {
+            if (averageWater < muctieu) {
                 textView.setText("Cảnh báo: Uống quá ít nước");
                 textView.setTextSize(28); // Đặt kích thước chữ là 18
                 textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
                 textView.setTextColor(Color.RED);
-            } else if (averageExerciseTime >= muctieu && averageExerciseTime <= muctieu + 1000) {
+            } else if (averageWater >= muctieu && averageWater <= muctieu + 1000) {
                 textView.setText("Bạn làm tốt lắm!");
                 textView.setTextSize(28); // Đặt kích thước chữ là 18
                 textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
@@ -233,16 +242,16 @@ public class WaterStatistics extends AppCompatActivity {
         }
         // Cập nhật TextView thể hiện thời gian ngủ trung bình
         TextView averageTimeTextView = findViewById(R.id.textAverage);
-        averageTimeTextView.setText(averageExerciseTime + "L");
+        averageTimeTextView.setText(averageWater + "ml");
 
         //Cập nhật TextView thể hiện thời gian ngủ nhiều nhất
         TextView maxTimeTextView = findViewById(R.id.textMax);
-        maxTimeTextView.setText(maxExerciseTime + "L");
+        maxTimeTextView.setText(maxWater + "ml");
 
 
         //Cập nhật TextView thể hiện thời gian ngủ ít nhất
         TextView minTimeTextView = findViewById(R.id.textMin);
-        minTimeTextView.setText(minExerciseTime + "L");
+        minTimeTextView.setText(minWater + "ml");
 
 
         // Cập nhật ImageView dựa trên giá trị trung bình
@@ -250,13 +259,29 @@ public class WaterStatistics extends AppCompatActivity {
         if (isNew == true)
             imageView.setImageResource(R.drawable.image_low_sleep);
         else
-        if (averageExerciseTime < muctieu) {
+        if (averageWater < muctieu) {
             imageView.setImageResource(R.drawable.image_low_sleep);
-        } else if (averageExerciseTime >= muctieu && averageExerciseTime <= muctieu + 1000) {
+        } else if (averageWater >= muctieu && averageWater <= muctieu + 1000) {
             imageView.setImageResource(R.drawable.image_normal_sleep);
         } else {
             imageView.setImageResource(R.drawable.image_high_sleep);
         }
+        YAxis leftAxis = barChart.getAxisLeft();
+        leftAxis.setTextSize(12);
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                // Sử dụng DecimalFormat để định dạng giá trị và loại bỏ phần thập phân nếu không có số thập phân
+                DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                String formattedValue = decimalFormat.format(value);
+                if (formattedValue.endsWith(".0")) {
+                    formattedValue = formattedValue.substring(0, formattedValue.length() - 2);
+                }
+                return formattedValue + " ml"; // Hiển thị giá trị với đơn vị ml
+            }
+        });
     }
 }
 

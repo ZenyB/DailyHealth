@@ -140,6 +140,7 @@ import android.widget.Toast;
 
 import com.example.dailyhealth.database.MoonHelper;
 import com.example.dailyhealth.database.UserHelper;
+import com.example.dailyhealth.receiver.MoonReceiver;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -301,6 +302,8 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         CalendarUtils.mooning = 0;
         calendarAdapter.notifyItemChanged(daysInMonth.indexOf(startDate));
         setMonthView();
+        Toast.makeText(getBaseContext(), "Ket thuc", Toast.LENGTH_SHORT).show();
+        MoonReceiver.scheduleNotification(getBaseContext(), "03/08/2023", 2);
         endBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
     }
