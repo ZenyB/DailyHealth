@@ -1,6 +1,7 @@
 package com.example.dailyhealth;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,10 @@ public class NavigationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
+        if (getIntent().getBooleanExtra("navigate_to_moon", false)) {
+            Intent intent = new Intent(this, MoonCalendar.class);
+        }
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
