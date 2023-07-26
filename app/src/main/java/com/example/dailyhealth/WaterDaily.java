@@ -25,6 +25,13 @@ public class WaterDaily extends AppCompatActivity {
     private int progressValue = 0;
     private int progressMax = 0;
     private String name;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        InitWaterProgress();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +50,6 @@ public class WaterDaily extends AppCompatActivity {
         Button amountWater = findViewById(R.id.buttonAmoutWater);
 
         ImageView backButton = findViewById(R.id.backButton);
-
         InitWaterProgress();
 
         water.setText(progressValue + "/" + progressBar.getMax() +"ml");
@@ -54,7 +60,6 @@ public class WaterDaily extends AppCompatActivity {
                 finish();
             }
         });
-
         amountWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +97,7 @@ public class WaterDaily extends AppCompatActivity {
             public void onClick(View view) {
 
                 progressBar.setProgress(progressBar.getProgress() + amountDrink,true);
-                amount.setText(cup_1.getText());
+                //amount.setText(cup_1.getText());
 
                 progressValue = progressBar.getProgress();
                 water.setText(progressValue + "/" + progressBar.getMax() +"ml");
@@ -149,11 +154,12 @@ public class WaterDaily extends AppCompatActivity {
 
         if (cursor.getCount() > 0){
             while (cursor.moveToNext()){
-                progressBar.setProgress(cursor.getInt(0), true);
+                progressValue = cursor.getInt(0);
+                progressBar.setProgress(progressValue, true);
                 Log.i(cursor.getString(2), Integer.toString(cursor.getInt(1)));
                 progressBar.setMax(cursor.getInt(1));
                 name = cursor.getString(2);
-                progressValue = cursor.getInt(0);
+
             }
         }
     }
