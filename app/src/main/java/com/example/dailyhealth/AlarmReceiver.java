@@ -26,7 +26,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     private static final int NOTIFICATION_ID = 123;
     private static final String ALARM_CHANNEL_ID = "ALARM_CHANNEL";
     private Handler handler;
-    private Ringtone ringtone;
+    public static Ringtone ringtone;
     @Override
     public void onReceive(Context context, Intent intent) {
         // Tạo thông báo khi báo thức được kích hoạt
@@ -47,7 +47,12 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
         if (intent != null) {
             String action = intent.getAction();
-            if (action != null && action.equals(START_RINGTONE)) {
+            if (action != null && action.equals(STOP_RINGTONE)) {
+                // Nếu nhận thông báo yêu cầu dừng tiếng chuông từ SleepManagement
+                stopRingtone(context);
+
+            }
+            else if (action != null && action.equals(START_RINGTONE)) {
                 // Nếu nhận thông báo báo thức từ hệ thống và có dữ liệu Uri tiếng chuông
                 Uri alarm = intent.getParcelableExtra(RINGTONE_URI_EXTRA);
                 if (alarm != null) {
@@ -57,10 +62,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                     // Nếu không nhận được Uri tiếng chuông, sử dụng tiếng chuông mặc định
                     startDefaultRingtone(context);
                 }
-            } else if (action != null && action.equals(STOP_RINGTONE)) {
-                // Nếu nhận thông báo yêu cầu dừng tiếng chuông từ SleepManagement
-                stopRingtone(context);
-
             }
         }
     }
@@ -75,13 +76,13 @@ public class AlarmReceiver extends BroadcastReceiver {
             ringtone.play();
         }
         // Sử dụng Handler để dừng tiếng chuông sau khoảng thời gian xác định
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                stopRingtone(context); // Dừng tiếng chuông sau thời gian xác định
-            }
-        }, 30000);
+//        handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                stopRingtone(context); // Dừng tiếng chuông sau thời gian xác định
+//            }
+//        }, 30000);
     }
 
 
@@ -95,19 +96,21 @@ public class AlarmReceiver extends BroadcastReceiver {
             ringtone = RingtoneManager.getRingtone(context, alarmUri);
             if (ringtone != null) {
                 ringtone.play();
+                Log.i("","Play ringtone:" + ringtone.toString());
             }
         }
         // Sử dụng Handler để dừng tiếng chuông sau khoảng thời gian xác định
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                stopRingtone(context); // Dừng tiếng chuông sau thời gian xác định
-            }
-        }, 30000);
+//        handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                stopRingtone(context); // Dừng tiếng chuông sau thời gian xác định
+//            }
+//        }, 30000);
     }
 
     private void stopRingtone(Context context) {
+
         // Dừng tiếng chuông
         if (ringtone != null) {
             ringtone.stop();
