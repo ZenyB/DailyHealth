@@ -307,6 +307,8 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
 
     public void goBackBtn(View view)
     {
+        Intent intent = new Intent(getBaseContext(), NavigationActivity.class);
+        startActivity(intent);
         finish();
     }
 

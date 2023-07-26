@@ -189,7 +189,7 @@ public class SplashScreen extends AppCompatActivity {
 
             //User đã cài đặt thông tin ban đầu => Home
             // Start home activity
-            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+       //     Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
             return;
         }
@@ -199,7 +199,7 @@ public class SplashScreen extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putLong(KEY_LAST_NEW_DAY_TIME, currentTime);
             editor.apply();
-            Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SplashScreen.this, GetStart.class));
             return;
         }

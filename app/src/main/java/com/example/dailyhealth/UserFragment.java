@@ -114,7 +114,7 @@ public class UserFragment extends Fragment {
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 String name = cursor.getString(1);
-                userName.setText(name);
+                userName.setText(" " + name);
                 int luongnuochomnay = cursor.getInt(6);
 
                 String nuoc = Integer.toString(luongnuochomnay) + "ml";
