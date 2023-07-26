@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
+
+import com.example.dailyhealth.database.MoonHelper;
 
 import java.util.Calendar;
 
@@ -16,9 +21,15 @@ public class MoonSettingScreen1 extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
-    int year;
-    int month;
-    int day;
+    private ImageButton btnBack;
+    static int year;
+    static int month;
+    static int day;
+    public static int pickYear;
+    public static int pickMonth;
+    public static int pickDay;
+    private MoonHelper moonHelper = new MoonHelper(this);
+    protected static String idSave = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +37,16 @@ public class MoonSettingScreen1 extends AppCompatActivity {
         setContentView(R.layout.activity_moon_setting_screen1);
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         initDatePicker();
+
+
     }
 
     private String getTodaysDate()
@@ -36,6 +56,9 @@ public class MoonSettingScreen1 extends AppCompatActivity {
         month = cal.get(Calendar.MONTH);
         month = month + 1;
         day = cal.get(Calendar.DAY_OF_MONTH);
+        pickDay = day;
+        pickMonth = month;
+        pickYear = year;
         return makeDateString(day, month, year);
     }
 
@@ -47,6 +70,9 @@ public class MoonSettingScreen1 extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day)
             {
                 month = month + 1;
+                pickDay = day;
+                pickMonth = month;
+                pickYear = year;
                 String date = makeDateString(day, month, year);
                 dateButton.setText(date);
             }
@@ -105,11 +131,23 @@ public class MoonSettingScreen1 extends AppCompatActivity {
     }
 
     public void goBackBtn(View view) {
+        Intent intent = new Intent(getBaseContext(), NavigationActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getBaseContext(), NavigationActivity.class);
+        startActivity(intent);
         finish();
     }
 
     public void confirmBtn(View view)
     {
+//            String query = "SELECT NGAYBATDAU, THANGBATDAU, NAMBATDAU FROM moon";
+//            Cursor cursor = moonHelper.GetData(query);
+
         Intent i = new Intent(getBaseContext(), MoonSettingScreen2.class);
         startActivity(i);
     }

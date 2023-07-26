@@ -16,6 +16,8 @@ public class NavigationActivity extends AppCompatActivity {
 
     private MeowBottomNavigation bottomNavigation;
 
+    protected static int id = 1;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +26,7 @@ public class NavigationActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.property_1_home));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.property_1_exercise));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_run));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.property_1_setting));
         bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.property_1_user));
         bottomNavigation.show(1, true);

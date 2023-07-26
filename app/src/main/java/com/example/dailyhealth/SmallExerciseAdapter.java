@@ -1,5 +1,6 @@
 package com.example.dailyhealth;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -80,6 +81,7 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
         return viewHolder;
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SmallExercise smallExercise = smallExercises.get(position);
@@ -213,7 +215,7 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
             @Override
             public void onTick(long millisUntilFinished) {
                 if (millisUntilFinished / 1000 > 4)
-                    Toast.makeText(context, "Bắt đầu trong " + Long.toString(millisUntilFinished / 1000 - 4), Toast.LENGTH_SHORT).show();
+                    CustomToast.makeText(context, "Bắt đầu trong " + Long.toString(millisUntilFinished / 1000 - 4), Toast.LENGTH_SHORT, 1).show();
             }
 
             @Override

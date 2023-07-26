@@ -89,8 +89,11 @@ package com.example.dailyhealth;
 //    }
 //}
 
+import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,13 +102,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dailyhealth.database.MoonHelper;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
     private final ArrayList<LocalDate> days;
     private final OnItemListener onItemListener;
+    private static MoonHelper moonHelper;
+    private static boolean index;
 
     public CalendarAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener)
     {
@@ -113,30 +121,81 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         this.onItemListener = onItemListener;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        if(parent.getRootView().findViewById(R.id.moonStartButton) != null)
+            index = true;
+        else
+            index = false;
+        Log.i("indexsdads", Boolean.toString(index));
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) parent.getWidth() / 7;
 
+        if(index) {
+            moonHelper = new MoonHelper(parent.getContext());
+            String query = "SELECT NGAYBATDAU, THANGBATDAU, NAMBATDAU, TRUNGBINHCHUKY, TRUNGBINHKINHNGUYET, THOIGIANNHACTRUOC, NGAY, THANG, NAM, HANHKINH FROM MOON WHERE ID = '1'";
+            Cursor cursor = moonHelper.GetData(query);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    Integer ngaybatdau = cursor.getInt(0);
+                    Integer thangbatdau = cursor.getInt(1);
+                    Integer nambatdau = cursor.getInt(2);
+                    Integer tbchuky = cursor.getInt(3);
+                    Integer tbkinhnguyet = cursor.getInt(4);
+                    Integer thoigiannhac = cursor.getInt(5);
+                    Integer ngay = cursor.getInt(6);
+                    Integer thang = cursor.getInt(7);
+                    Integer nam = cursor.getInt(8);
+                    Integer hanhkinh = cursor.getInt(9);
+                    CalendarUtils.startDate = LocalDate.of(nambatdau, thangbatdau, ngaybatdau);
+                    if (hanhkinh == 1)
+                        CalendarUtils.startButtonDate = LocalDate.of(nam, thang, ngay);
+                    CalendarUtils.moonDays = tbkinhnguyet;
+                    CalendarUtils.cycleDays = tbchuky;
+                }
+            }
+        }
+
         return new CalendarViewHolder(view, onItemListener, days);
     }
 
+    @SuppressLint("Range")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
+        Log.i("aa",holder.parentView.getRootView().toString());
         final LocalDate date = days.get(position);
-        if(date == null)
-            holder.dayOfMonth.setText("");
-        else
+        if(index)
         {
-            holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
-            if(date.equals(CalendarUtils.selectedDate))
-                holder.parentView.setBackgroundColor(Color.LTGRAY);
+            final ArrayList<LocalDate> daysMooning = CalendarUtils.daysMooningArray();
+            final ArrayList<LocalDate> daysInMoon = CalendarUtils.daysInMoonArray();
+            if (date == null)
+                holder.dayOfMonth.setText("");
+            else {
+                holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+                if (date.equals(CalendarUtils.selectedDate))
+                    holder.parentView.setBackgroundColor(Color.LTGRAY);
+                else if (daysMooning.contains(date) && index)
+                    holder.parentView.setBackgroundColor(Color.parseColor("#F33058"));
+                else if (daysInMoon.contains(date) && index)
+                    holder.parentView.setBackgroundColor(Color.parseColor("#F598E2"));
+            }
+        }
+
+        else {
+            if (date == null)
+                holder.dayOfMonth.setText("");
+            else {
+                holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+                if (date.equals(CalendarUtils.selectedDate))
+                    holder.parentView.setBackgroundColor(Color.LTGRAY);
+            }
         }
     }
 

@@ -29,7 +29,6 @@
 
         <receiver android:name=".AlarmReceiver" />
         <receiver android:name=".NewDayBroadcastReceiver" />
-
         <activity
             android:name=".NavigationActivity"
             android:exported="false" />
@@ -52,7 +51,7 @@
             android:exported="false" >
         </activity>
         <activity
-            android:name=".MoonCalendar"
+            android:name=".MoonSettingScreen1"
             android:exported="false">
         </activity>
         <activity
@@ -86,8 +85,9 @@
             android:name=".MoonSettingScreen2"
             android:exported="false" />
         <activity
-            android:name=".MoonSettingScreen1"
-            android:exported="false" />
+            android:name=".MoonCalendar"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".DetailExerciseActivity"
             android:exported="false" />
