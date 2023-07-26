@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +15,28 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.example.dailyhealth.database.MoonHelper;
 import com.example.dailyhealth.database.UserHelper;
 import com.example.dailyhealth.database.WeekInfoHelper;
 
+import java.time.LocalDate;
+
 public class UserFragment extends Fragment {
     public String databaseName = "DAILYHEATH";
+    private TextView recent ;
+    private TextView predict ;
+    private TextView te1 ;
+    private TextView te2 ;
     private TextView userName, sleepAve,waterAve,exerciseAve, sleepToday, waterToday, exerciseToday;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +48,10 @@ public class UserFragment extends Fragment {
         waterToday = view.findViewById(R.id.Water);
         exerciseToday = view.findViewById(R.id.ExerciseTime);
         userName = view.findViewById(R.id.UserName);
+        recent = view.findViewById(R.id.LastMes);
+        predict = view.findViewById(R.id.preMes);
+        te1 = view.findViewById(R.id.tex1);
+        te2 = view.findViewById(R.id.tex2);
         setValue();
 
         LinearLayout sleepLayout = view.findViewById(R.id.sleepLayout);
@@ -64,16 +78,33 @@ public class UserFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        LinearLayout menLayout = view.findViewById(R.id.menLayout);
+        menLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                SQLiteDatabase db = getActivity().openOrCreateDatabase("DAILYHEATH", Context.MODE_PRIVATE, null);
+                if (SplashScreen.isTableExist(db, "MOON")) {
+                    intent = new Intent(getActivity(), MoonCalendar.class);
+                }
+                else
+                    intent = new Intent(getActivity(), MoonSettingScreen1.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
         //SQLiteDatabase db = openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStart() {
         super.onStart();
         setValue();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setValue(){
         //exerciseAve = find
 
@@ -124,6 +155,37 @@ public class UserFragment extends Fragment {
                 sleepToday.setText(convertToHourMinuteFormat(gionguhomnay));
                 exerciseToday.setText(convertToHourMinuteFormat(luyentaphomnay));
 
+            }
+        }
+        // Moon
+
+        MoonHelper moonHelper = new MoonHelper(getActivity());
+        SQLiteDatabase db = getActivity().openOrCreateDatabase("DAILYHEATH", Context.MODE_PRIVATE, null);
+        if (!SplashScreen.isTableExist(db, "MOON")){
+            te1.setVisibility(View.INVISIBLE);
+            recent.setVisibility(View.INVISIBLE);
+            predict.setVisibility(View.INVISIBLE);
+            te2.setText("Nhấn để sử dụng chức năng");
+        }
+        else
+        {
+            query = "SELECT NGAYBATDAU ,THANGBATDAU , NAMBATDAU , TRUNGBINHCHUKY FROM MOON WHERE ID = '1'";
+            Cursor cursor1 = moonHelper.GetData(query);
+            if (cursor1.getCount()>0){
+                while (cursor1.moveToNext()){
+                    int ngay = cursor1.getInt(0);
+                    int thang = cursor1.getInt(1);
+                    int nam = cursor1.getInt(2);
+                    int chuky = cursor1.getInt(3);
+                    recent.setText(ngay + " / " + thang + " / "+nam);
+                    LocalDate pre;
+                    pre = LocalDate.of(nam,thang,ngay);
+                    LocalDate newday = pre.plusDays(chuky);
+                    ngay = newday.getDayOfMonth();
+                    thang = newday.getMonthValue();
+                    nam = newday.getYear();
+                    predict.setText(ngay + " / " + thang + " / "+nam);
+                }
             }
         }
 
