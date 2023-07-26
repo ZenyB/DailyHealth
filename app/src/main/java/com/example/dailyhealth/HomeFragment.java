@@ -184,8 +184,8 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
                 drinkPB.setProgress(nuoc);
                 exercisePB.setMax(tapluyenMT);
                 exercisePB.setProgress(tapluyen);
-                allPB.setMax(nguMT + nuocMT + tapluyenMT);
-                allPB.setProgress(ngu + nuoc + tapluyen);
+                allPB.setMax(100);
+                allPB.setProgress(Math.round((float)ngu / nguMT * 100 + (float)nuoc / nuocMT * 100 + (float)tapluyen / tapluyenMT * 100) / 3);
 
                 sleepPercentTV.setText(Integer.toString(Math.round((float)ngu / nguMT * 100)) + "%");
                 drinkPercentTV.setText(Integer.toString(Math.round((float)nuoc / nuocMT * 100)) + "%");
