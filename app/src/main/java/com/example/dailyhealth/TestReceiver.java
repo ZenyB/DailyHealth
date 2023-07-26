@@ -19,25 +19,25 @@ public class TestReceiver extends BroadcastReceiver {
         // Xử lý hiển thị thông báo tại đây
         // Ví dụ: Sử dụng NotificationManagerCompat để hiển thị thông báo
         // hoặc sử dụng các cách hiển thị thông báo khác
-//        Log.i("message", "Received");
-//        Toast.makeText(context, "Đến 12:00 AM - Hiển thị thông báo!", Toast.LENGTH_SHORT).show();
-//
-//
-//        Intent intent1 = new Intent(context, SleepStatistics.class);
-//        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "MOON")
-//                .setSmallIcon(R.drawable.icon_sleep)
-//                .setContentTitle("Sleep")
-//                .setContentText("You have to sleep more")
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent)
-//                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-//                .setAutoCancel(true);
-//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-//
-//        // notificationId is a unique int for each notification that you must define
-//        int notificationId = (int) System.currentTimeMillis();
-//        notificationManager.notify(notificationId, builder.build());
+        Log.i("message", "Received");
+        Toast.makeText(context, "Đến 12:00 AM - Hiển thị thông báo!", Toast.LENGTH_SHORT).show();
+
+
+        Intent intent1 = new Intent(context, NavigationActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "444")
+                .setSmallIcon(R.drawable.icon_sleep)
+                .setContentTitle("Sleep")
+                .setContentText("You have to sleep more")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setAutoCancel(true);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+
+        // notificationId is a unique int for each notification that you must define
+        int notificationId = 4444;
+        notificationManager.notify(notificationId, builder.build());
     }
 
 //    private void createNotificationChannel() {
