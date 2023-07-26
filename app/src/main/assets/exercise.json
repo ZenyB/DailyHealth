@@ -1,5 +1,27 @@
 [
   {
+    "id": "A000",
+    "largeExerciseName": "Bài tập bụng để test",
+    "exerciseDuration": 20,
+    "exerciseDifficulty": 2,
+    "smallExercises": [
+      {
+        "smallExerciseCode": 1,
+        "smallExerciseName": "Bật nhảy",
+        "exerciseType": 0,
+        "imageFileName": "bat_nhay",
+        "exerciseDuration": 5
+      },
+      {
+        "smallExerciseCode": 2,
+        "smallExerciseName": "Tập cơ bụng",
+        "exerciseType": 1,
+        "imageFileName": "co_bung",
+        "exerciseRepetitions": 15
+      }
+    ]
+  },
+  {
     "id": "A001",
     "largeExerciseName": "Bài tập bụng cơ bản",
     "exerciseDuration": 20,

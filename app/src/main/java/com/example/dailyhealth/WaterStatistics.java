@@ -1,9 +1,11 @@
 package com.example.dailyhealth;
 
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.dailyhealth.database.UserHelper;
+import com.example.dailyhealth.database.WeekInfoHelper;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -131,13 +135,27 @@ public class WaterStatistics extends AppCompatActivity {
 
     private void populateBarChart() {
         List<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, 8.4f));   // Thời gian tập thứ 2: 8h24
-        entries.add(new BarEntry(1, 7.5f));   // Thời gian tập thứ 3: 7h30
-        entries.add(new BarEntry(2, 6.9f));   // Thời gian tập thứ 4: 6h54
-        entries.add(new BarEntry(3, 7.8f));   // Thời gian tập thứ 5: 7h48
-        entries.add(new BarEntry(4, 6.1f));   // Thời gian tập thứ 6: 6h06
-        entries.add(new BarEntry(5, 8.3f));   // Thời gian tập thứ 7: 8h18
-        entries.add(new BarEntry(6, 7.2f));   // Thời gian tập chủ nhật: 7h12
+        boolean isNew = true;
+        WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
+        //String query = "SELECT * FROM weekInfo WHERE SHOWABLE = 1";
+        String query = "SELECT * FROM weekInfo ";
+        Cursor cursor = weekInfoHelper.GetData(query);
+        if (cursor.getCount() > 0) {
+            int i = 0;
+            while (cursor.moveToNext()) {
+                String Thu = cursor.getString(1);
+                int num = cursor.getInt(2);
+                int showable = cursor.getInt(5);
+                if (showable == 1){
+                    isNew = false;
+                    entries.add(new BarEntry(i, SleepStatistics.convertToHourMinuteFormat(num)));
+                }
+                else {
+                    entries.add(new BarEntry(i, 0));
+                }
+                i ++;
+            }
+        }
 
 
         BarDataSet dataSet = new BarDataSet(entries, "Nước uống");
@@ -175,18 +193,43 @@ public class WaterStatistics extends AppCompatActivity {
         }
         float averageExerciseTime = totalExerciseTime / entries.size();
 
+        int muctieu = 0;
+        UserHelper userHelper = new UserHelper(this);
+        query = "SELECT * FROM users";
+        cursor = userHelper.GetData(query);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                muctieu = cursor.getInt(10);
+                Log.i("","Muc tieu: " + Float.toString(muctieu));
+            }
+        }
         // Cập nhật TextView dựa trên giá trị trung bình
         TextView textView = findViewById(R.id.warning);
-        if (averageExerciseTime < 7) {
-            textView.setText("Cảnh báo: Uống quá ít nước");
-            textView.setTextSize(28); // Đặt kích thước chữ là 18
-            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
-            textView.setTextColor(Color.RED);
-        } else if (averageExerciseTime >= 7 && averageExerciseTime <= 8) {
-            textView.setText("Bạn làm tốt lắm!");
+        if (isNew == true){
+            textView.setText("Chưa có thông tin");
             textView.setTextSize(28); // Đặt kích thước chữ là 18
             textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
             textView.setTextColor(Color.parseColor("#3EA862"));
+
+        }
+
+        else {
+            if (averageExerciseTime < muctieu) {
+                textView.setText("Cảnh báo: Uống quá ít nước");
+                textView.setTextSize(28); // Đặt kích thước chữ là 18
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+                textView.setTextColor(Color.RED);
+            } else if (averageExerciseTime >= muctieu && averageExerciseTime <= muctieu + 1000) {
+                textView.setText("Bạn làm tốt lắm!");
+                textView.setTextSize(28); // Đặt kích thước chữ là 18
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+                textView.setTextColor(Color.parseColor("#3EA862"));
+            } else {
+                textView.setText("Cảnh báo: Uống nước quá nhiều");
+                textView.setTextSize(28); // Đặt kích thước chữ là 18
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+                textView.setTextColor(Color.YELLOW);
+            }
         }
         // Cập nhật TextView thể hiện thời gian ngủ trung bình
         TextView averageTimeTextView = findViewById(R.id.textAverage);
@@ -204,10 +247,15 @@ public class WaterStatistics extends AppCompatActivity {
 
         // Cập nhật ImageView dựa trên giá trị trung bình
         ImageView imageView = findViewById(R.id.sleepImage);
-        if (averageExerciseTime < 7) {
+        if (isNew == true)
             imageView.setImageResource(R.drawable.image_low_sleep);
-        } else if (averageExerciseTime >= 7 && averageExerciseTime <= 8) {
+        else
+        if (averageExerciseTime < muctieu) {
+            imageView.setImageResource(R.drawable.image_low_sleep);
+        } else if (averageExerciseTime >= muctieu && averageExerciseTime <= muctieu + 1000) {
             imageView.setImageResource(R.drawable.image_normal_sleep);
+        } else {
+            imageView.setImageResource(R.drawable.image_high_sleep);
         }
     }
 }
