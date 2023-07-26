@@ -68,6 +68,12 @@ public class UserFragment extends Fragment {
         //SQLiteDatabase db = openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        setValue();
+    }
+
     public void setValue(){
         //exerciseAve = find
 
@@ -97,7 +103,7 @@ public class UserFragment extends Fragment {
 
         if (average_exercise != null && average_sleep!= null & average_water!= null){
             sleepAve.setText(convertToHourMinuteFormat(average_sleep));
-            waterAve.setText(average_water.toString() + "L");
+            waterAve.setText(average_water.toString() + "ml");
             exerciseAve.setText(convertToHourMinuteFormat(average_exercise));
         }
 
@@ -111,7 +117,7 @@ public class UserFragment extends Fragment {
                 userName.setText(name);
                 int luongnuochomnay = cursor.getInt(6);
 
-                String nuoc = Integer.toString(luongnuochomnay) + "L";
+                String nuoc = Integer.toString(luongnuochomnay) + "ml";
                 int gionguhomnay = cursor.getInt(7);
                 int luyentaphomnay = cursor.getInt(8);
                 waterToday.setText(nuoc);

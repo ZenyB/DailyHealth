@@ -84,6 +84,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }, 30000);
     }
 
+
     private void startDefaultRingtone(Context context) {
         // Dừng tiếng chuông nếu đang phát
         stopRingtone(context);
@@ -110,12 +111,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Dừng tiếng chuông
         if (ringtone != null) {
             ringtone.stop();
-        }
-        else{
-//            Intent intent = new Intent(this, SleepManagement.class);
-//            Intent stopRingtoneIntent = new Intent(AlarmReceiver.STOP_RINGTONE);
-//            this.sendBroadcast(stopRingtoneIntent);
-            Log.i("Lỗi","LỖI");
         }
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);
