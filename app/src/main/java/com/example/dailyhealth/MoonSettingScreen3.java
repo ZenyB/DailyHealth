@@ -13,12 +13,13 @@ import com.example.dailyhealth.database.MoonHelper;
 public class MoonSettingScreen3 extends AppCompatActivity {
 
     private MoonHelper moonHelper = new MoonHelper(this);
-    static int moonCycle = 2;
+    static int moonCycle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moon_setting_screen3);
         NumberPicker MoonLengthPicker = findViewById(R.id.MoonLengthPickerButton);
+        moonCycle = 2;
         if (MoonLengthPicker != null) {
             MoonLengthPicker.setMinValue(2);
             MoonLengthPicker.setMaxValue(10);
@@ -39,8 +40,6 @@ public class MoonSettingScreen3 extends AppCompatActivity {
     }
     public void confirmBtn(View view)
     {
-        String query = "UPDATE MOON SET (TRUNGBINHKINHNGUYET) = " + moonCycle + " WHERE ID = '1'";
-        moonHelper.QueryData(query);
         Intent i = new Intent(getBaseContext(), MoonSettingScreen4.class);
         startActivity(i);
     }

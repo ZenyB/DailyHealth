@@ -71,11 +71,10 @@ public class CalendarUtils
         LocalDate today = LocalDate.now();
         if(mooning == 1)
         {
-            int n = (int) DAYS.between(today, startButtonDate);
-            {
-                for(int i = 0; i <= n; i++)
-                    daysMooningArray.add(startButtonDate.plusDays(i));
-            }
+            int n = (int) DAYS.between(startButtonDate, today);
+            Log.i("so ngay bat dau", Integer.toString(n));
+            for(int i = 0; i <= n; i++)
+                daysMooningArray.add(startButtonDate.plusDays(i));
         }
         return daysMooningArray;
     }

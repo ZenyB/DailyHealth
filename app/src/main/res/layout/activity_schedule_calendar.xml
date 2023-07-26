@@ -20,8 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@drawable/ic_black_back_layout"
-            android:onClick="backButton"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
             tools:visibility="visible" />
 
         <LinearLayout

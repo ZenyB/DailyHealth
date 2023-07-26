@@ -122,10 +122,12 @@ import static com.example.dailyhealth.CalendarUtils.startDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
@@ -148,10 +150,12 @@ import java.time.temporal.ChronoUnit;
 
 public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener
 {
-    private TextView monthYearText;
+    private TextView monthYearText, cycleText, moonCycleText;
     private RecyclerView calendarRecyclerView;
     private Button startBtn;
     private Button endBtn;
+    private int cc;
+    private int mc;
     private static MoonHelper moonHelper;
     private static CalendarAdapter calendarAdapter;
 
@@ -164,17 +168,23 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         setContentView(R.layout.activity_moon_calendar);
         startBtn = findViewById(R.id.moonStartButton);
         endBtn = findViewById(R.id.moonEndButton);
+        cycleText = findViewById(R.id.cycleTV);
+        moonCycleText = findViewById(R.id.moonCycleTV);
         CalendarUtils.selectedDate = LocalDate.now();
         moonHelper = new MoonHelper(this);
-        String query = "SELECT HANHKINH FROM MOON WHERE ID = '1'";
+        String query = "SELECT HANHKINH, TRUNGBINHKINHNGUYET, TRUNGBINHCHUKY FROM MOON WHERE ID = '1'";
         Cursor cursor = moonHelper.GetData(query);
 
         if(cursor.getCount() > 0)
         {
             while (cursor.moveToNext()){
                 mooning = cursor.getInt(0);
+                cc = cursor.getInt(2);
+                mc = cursor.getInt(1);
             }
         }
+        cycleText.setText(cc + " ngày");
+        moonCycleText.setText(mc +" ngày");
         if(mooning == 0)
         {
             endBtn.setVisibility(View.GONE);
@@ -268,7 +278,7 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         calendarAdapter.notifyItemRangeChanged(daysInMonth.indexOf(startDate.plusDays(cycleDays)), moonDays);
         int temp = (int) DAYS.between(startDate, CalendarUtils.startButtonDate);
         cycleDays = (cycleDays + temp + 1) / 2;
-        int tempo = (int)DAYS.between(LocalDate.now(), startButtonDate) + 5;
+        int tempo = (int)DAYS.between(startButtonDate, LocalDate.now());
         Log.i("tempo", Integer.toString(tempo));
         moonDays = (moonDays + tempo + 1) / 2;
         startDate = startButtonDate;
@@ -284,8 +294,13 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         moonHelper.QueryData(query);
         query = "UPDATE MOON SET (TRUNGBINHCHUKY) = " + cycleDays + " WHERE ID = '1'";
         moonHelper.QueryData(query);
+        mc = moonDays;
+        cc = cycleDays;
+        cycleText.setText(cc + " ngày");
+        moonCycleText.setText(mc +" ngày");
         CalendarUtils.mooning = 0;
         calendarAdapter.notifyItemChanged(daysInMonth.indexOf(startDate));
+        setMonthView();
         endBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
     }
@@ -297,7 +312,38 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
 
     public void restartSetting(View view)
     {
-        Intent i = new Intent(getBaseContext(), MoonSettingScreen1.class);
-        startActivity(i);
+        showExitConfirmationDialog();
+    }
+    private void showExitConfirmationDialog() {
+        // Xây dựng hộp thoại thông báo
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Bạn có chắc chắn muốn cài đặt lại?");
+        builder.setMessage("Nếu bạn cài đặt lại sẽ mất những dữ liệu đang có");
+
+        // Thiết lập nút "Đồng ý" cho hộp thoại
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Thoát ứng dụng hoặc thực hiện các thao tác khi người dùng đồng ý thoát
+                String query = "DROP TABLE MOON";
+                moonHelper.QueryData(query);
+                Intent i = new Intent(getBaseContext(), MoonSettingScreen1.class);
+                startActivity(i); // Kết thúc hoạt động hiện tại
+                finish();
+            }
+        });
+
+        // Thiết lập nút "Hủy" cho hộp thoại
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Đóng hộp thoại khi người dùng chọn "Hủy"
+                dialog.dismiss();
+            }
+        });
+
+        // Hiển thị hộp thoại
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

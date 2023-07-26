@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 
 import com.example.dailyhealth.database.MoonHelper;
 
@@ -20,12 +21,13 @@ public class MoonSettingScreen1 extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
+    private ImageButton btnBack;
     static int year;
     static int month;
     static int day;
-    static int pickYear;
-    static int pickMonth;
-    static int pickDay;
+    public static int pickYear;
+    public static int pickMonth;
+    public static int pickDay;
     private MoonHelper moonHelper = new MoonHelper(this);
     protected static String idSave = "";
 
@@ -35,6 +37,13 @@ public class MoonSettingScreen1 extends AppCompatActivity {
         setContentView(R.layout.activity_moon_setting_screen1);
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         initDatePicker();
 
 
@@ -122,6 +131,15 @@ public class MoonSettingScreen1 extends AppCompatActivity {
     }
 
     public void goBackBtn(View view) {
+        Intent intent = new Intent(getBaseContext(), NavigationActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getBaseContext(), NavigationActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -129,26 +147,7 @@ public class MoonSettingScreen1 extends AppCompatActivity {
     {
 //            String query = "SELECT NGAYBATDAU, THANGBATDAU, NAMBATDAU FROM moon";
 //            Cursor cursor = moonHelper.GetData(query);
-        String query = "DROP TABLE MOON";
-        moonHelper.QueryData(query);
-        query = "CREATE TABLE MOON " +
-                "(ID TEXT PRIMARY KEY, NGAYBATDAU INTEGER, THANGBATDAU INTEGER, NAMBATDAU INTEGER, TRUNGBINHCHUKY INTEGER, " +
-                "TRUNGBINHKINHNGUYET INTEGER, THOIGIANNHACTRUOC INTEGER, HANHKINH INTEGER, NGAY INTEGER, THANG INTEGER, NAM INTEGER)";
-        MoonHelper moonHelper = new MoonHelper(this);
-        moonHelper.QueryData(query);
-        Log.i("pickday",Integer.toString(pickDay));
-        query = "INSERT INTO MOON (ID)" +
-                " VALUES ('"+1+  "')";
-        moonHelper.QueryData(query);
-        query = "UPDATE MOON SET (NGAYBATDAU) = " + pickDay + " WHERE ID = '1'";
-        moonHelper.QueryData(query);
-        query = "UPDATE MOON SET (THANGBATDAU) = " + pickMonth + " WHERE ID = '1'";
-        moonHelper.QueryData(query);
-        query = "UPDATE MOON SET (NAMBATDAU) = " + pickYear + " WHERE ID = '1'";
-        moonHelper.QueryData(query);
-        query = "UPDATE MOON SET (HANHKINH) = " + 0 + " WHERE ID = '1'";
-        moonHelper.QueryData(query);
-        CalendarUtils.mooning = 0;
+
         Intent i = new Intent(getBaseContext(), MoonSettingScreen2.class);
         startActivity(i);
     }

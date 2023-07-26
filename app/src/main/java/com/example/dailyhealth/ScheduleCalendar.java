@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     private TextView YearText;
     private RecyclerView calendarRecyclerView;
     private RecyclerView r;
+    private ImageButton btnBack;
     //    private ListView eventListView;
     private String[] item = {"Sửa", "Xóa"};
     private LocalDate today = LocalDate.now();
@@ -59,6 +61,13 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
 //        scheduleEvents.add(new ScheduleEvent("Đi ăn cưới", "11:35","Note lại đi 500k", "Xóm 100"));
 //        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
 
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         r = (RecyclerView) findViewById(R.id.scheduleCalendarRV);
         r.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         r.setAdapter(new ScheduleEventAdapter(this, scheduleEvents, this));
@@ -142,7 +151,6 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
 //        scheduleEvents.add(new ScheduleEvent("Đi chơi với gái", "13:35","Note lại đi 1tr", "Phòng 2168"));
         r.setAdapter(new ScheduleEventAdapter(this, scheduleEvents, this));
     }
-
     @Override
     protected void onResume()
     {
@@ -172,7 +180,7 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         startActivity(i);
     }
 
-    private void backButton(View view) { finish();}
+//    private void backButton(View view) { finish();}
 
 //    private void setEventAdpater()
 //    {
