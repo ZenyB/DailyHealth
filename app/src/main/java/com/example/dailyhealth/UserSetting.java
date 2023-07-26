@@ -80,7 +80,8 @@ public class UserSetting extends AppCompatActivity {
     }
 
     private void updateData(){
-        String query;
+        String query, ten = "";
+        ten = name.getHint().toString();
         if (!name.getText().toString().isEmpty()){
             query = "UPDATE USERS SET TEN = '" + name.getText() + "' WHERE TEN = '" + name.getHint() + "'";
             userHelper.QueryData(query);
@@ -94,11 +95,20 @@ public class UserSetting extends AppCompatActivity {
         if (!height.getText().toString().isEmpty()){
             query = "UPDATE USERS SET CHIEUCAO = " + height.getText() + " WHERE TEN = '" + name.getHint() + "'";
             userHelper.QueryData(query);
+
+            query = "UPDATE USERS SET LUONGNUOCMUCTIEU = " + luongNuoc(Integer.parseInt(weight.getHint().toString()), Integer.parseInt(height.getText().toString())) + " WHERE TEN = '" + ten + "'";
+            userHelper.QueryData(query);
+            Log.i(ten, Integer.toString(luongNuoc(Integer.parseInt(weight.getHint().toString()), Integer.parseInt(height.getText().toString()))));
+            height.setHint(height.getText());
             height.setText("");
         }
         if (!weight.getText().toString().isEmpty()){
             query = "UPDATE USERS SET CANNANG = " + weight.getText() + " WHERE TEN = '" + name.getHint() + "'";
             userHelper.QueryData(query);
+
+            query = "UPDATE USERS SET LUONGNUOCMUCTIEU = " + luongNuoc(Integer.parseInt(weight.getText().toString()), Integer.parseInt(height.getHint().toString())) + " WHERE TEN = '" + ten + "'";
+            userHelper.QueryData(query);
+            Log.i(ten, Integer.toString(luongNuoc(Integer.parseInt(weight.getText().toString()), Integer.parseInt(height.getHint().toString()))));
             weight.setText("");
         }
 
@@ -130,5 +140,15 @@ public class UserSetting extends AppCompatActivity {
         } else {
             female.setChecked(true);
         }
+    }
+
+    private int luongNuoc(int weight, float height){
+        float bmi = (float) weight / (((float)height/100) * ((float)height / 100));
+        int nuoc = weight * 35;
+        Log.i("aaaaa", Integer.toString(nuoc));
+
+        if (bmi < 18.5 || bmi > 25)
+            nuoc = nuoc * 115 / 100;
+        return nuoc;
     }
 }
