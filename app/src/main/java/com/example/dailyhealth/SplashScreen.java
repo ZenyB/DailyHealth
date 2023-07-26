@@ -195,6 +195,7 @@ public class SplashScreen extends AppCompatActivity {
             //User đã cài đặt thông tin ban đầu => Home
             // Start home activity
        //     Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
+            createNotificationChannel();
             startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
             startUpdatingTime();
             return;
@@ -475,4 +476,20 @@ public class SplashScreen extends AppCompatActivity {
         }
     }
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //String CHANNEL_ID = "MOON";
+            CharSequence name = "Thông báo kinh nguyệt";
+            String description = "Thông báo kinh nguyệt";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("444", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system. You can't change the importance
+            // or other notification behaviors after this.
+            NotificationManager notificationManager = getBaseContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 }
