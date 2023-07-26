@@ -2,19 +2,33 @@ package com.example.dailyhealth;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.dailyhealth.database.UserHelper;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.AlarmClock;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
@@ -26,8 +40,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 import java.util.Locale;
+import android.content.Context;
 
 public class SleepManagement extends AppCompatActivity {
+    public static final String STOP_RINGTONE = "com.example.dailyhealth.STOP_RINGTONE";
+    private static final String ALARM_CHANNEL_ID = "ALARM_CHANNEL";
+    private static final int ALARM_NOTIFICATION_ID = 1;
+    private static final int ALARM_REQUEST_CODE = 100;
+
+    private AlarmManager alarmManager;
+    private PendingIntent alarmPendingIntent;
+    private Ringtone ringtone; // Đã thêm biến ringtone ở đây
+    private Calendar startTime; // Khai báo biến startTime
+
+    private Uri selectedRingtoneUri;
+    private int alarmVolume = 100;
 
     private int dayColor ;
     private  int nightColor ;
@@ -74,6 +101,49 @@ public class SleepManagement extends AppCompatActivity {
         textActualSleep.setText("Thời gian ngủ ~ 7 giờ 30 phút");
         textAlarmTime.setText("Giờ báo thức: 8:00 AM");
 
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        SeekBar seekBarVolume = findViewById(R.id.seekBarVolume);
+        seekBarVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // Update the alarm volume based on the SeekBar progress
+                alarmVolume = progress;
+                // You can implement the logic to adjust the alarm volume here (if needed)
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // Not needed for this implementation
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // Not needed for this implementation
+            }
+        });
+
+        // Show/hide alarm settings when btnSetAlarm is clicked
+        btnSetAlarm.setOnClickListener(v -> {
+            LinearLayout layoutAlarmSettings = findViewById(R.id.layoutAlarmSettings);
+            if (layoutAlarmSettings.getVisibility() == View.GONE) {
+                layoutAlarmSettings.setVisibility(View.VISIBLE);
+            } else {
+                layoutAlarmSettings.setVisibility(View.GONE);
+            }
+        });
+
+        // Set onClickListener for "Chọn nhạc" button to pick ringtone
+        Button btnRingtone = findViewById(R.id.btnRingtone);
+        btnRingtone.setOnClickListener(v -> pickRingtone());
+
+
         // Initialize dayColor and nightColor here
         dayColor = getResources().getColor(R.color.lighter_main_green);
         nightColor = getResources().getColor(android.R.color.black);
@@ -102,9 +172,19 @@ public class SleepManagement extends AppCompatActivity {
             minutes[i] = String.format("%02d", i);
         }
 
+        // Get the current time
+        Calendar calendar = Calendar.getInstance();
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = calendar.get(Calendar.MINUTE);
+
+        // Set the current time to the NumberPicker
+        hourPicker.setValue(currentHour);
+        minutePicker.setValue(currentMinute);
+
+        updateAlarmTimeText();
         // Set clock
         // Set onClickListener for btnSetAlarm
-        btnSetAlarm.setOnClickListener(v -> setAlarm());
+        //btnSetAlarm.setOnClickListener(v -> setAlarm());
 
         btnReminder.setOnClickListener(v -> {
             // Change the value of checkboxReminder when btnReminder is clicked
@@ -162,6 +242,7 @@ public class SleepManagement extends AppCompatActivity {
                         // Nếu đang trong trạng thái isSleeping = false, chuyển về trạng thái "Ngủ"
                         if (!isSleeping) {
                             isSleeping = true;
+                            setAlarm();
                             hideNumberPickerAndShowClock();
                             animateToNightMode();
                             ((TextView) findViewById(R.id.btnSleep)).setText("Thức dậy");
@@ -176,6 +257,8 @@ public class SleepManagement extends AppCompatActivity {
                                     ((TextView) findViewById(R.id.btnSleep)).setText("Ngủ");
                                     if (pulseAnimation != null) {
                                     pulseAnimation.stop();
+                                    handler.removeCallbacksAndMessages(null);
+                                    stopAlarm();
                                 }
 
                             }
@@ -185,6 +268,18 @@ public class SleepManagement extends AppCompatActivity {
                 return true;
             }
         });
+
+        // Create notification channel for alarm
+        createAlarmNotificationChannel();
+
+        // Initialize AlarmManager and PendingIntent
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            alarmPendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            alarmPendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, 0);
+        }
     }
 
     private void updateClockTime() {
@@ -286,26 +381,127 @@ public class SleepManagement extends AppCompatActivity {
             }
         }
     }
-    private void setAlarm() {
-        // Lấy thời gian từ NumberPicker
+    private void startAlarm() {
         NumberPicker hourPicker = findViewById(R.id.hourPicker);
         NumberPicker minutePicker = findViewById(R.id.minutePicker);
+
         int hour = hourPicker.getValue();
         int minute = minutePicker.getValue();
 
-        // Tạo Intent để mở ứng dụng đồng hồ
-        Intent alarmClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
-        alarmClockIntent.putExtra(AlarmClock.EXTRA_HOUR, hour);
-        alarmClockIntent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+        // Calculate alarm time
+        Calendar alarmCalendar = Calendar.getInstance();
+        alarmCalendar.set(Calendar.HOUR_OF_DAY, hour);
+        alarmCalendar.set(Calendar.MINUTE, minute);
+        alarmCalendar.set(Calendar.SECOND, 0);
 
-        // Kiểm tra xem điện thoại có hỗ trợ ứng dụng đồng hồ không
-        if (alarmClockIntent.resolveActivity(getPackageManager()) != null) {
-            // Mở ứng dụng đồng hồ và đặt báo thức
-            startActivity(alarmClockIntent);
-        } else {
-            // Nếu không tìm thấy ứng dụng đồng hồ, thông báo cho người dùng
-            Toast.makeText(this, "Không tìm thấy ứng dụng đồng hồ trên thiết bị của bạn. Hãy tự đặt báo thức nhé!", Toast.LENGTH_SHORT).show();
+        if (alarmCalendar.before(Calendar.getInstance())) {
+            alarmCalendar.add(Calendar.DAY_OF_MONTH, 1); // If alarm time is in the past, set it for tomorrow
         }
+
+        // Set the alarm using AlarmManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), alarmPendingIntent);
+        } else {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), alarmPendingIntent);
+        }
+
+        // Display a toast to inform the user
+        Toast.makeText(this, "Báo thức đã được đặt!", Toast.LENGTH_SHORT).show();
+        // Tạo Intent cho BroadcastReceiver
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        // Gửi Uri của tiếng chuông qua Intent
+        alarmIntent.setAction(AlarmReceiver.START_RINGTONE); // Hành động báo thức
+        alarmIntent.putExtra(AlarmReceiver.RINGTONE_URI_EXTRA, selectedRingtoneUri);
+
+        alarmPendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
+        // Cài đặt thông báo
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), alarmPendingIntent);
+        } else {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), alarmPendingIntent);
+        }
+        // Lấy Uri của tiếng chuông đã chọn
+        //Uri selectedRingtone = selectedRingtoneUri; // Lấy Uri của tiếng chuông từ nguồn bạn lựa chọn
+
+        // Lấy giá trị âm lượng từ SeekBar
+        SeekBar seekBarVolume = findViewById(R.id.seekBarVolume);
+        int volume = seekBarVolume.getProgress();
+
+        // Tạo đối tượng AudioManager để điều chỉnh âm lượng
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+        int targetVolume = (int) ((volume / 100.0) * maxVolume);
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, targetVolume, 0);
+
+        // Tạo đối tượng MediaPlayer và chạy tiếng chuông
+//        if (selectedRingtoneUri != null) {
+//            ringtone = RingtoneManager.getRingtone(this, selectedRingtoneUri);
+//            ringtone.setStreamType(AudioManager.STREAM_ALARM);
+//            ringtone.play();
+//        }
+    }
+
+    private void stopAlarm() {
+        // Cancel the alarm using AlarmManager
+        alarmManager.cancel(alarmPendingIntent);
+        if (alarmManager != null && alarmPendingIntent != null) {
+            alarmManager.cancel(alarmPendingIntent);
+            // Dừng âm thanh chuông
+            AlarmReceiver alarmReceiver = new AlarmReceiver();
+            // Display a toast to inform the user
+            Toast.makeText(this, "Báo thức đã được hủy!", Toast.LENGTH_SHORT).show();
+        }
+        if (ringtone != null) {
+            ringtone.stop();
+        }
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        Intent stopRingtoneIntent = new Intent(AlarmReceiver.STOP_RINGTONE);
+        this.sendBroadcast(stopRingtoneIntent);
+    }
+    // Trong lớp SleepManagement
+
+    private void stopRingtone() {
+        if (ringtone != null && ringtone.isPlaying()) {
+            ringtone.stop();
+        }
+    }
+
+    // Create notification channel for alarm (if using Android 8.0 and above)
+    private void createAlarmNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager == null) return;
+
+            // Tên và mô tả kênh thông báo
+            String channelName = "DailyHealthAlarmChannel";
+            String channelDescription = "Daily Health Alarm Channel";
+
+            // Đặt cờ FLAG_IMMUTABLE cho PendingIntent
+            int flags = PendingIntent.FLAG_IMMUTABLE;
+
+            // Tạo kênh thông báo
+            NotificationChannel channel = new NotificationChannel(ALARM_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription(channelDescription);
+
+            // Đặt cờ cho kênh thông báo (ví dụ: đặt có rung cho thông báo)
+            channel.enableVibration(true);
+
+            // Đăng ký kênh thông báo với hệ thống
+            notificationManager.createNotificationChannel(channel);
+         }
+    }
+
+    // ... (các phương thức khác)
+
+    private void setAlarm() {
+        // Lấy thời gian từ NumberPicker
+//        NumberPicker hourPicker = findViewById(R.id.hourPicker);
+//        NumberPicker minutePicker = findViewById(R.id.minutePicker);
+//        int hour = hourPicker.getValue();
+//        int minute = minutePicker.getValue();
+
+        startAlarm();
     }
 
     // Ẩn NumberPicker và hiển thị TextView với giờ và phút đã chọn
@@ -315,6 +511,7 @@ public class SleepManagement extends AppCompatActivity {
         NumberPicker minutePicker = findViewById(R.id.minutePicker);
         TextView dot = findViewById(R.id.dotdot);
 
+        startTime = Calendar.getInstance();
 
         hourPicker.setVisibility(View.GONE);
         minutePicker.setVisibility(View.GONE);
@@ -356,10 +553,31 @@ public class SleepManagement extends AppCompatActivity {
         NumberPicker minutePicker = findViewById(R.id.minutePicker);
         TextView dot = findViewById(R.id.dotdot);
 
+        stopAlarm();
         hourPicker.setVisibility(View.VISIBLE);
         minutePicker.setVisibility(View.VISIBLE);
         dot.setVisibility(View.VISIBLE);
         textClock.setVisibility(View.GONE);
+
+        Calendar calendar = Calendar.getInstance();
+
+        // Tính thời gian
+        int timeInMillis = (int) (calendar.getTimeInMillis() - startTime.getTimeInMillis());
+        int hoursSlept = timeInMillis / (60 * 60 * 1000);
+        int minutesSlept = (timeInMillis % (60 * 60 * 1000)) / (60 * 1000);
+
+        UserHelper helper = new UserHelper(this);
+        String query_temp = "SELECT * FROM users";
+        Cursor cursor = helper.GetData(query_temp);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                String id = cursor.getString(0);
+                int currentGionguHangNgay = cursor.getInt(7);
+                int newGionguHangNgay = currentGionguHangNgay + minutesSlept;
+                String updateQuery = "UPDATE users SET GIONGUHOMNAY = " + newGionguHangNgay + " WHERE ID = '"+ id + "'"  ; // Thay "your_user_id" bằng ID của người dùng đang sử dụng ứng dụng
+                helper.QueryData(updateQuery);            }
+        }
     }
 
     // Thực hiện chuyển đổi màu nền của màn hình thành đêm trong 1 giây
@@ -377,6 +595,7 @@ public class SleepManagement extends AppCompatActivity {
 
     // Thực hiện chuyển đổi màu nền của màn hình về màu trắng trong 1 giây
     private void animateToDayMode() {
+        stopAlarm();
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), nightColor, dayColor);
         colorAnimation.setDuration(1000);
         colorAnimation.addUpdateListener(animator -> {
@@ -388,4 +607,28 @@ public class SleepManagement extends AppCompatActivity {
         });
         colorAnimation.start();
     }
+    // Phương thức pickRingtone để chọn nhạc chuông
+    public void pickRingtone() {
+        Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Chọn nhạc chuông");
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM);
+        startActivityForResult(intent, ALARM_NOTIFICATION_ID);
+    }
+
+    // Phương thức onActivityResult để xử lý kết quả khi người dùng chọn nhạc chuông
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ALARM_NOTIFICATION_ID && resultCode == RESULT_OK) {
+            Uri ringtoneUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+            if (ringtoneUri != null) {
+                // Save the selected ringtone URI
+                selectedRingtoneUri = ringtoneUri;
+                // You can use the ringtoneUri to play the selected ringtone (if needed)
+            }
+        }
+    }
+
 }

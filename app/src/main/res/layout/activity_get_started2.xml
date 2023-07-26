@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="false"
-            android:max="4"
+            android:max="2"
             android:progress="1" />
 
         <ImageView
@@ -78,6 +78,7 @@
                 android:hint="Nhập tên"
                 android:layout_marginTop="15dp"
                 android:paddingLeft="10dp"
+                android:inputType="textPersonName"
                 android:fontFamily="@font/lato_fonts"
                 android:textColor="#ffffff"
                 android:textSize="20sp"

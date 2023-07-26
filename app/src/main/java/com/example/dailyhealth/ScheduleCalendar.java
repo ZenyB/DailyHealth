@@ -31,9 +31,10 @@ import java.util.ArrayList;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener, ScheduleEventAdapter.OnItemClick{
 
-    private ArrayList<ScheduleEvent> scheduleEvents = new ArrayList<>();
-    protected  static ArrayList<ScheduleEvent> schedule = new ArrayList<>();
+    protected static ArrayList<ScheduleEvent> scheduleEvents = new ArrayList<>();
+    protected static ArrayList<ScheduleEvent> schedule = new ArrayList<>();
     private ScheduleHelper scheduleHelper = new ScheduleHelper(this);
+    private static ScheduleHelper scheduleHelper1;
     private TextView monthYearText;
     private TextView YearText;
     private RecyclerView calendarRecyclerView;
@@ -50,10 +51,29 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         }
     }
 
+    public void updateSchedule(){
+        scheduleEvents.clear();
+
+        String query = "SELECT * FROM schedule";
+        //cheduleHelper1 = new ScheduleHelper();
+        Cursor cursor = scheduleHelper1.GetData(query);
+
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                Log.i("aaaaaa", cursor.getString(0));
+                if (CalendarUtils.selectedDate.getDayOfMonth() == cursor.getInt(4) && cursor.getInt(5) == CalendarUtils.selectedDate.getMonthValue() && cursor.getInt(6) == CalendarUtils.selectedDate.getYear()){
+                    scheduleEvents.add(new ScheduleEvent(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7), cursor.getInt(8)));
+                }
+            }
+        }
+        r.setAdapter(new ScheduleEventAdapter(this, scheduleEvents, this));
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        scheduleHelper1 = new ScheduleHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_calendar);
         CalendarUtils.selectedDate = LocalDate.now();
@@ -84,6 +104,7 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         super.onStart();
         initWidgets();
         setWeekView();
+        updateSchedule();
     }
 
     private void initWidgets()
@@ -161,6 +182,7 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
     public void todayGoback(View view) {
         CalendarUtils.selectedDate = today;
         setWeekView();
+        updateSchedule();
     }
 
 

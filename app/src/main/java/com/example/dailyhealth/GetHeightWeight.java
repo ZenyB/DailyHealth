@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dailyhealth.database.UserHelper;
 
+import java.util.Calendar;
+
 public class GetHeightWeight extends AppCompatActivity {
 
     private UserHelper userHelper = new UserHelper(this);
@@ -24,6 +26,8 @@ public class GetHeightWeight extends AppCompatActivity {
         private String name, birth;
         private int gender, height, weight;
         private int waterTarget, sleepTarget, exerciseTarget;
+
+        private float bmi;
 
         public User(){
         }
@@ -34,6 +38,8 @@ public class GetHeightWeight extends AppCompatActivity {
             this.gender = gender;
             this.height = height;
             this.weight = weight;
+
+            this.bmi = (float) weight / (((float)height/100) * ((float)height / 100));
         }
 
         public String getName() {
@@ -70,6 +76,33 @@ public class GetHeightWeight extends AppCompatActivity {
     }
 
     protected static User user;
+
+    private int mucTieu(String birth, float bmi){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int age = year - Integer.parseInt(birth);
+
+        if (age > 5 && age < 18)
+            return 20;
+        if (age > 17 && age < 61){
+            if (bmi >= 18.5 && bmi <= 25)
+                return 30;
+            else
+                return 40;
+        }
+        if (age > 60)
+            return 20;
+        return 20;
+    }
+
+    private int luongNuoc(int weight, float bmi){
+        int nuoc = weight * 35;
+        Log.i("aaaaa", Integer.toString(nuoc));
+
+        if (bmi < 18.5 || bmi > 25)
+            nuoc = nuoc * 115 / 100;
+        return nuoc;
+    }
 
     protected static EditText heightUser, weightUser;
 
@@ -133,8 +166,8 @@ public class GetHeightWeight extends AppCompatActivity {
 
     private void addUser(){
         String query = "INSERT INTO users (ID, TEN, NAMSINH, GIOITINH, CHIEUCAO, CANNANG, LUONGNUOCHOMNAY, GIONGUHOMNAY, TAPLUYENHOMNAY, LUONGNUOCMUCTIEU, GIONGUMUCTIEU, TAPLUYENMUCTIEU)" +
-                " VALUES ('00001', '" + user.name + "', '" + user.birth + "', '" + user.gender + "', " + user.height + ", " + user.weight + ", 0, 0, 0, 0, 0, 0)";
+                " VALUES ('00001', '" + user.name + "', '" + user.birth + "', '" + user.gender + "', " + user.height + ", " + user.weight + ", 0, 0, 0, " + Integer.toString(luongNuoc(user.weight, user.bmi)) + ", 8, "+ Integer.toString(mucTieu(user.birth, user.bmi)) +")";
         userHelper.QueryData(query);
-        Log.i("aaa", "add success");
+        Log.i(Float.toString(user.bmi), Integer.toString(mucTieu(user.birth, user.bmi)));
     }
 }
