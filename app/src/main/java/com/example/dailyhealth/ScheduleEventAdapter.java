@@ -2,7 +2,10 @@ package com.example.dailyhealth;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +26,7 @@ public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdap
     Activity activity;
     ArrayList<ScheduleEvent> scheduleEvents;
     private ScheduleEventAdapter.OnItemClick onItemClick;
+    private Context context ;
 
 
     public ScheduleEventAdapter(Activity activity, ArrayList<ScheduleEvent> scheduleEvents, ScheduleEventAdapter.OnItemClick onItemClick) {
@@ -38,6 +42,7 @@ public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdap
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.schedule_event, parent, false);
+        context = parent.getRootView().getContext();
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +52,20 @@ public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdap
         return new ScheduleEventAdapter.ViewHolder(view, onItemClick);
     }
 
+    /*private void updateSchedule(){
+        String query = "SELECT * FROM schedule";
+        ScheduleHelper scheduleHelper = new ScheduleHelper(context);
+        Cursor cursor = scheduleHelper.GetData(query);
+
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                Log.i("aaaaaa", cursor.getString(0));
+                if (CalendarUtils.selectedDate.getDayOfMonth() == cursor.getInt(4) && cursor.getInt(5) == CalendarUtils.selectedDate.getMonthValue() && cursor.getInt(6) == CalendarUtils.selectedDate.getYear()){
+                    scheduleEvents.add(new ScheduleEvent(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7), cursor.getInt(8)));
+                }
+            }
+        }
+    }*/
 
     @SuppressLint("ResourceAsColor")
     @Override
