@@ -166,7 +166,7 @@ public class GetHeightWeight extends AppCompatActivity {
 
     private void addUser(){
         String query = "INSERT INTO users (ID, TEN, NAMSINH, GIOITINH, CHIEUCAO, CANNANG, LUONGNUOCHOMNAY, GIONGUHOMNAY, TAPLUYENHOMNAY, LUONGNUOCMUCTIEU, GIONGUMUCTIEU, TAPLUYENMUCTIEU)" +
-                " VALUES ('00001', '" + user.name + "', '" + user.birth + "', '" + user.gender + "', " + user.height + ", " + user.weight + ", 0, 0, 0, " + Integer.toString(luongNuoc(user.weight, user.bmi)) + ", 8, "+ Integer.toString(mucTieu(user.birth, user.bmi)) +")";
+                " VALUES ('00001', '" + user.name + "', '" + user.birth + "', '" + user.gender + "', " + user.height + ", " + user.weight + ", 0, 0, 0, " + Integer.toString(luongNuoc(user.weight, user.bmi)) + ", 480, "+ Integer.toString(mucTieu(user.birth, user.bmi)) +")";
         userHelper.QueryData(query);
         Log.i(Float.toString(user.bmi), Integer.toString(mucTieu(user.birth, user.bmi)));
     }
