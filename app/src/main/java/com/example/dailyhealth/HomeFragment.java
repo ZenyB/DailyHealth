@@ -38,11 +38,13 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
 
     public static ArrayList<MainExercise> arrayList = new ArrayList<>();
     public static ArrayList<MainExercise> suggestArrayList = new ArrayList<>();
-    private ArrayList<Schedule> schedules = new ArrayList<>();
+    public static ArrayList<ScheduleEvent> schedules = new ArrayList<>();
     private static TextView nameTV;
     private static UserHelper userHelper;
+//    private static ScheduleHeper scheduleHeper;
     private static ProgressBar sleepPB, drinkPB, exercisePB, allPB;
     private static TextView sleepPercentTV, drinkPercentTV, exercisePercentTV, allGoalPercentTV;
+    private int chieucao, cannang;
 
     TextView drinkTV;
 
@@ -74,30 +76,13 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
         userHelper = new UserHelper(getActivity().getApplicationContext());
 
         arrayList = JSONFileHandler.readMainExercisesFromJSON(getActivity());
-        String query = "SELECT CHIEUCAO, CANNANG FROM USERS";
-        Cursor cursor = userHelper.GetData(query);
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                Integer chieucao = cursor.getInt(0);
-                Integer cannang = cursor.getInt(1);
-                getSuggestExerciseBaseOnBMI(chieucao, cannang);
-            }
-        }
-
-        setProgressBarDaily();
-        resetName();
 
         final RecyclerView r = (RecyclerView) view.findViewById(R.id.exMainRV);
         r.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-//        Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
         r.setAdapter(new HorizontalExerciseAdapter(getActivity(), suggestArrayList, this));
-
-        schedules.add(new Schedule("Đi du lịch - ngày 12/4/2023"));
-        schedules.add(new Schedule("Đi đến phòng tập - ngày 15/7/2023"));
 
         final RecyclerView r1 = (RecyclerView) view.findViewById(R.id.scheduleMainRV);
         r1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-//        Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
         r1.setAdapter(new MainScheduleAdapter(getActivity(), schedules, this));
 
         drinkTV = view.findViewById(R.id.amountWaterTV);
@@ -143,7 +128,24 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
         return view;
     }
 
-    public static void getSuggestExerciseBaseOnBMI(int chieucao, int cannang) {
+    @Override
+    public void onStart() {
+        super.onStart();
+        getSuggestExerciseBaseOnBMI();
+        setProgressBarDaily();
+        resetName();
+        setSchedules();
+    }
+
+    private void getSuggestExerciseBaseOnBMI() {
+        String query = "SELECT CHIEUCAO, CANNANG FROM USERS";
+        Cursor cursor = userHelper.GetData(query);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                chieucao = cursor.getInt(0);
+                cannang = cursor.getInt(1);
+            }
+        }
         if (chieucao == 0)
             chieucao = 1;
 //        Log.i("BMICC", Integer.toString(chieucao));
@@ -164,7 +166,7 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
         }
     }
     
-    public static void setProgressBarDaily() {
+    private void setProgressBarDaily() {
         String query = "SELECT LUONGNUOCHOMNAY, GIONGUHOMNAY, TAPLUYENHOMNAY, LUONGNUOCMUCTIEU, GIONGUMUCTIEU, TAPLUYENMUCTIEU FROM USERS";
         Cursor cursor = userHelper.GetData(query);
         if (cursor.getCount() > 0) {
@@ -193,12 +195,34 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
         }
     }
 
-    public static void resetName() {
+    private void resetName() {
         String query = "SELECT TEN FROM USERS";
         Cursor cursor = userHelper.GetData(query);
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 nameTV.setText("Xin chào, " + cursor.getString(0));
+            }
+        }
+    }
+
+    private void setSchedules() {
+        schedules.clear();
+        String query = "SELECT * FROM SCHEDULE ORDER BY NAM ASC, THANG ASC, NGAY ASC, TIENG ASC, TONGPHUT ASC";
+        Cursor cursor = userHelper.GetData(query);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                String id = cursor.getString(0);
+                String tieude = cursor.getString(1);
+                String ghichu = cursor.getString(2);
+                String diadiem = cursor.getString(3);
+                Integer ngay = cursor.getInt(4);
+                Integer thang = cursor.getInt(5);
+                Integer nam = cursor.getInt(6);
+                Integer tieng = cursor.getInt(7);
+                Integer tongphut = cursor.getInt(8);
+                String time;
+
+                schedules.add(new ScheduleEvent(id, tieude, ghichu, diadiem, ngay, thang, nam, tieng, tongphut));
             }
         }
     }

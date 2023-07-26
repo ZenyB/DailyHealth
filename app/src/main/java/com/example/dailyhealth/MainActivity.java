@@ -26,29 +26,29 @@ public class MainActivity extends AppCompatActivity implements HorizontalExercis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        arrayList = JSONFileHandler.readMainExercisesFromJSON(this);
-
-        final RecyclerView r = (RecyclerView) findViewById(R.id.exMainRV);
-        r.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//        Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
-        r.setAdapter(new HorizontalExerciseAdapter(this, arrayList, this));
-
-        schedules.add(new Schedule("Đi du lịch - ngày 12/4/2023"));
-        schedules.add(new Schedule("Đi đến phòng tập - ngày 15/7/2023"));
-
-        final RecyclerView r1 = (RecyclerView) findViewById(R.id.scheduleMainRV);
-        r1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//        Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
-        r1.setAdapter(new MainScheduleAdapter(this, schedules, this));
-
-        drinkTV = findViewById(R.id.amountWaterTV);
-        drinkTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Navigate qua màn hình uống nước
-                Toast.makeText(getApplicationContext(), "Navigate to Uống nước", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        arrayList = JSONFileHandler.readMainExercisesFromJSON(this);
+//
+//        final RecyclerView r = (RecyclerView) findViewById(R.id.exMainRV);
+//        r.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+////        Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
+//        r.setAdapter(new HorizontalExerciseAdapter(this, arrayList, this));
+//
+//        schedules.add(new Schedule("Đi du lịch - ngày 12/4/2023"));
+//        schedules.add(new Schedule("Đi đến phòng tập - ngày 15/7/2023"));
+//
+//        final RecyclerView r1 = (RecyclerView) findViewById(R.id.scheduleMainRV);
+//        r1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+////        Toast.makeText(getApplicationContext(), arrayList.size(), Toast.LENGTH_SHORT).show();
+//        r1.setAdapter(new MainScheduleAdapter(this, schedules, this));
+//
+//        drinkTV = findViewById(R.id.amountWaterTV);
+//        drinkTV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Navigate qua màn hình uống nước
+//                Toast.makeText(getApplicationContext(), "Navigate to Uống nước", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 

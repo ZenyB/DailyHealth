@@ -7,7 +7,7 @@ public class ScheduleEvent {
     private String detail;
     private String location;
 
-    public ScheduleEvent(String id,String title, String detail, String location, int day, int month, int year, int hours, int totalMinutes)
+    public ScheduleEvent(String id, String title, String detail, String location, int day, int month, int year, int hours, int totalMinutes)
     {
         this.id = id;
         this.title = title;

@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 public class MainScheduleAdapter extends RecyclerView.Adapter<MainScheduleAdapter.ViewHolder> {
     Activity activity;
-    ArrayList<Schedule> schedules;
+    ArrayList<ScheduleEvent> schedules;
     private MainScheduleAdapter.OnItemClick onItemClick;
 
-    public MainScheduleAdapter(Activity activity, ArrayList<Schedule> schedules, MainScheduleAdapter.OnItemClick onItemClick) {
+    public MainScheduleAdapter(Activity activity, ArrayList<ScheduleEvent> schedules, MainScheduleAdapter.OnItemClick onItemClick) {
         this.activity = activity;
         this.schedules = schedules;
         this.onItemClick = onItemClick;
@@ -34,10 +34,10 @@ public class MainScheduleAdapter extends RecyclerView.Adapter<MainScheduleAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MainScheduleAdapter.ViewHolder holder, int position) {
-        Schedule schedule = schedules.get(position);
+        ScheduleEvent schedule = schedules.get(position);
         if (position % 2 != 0)
             holder.constraintLayout.setBackgroundResource(R.drawable.purple_right);
-        holder.titleTV.setText(schedule.getTitle());
+        holder.titleTV.setText(schedule.getTitle() + " - ngày " + schedule.getDay() + "/" + schedule.getMonth() + "/" + schedule.getYear());
 
     }
 
