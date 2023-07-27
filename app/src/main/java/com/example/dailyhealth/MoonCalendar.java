@@ -265,7 +265,7 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void onEndBtn(View view) {
-        ArrayList<LocalDate> daysInMonth = daysInMonthArray(startDate);
+        ArrayList<LocalDate> daysInMonth = daysInMonthArray(LocalDate.now());
         CalendarUtils.daysMooningArray().clear();
         CalendarUtils.daysInMoonArray().clear();
         calendarAdapter.notifyItemRangeChanged(daysInMonth.indexOf(startDate.plusDays(cycleDays)), moonDays);
@@ -303,7 +303,11 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         calendarAdapter.notifyItemChanged(daysInMonth.indexOf(startDate));
         setMonthView();
         LocalDate noticeDay = (startDate.plusDays(cycleDays)).minusDays(nhactruoc);
-        scheduleNotification(noticeDay.getDayOfMonth(), noticeDay.getMonthValue(), noticeDay.getYear());
+        if (noticeDay.isBefore(LocalDate.now())) {
+
+        } else {
+            scheduleNotification(noticeDay.getDayOfMonth(), noticeDay.getMonthValue(), noticeDay.getYear());
+        }
         endBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
     }

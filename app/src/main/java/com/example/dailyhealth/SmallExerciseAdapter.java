@@ -85,6 +85,9 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SmallExercise smallExercise = smallExercises.get(position);
+        if (DetailExerciseActivity.mainExercise.getName().equals("Bài tập bụng để test")) {
+            totalRelaxSeconds = 3;
+        }
         Log.i("binding", Integer.toString(position));
         switch (holder.getItemViewType()) {
             case 0:
@@ -124,6 +127,8 @@ public class SmallExerciseAdapter extends RecyclerView.Adapter<RecyclerView.View
                                     time = time + DetailExerciseActivity.mainExercise.getDuration();
                                     query = "UPDATE USERS SET TAPLUYENHOMNAY = " + Integer.toString(time);
                                     userHelper.QueryData(query);
+                                    CustomToast.makeText(context, "Hoàn tất bài tập", Toast.LENGTH_SHORT, 1).show();
+                                    DetailExerciseActivity.isDone = true;
                                 }
                             } else {
                                 Log.i("NO USER", "Fail");

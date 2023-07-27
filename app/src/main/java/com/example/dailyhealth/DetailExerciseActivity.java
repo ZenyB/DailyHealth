@@ -26,6 +26,7 @@ public class DetailExerciseActivity extends AppCompatActivity {
     TextView mainNameTV, mainTimeTV;
 
     private int positionNow = 0;
+    public static boolean isDone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,10 @@ public class DetailExerciseActivity extends AppCompatActivity {
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showExitConfirmationDialog();
+                if (!isDone)
+                    showExitConfirmationDialog();
+                else
+                    finish();
             }
         });
     }
