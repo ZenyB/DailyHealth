@@ -1,11 +1,17 @@
 package com.example.dailyhealth;
 
+import static com.example.dailyhealth.CalendarUtils.cycleDays;
+import static com.example.dailyhealth.CalendarUtils.startDate;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.dailyhealth.database.MoonHelper;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class MoonSettingScreen4 extends AppCompatActivity {
@@ -62,6 +69,7 @@ public class MoonSettingScreen4 extends AppCompatActivity {
     public void goBackBtn(View view) {
         finish();
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void confirmBtn(View view)
     {
         String query = "CREATE TABLE MOON " +
@@ -86,7 +94,20 @@ public class MoonSettingScreen4 extends AppCompatActivity {
         CalendarUtils.mooning = 0;
         query = "UPDATE MOON SET (THOIGIANNHACTRUOC) = " + notice + " WHERE ID = '1'";
         moonHelper.QueryData(query);
+        int nhactruoc = 0;
+        query = "SELECT THOIGIANNHACTRUOC FROM MOON WHERE ID = '1'";
+        Cursor cursor = moonHelper.GetData(query);
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                nhactruoc = cursor.getInt(0);
+            }
+        }
+        LocalDate noticeDay = (startDate.plusDays(cycleDays)).minusDays(nhactruoc);
+        if (noticeDay.isBefore(LocalDate.now())) {
 
+        } else {
+            scheduleNotification(noticeDay.getDayOfMonth(), noticeDay.getMonthValue(), noticeDay.getYear());
+        }
         Intent i = new Intent(getBaseContext(), MoonCalendar.class);
         startActivity(i);
     }

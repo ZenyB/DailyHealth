@@ -40,6 +40,7 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
     public static ArrayList<MainExercise> suggestArrayList = new ArrayList<>();
     public static ArrayList<ScheduleEvent> schedules = new ArrayList<>();
     private static TextView nameTV;
+    private TextView scheduleTV;
     private static UserHelper userHelper;
 //    private static ScheduleHeper scheduleHeper;
     private static ProgressBar sleepPB, drinkPB, exercisePB, allPB;
@@ -77,10 +78,15 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
 
         arrayList = JSONFileHandler.readMainExercisesFromJSON(getActivity());
 
+        scheduleTV = view.findViewById(R.id.scheduleTV);
+
         final RecyclerView r = (RecyclerView) view.findViewById(R.id.exMainRV);
         r.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         r.setAdapter(new HorizontalExerciseAdapter(getActivity(), suggestArrayList, this));
 
+        if (schedules.size() < 1) {
+            scheduleTV.setText("Lịch trình (chưa có lịch trình nào được cài đặt)");
+        }
         final RecyclerView r1 = (RecyclerView) view.findViewById(R.id.scheduleMainRV);
         r1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         r1.setAdapter(new MainScheduleAdapter(getActivity(), schedules, this));
