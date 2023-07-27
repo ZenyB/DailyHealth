@@ -2,6 +2,7 @@ package com.example.dailyhealth;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.dailyhealth.database.SleepHelper;
 import com.example.dailyhealth.database.UserHelper;
 
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -28,6 +30,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
@@ -47,11 +50,12 @@ public class SleepManagement extends AppCompatActivity {
     private static final String ALARM_CHANNEL_ID = "ALARM_CHANNEL";
     private static final int ALARM_NOTIFICATION_ID = 1;
     private static final int ALARM_REQUEST_CODE = 100;
+    public static final String KEY_LAST_START_SLEEP = "TimeStartToSleep";
 
     private AlarmManager alarmManager;
     private PendingIntent alarmPendingIntent;
     private Ringtone ringtone; // Đã thêm biến ringtone ở đây
-    private Calendar startTime; // Khai báo biến startTime
+    private long startTime; // Khai báo biến startTime
 
     private Uri selectedRingtoneUri;
     private int alarmVolume = 100;
@@ -67,7 +71,8 @@ public class SleepManagement extends AppCompatActivity {
     private TextView textClock;
     private Toolbar toolbar;
     private LinearLayout setting;
-    private boolean isSleeping = false;
+    private boolean isSleeping;
+    private boolean canNotification;
     private boolean isButtonHeld = false;
     private ConstraintLayout mainLayout;
     private SeekBar progressBar;
@@ -241,11 +246,14 @@ public class SleepManagement extends AppCompatActivity {
                         stopButtonHeldAnimation();
                         // Nếu đang trong trạng thái isSleeping = false, chuyển về trạng thái "Ngủ"
                         if (!isSleeping) {
+                            setStartTime();
                             isSleeping = true;
                             setAlarm();
                             hideNumberPickerAndShowClock();
                             animateToNightMode();
                             ((TextView) findViewById(R.id.btnSleep)).setText("Thức dậy");
+
+
                         } else { // Nếu đang trong trạng thái isSleeping = true, chuyển về trạng thái "Thức dậy"
                             // Check if the button was held for at least 3 seconds
                             long pressDuration = System.currentTimeMillis() - pressStartTime;
@@ -280,8 +288,65 @@ public class SleepManagement extends AppCompatActivity {
         } else {
             alarmPendingIntent = PendingIntent.getBroadcast(getBaseContext(), ALARM_REQUEST_CODE, alarmIntent, 0);
         }
+        SleepHelper sleepHelper = new SleepHelper(this);
+        String query = "SELECT * FROM giacngu";
+        Cursor cursor = sleepHelper.GetData(query);
+        if (cursor.getCount()>0){
+            while (cursor.moveToNext()){
+                int dangngu = cursor.getInt(0);
+                int giodingu = cursor.getInt(1);
+                int phutngu = cursor.getInt(2);
+                int nhacnhodingu = cursor.getInt(3);
+                if (dangngu == 1)
+                    isSleeping = true;
+                else
+                    isSleeping = false;
+                if (nhacnhodingu == 1)
+                    checkboxReminder.setChecked(true);
+                else
+                    checkboxReminder.setChecked(false);
+            }
+        }
+        if (isSleeping) {
+            hideNumberPickerAndShowClock();
+            animateToNightMode();
+            ((TextView) findViewById(R.id.btnSleep)).setText("Thức dậy");
+        } else {
+                showNumberPickerAndHideClock();
+                animateToDayMode();
+                ((TextView) findViewById(R.id.btnSleep)).setText("Ngủ");
+                if (pulseAnimation != null) {
+                    pulseAnimation.stop();
+                    handler.removeCallbacksAndMessages(null);
+                    stopAlarm();
+                }
+        }
+        checkboxReminder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Xử lý sự kiện khi trạng thái của checkbox thay đổi
+                if (isChecked) {
+                    // Checkbox được chọn
+                } else {
+                    // Checkbox không được chọn
+                }
+            }
+        });
     }
 
+    private void setStartTime(){
+        SleepHelper sleepHelper = new SleepHelper(this);
+        String query = "UPDATE giacngu SET DANGNGU = 1 WHERE ID = 1";
+        sleepHelper.QueryData(query);
+        // Cập nhật lại mốc thời gian ngày mới bắt đầu sau khi hiển thị thông báo
+        SharedPreferences sharedPref = getSharedPreferences(SplashScreen.PREFS_NAME, Context.MODE_PRIVATE);
+        long currentTime = System.currentTimeMillis();
+        Log.i(""," " + currentTime);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putLong(KEY_LAST_START_SLEEP, currentTime);
+        editor.apply();
+    }
     private void updateClockTime() {
         textClock.setText(getCurrentTime());
     }
@@ -514,7 +579,7 @@ public class SleepManagement extends AppCompatActivity {
         NumberPicker minutePicker = findViewById(R.id.minutePicker);
         TextView dot = findViewById(R.id.dotdot);
 
-        startTime = Calendar.getInstance();
+        //startTime = Calendar.getInstance();
 
         hourPicker.setVisibility(View.GONE);
         minutePicker.setVisibility(View.GONE);
@@ -560,12 +625,17 @@ public class SleepManagement extends AppCompatActivity {
         hourPicker.setVisibility(View.VISIBLE);
         minutePicker.setVisibility(View.VISIBLE);
         dot.setVisibility(View.VISIBLE);
-        textClock.setVisibility(View.GONE);
+        if (textClock != null)
+            textClock.setVisibility(View.GONE);
 
         Calendar calendar = Calendar.getInstance();
 
+        SharedPreferences sharedPref = getSharedPreferences(SplashScreen.PREFS_NAME, Context.MODE_PRIVATE);
+        startTime = sharedPref.getLong(KEY_LAST_START_SLEEP, 0);
+
+
         // Tính thời gian
-        int timeInMillis = (int) (calendar.getTimeInMillis() - startTime.getTimeInMillis());
+        int timeInMillis = (int) (calendar.getTimeInMillis() - startTime);
         int hoursSlept = timeInMillis / (60 * 60 * 1000);
         int minutesSlept = (timeInMillis % (60 * 60 * 1000)) / (60 * 1000);
 
@@ -581,6 +651,9 @@ public class SleepManagement extends AppCompatActivity {
                 String updateQuery = "UPDATE users SET GIONGUHOMNAY = " + newGionguHangNgay + " WHERE ID = '"+ id + "'"  ; // Thay "your_user_id" bằng ID của người dùng đang sử dụng ứng dụng
                 helper.QueryData(updateQuery);            }
         }
+        SleepHelper sleepHelper = new SleepHelper(this);
+        String query = "UPDATE giacngu SET DANGNGU = 0 WHERE ID = 1";
+        sleepHelper.QueryData(query);
     }
 
     // Thực hiện chuyển đổi màu nền của màn hình thành đêm trong 1 giây

@@ -22,6 +22,8 @@
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen2.xml" value="0.20516304347826086" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen3.xml" value="0.20516304347826086" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_moon_setting_screen4.xml" value="0.20516304347826086" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_schedule_calendar.xml" value="0.1743659420289855" />
+        <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_setting_user.xml" value="0.24728260869565216" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_sleep_management.xml" value="0.25" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/activity_water_daily.xml" value="0.20516304347826086" />
         <entry key="..\:/300baicodethieunhi/NMUDDD/DoAn/DailyHealth/app/src/main/res/layout/calendar_cell.xml" value="0.20516304347826086" />
@@ -58,7 +60,6 @@
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/fragment_setting.xml" value="0.11822916666666666" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/horizontal_exercise_item.xml" value="0.264" />
-        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/main_schedule_item.xml" value="0.25416666666666665" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/setting_item.xml" value="0.11822916666666666" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/small_exercise_item.xml" value="0.25416666666666665" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/layout/small_exercise_item_activated.xml" value="0.264" />

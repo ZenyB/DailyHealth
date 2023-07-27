@@ -19,11 +19,10 @@ public class TestReceiver extends BroadcastReceiver {
         // Xử lý hiển thị thông báo tại đây
         // Ví dụ: Sử dụng NotificationManagerCompat để hiển thị thông báo
         // hoặc sử dụng các cách hiển thị thông báo khác
-        Log.i("message", "Received");
-        Toast.makeText(context, "Đến 12:00 AM - Hiển thị thông báo!", Toast.LENGTH_SHORT).show();
-
-
+        String id = intent.getStringExtra("id");
+        intent.getBooleanExtra("is_update", false);
         Intent intent1 = new Intent(context, NavigationActivity.class);
+        intent1.putExtra("navigate_to_moon", true);
         intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "444")
@@ -37,7 +36,7 @@ public class TestReceiver extends BroadcastReceiver {
 
         // notificationId is a unique int for each notification that you must define
         int notificationId = 4444;
-        notificationManager.notify(notificationId, builder.build());
+        notificationManager.notify(Integer.parseInt(id), builder.build());
     }
 
 //    private void createNotificationChannel() {

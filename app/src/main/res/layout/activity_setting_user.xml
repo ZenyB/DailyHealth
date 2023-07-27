@@ -109,6 +109,7 @@
                         android:fontFamily="@font/lato_bold_2"
                         android:lineHeight="@dimen/title_line_height"
                         android:hint="Username"
+                        android:inputType="textPersonName"
                         android:textColor="@color/black"
                         android:textSize="@dimen/title_font_size" />
                     <ImageButton

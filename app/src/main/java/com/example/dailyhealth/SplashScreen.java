@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.dailyhealth.database.MoonHelper;
 import com.example.dailyhealth.database.ScheduleHelper;
+import com.example.dailyhealth.database.SleepHelper;
 import com.example.dailyhealth.database.UserHelper;
 import com.example.dailyhealth.database.WeekInfoHelper;
 
@@ -86,6 +87,22 @@ public class SplashScreen extends AppCompatActivity {
 
             WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
             weekInfoHelper.QueryData(query);
+
+            // Tạo bảng sleep
+            query = "CREATE TABLE IF NOT EXISTS giacngu (" +
+                    "    DANGNGU INTEGER ," +
+                    "    GIODINGU INTEGER," +
+                    "    PHUTDINGU INTEGER," +
+                    "    NHACNGU INTEGER," +
+                    "    ID INTEGER PRIMARY KEY"+
+                    ")";
+            SleepHelper sleepHelper = new SleepHelper(this);
+            sleepHelper.QueryData(query);
+
+
+            query = "INSERT INTO giacngu (DANGNGU,GIODINGU,PHUTDINGU,NHACNGU, ID)" +
+            " VALUES (0,22,0,0,1)";
+            sleepHelper.QueryData(query);
 
             String[] days = {"THU HAI", "THU BA", "THU TU", "THU NAM", "THU SAU", "THU BAY", "CHU NHAT"};
             for (int i = 0; i < days.length; i++) {

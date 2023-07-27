@@ -2,9 +2,11 @@ package com.example.dailyhealth;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -19,6 +21,7 @@ public class NavigationActivity extends AppCompatActivity {
 
     protected static int id = 1;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,9 @@ public class NavigationActivity extends AppCompatActivity {
 
         if (getIntent().getBooleanExtra("navigate_to_moon", false)) {
             Intent intent = new Intent(this, MoonCalendar.class);
+        }
+        if (getIntent().getBooleanExtra("navigate_to_schedule", false)) {
+            Intent intent = new Intent(this, ScheduleCalendar.class);
         }
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
