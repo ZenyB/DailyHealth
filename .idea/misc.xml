@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -43,6 +44,7 @@
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/circle_custom_progress.xml" value="0.115" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_back_layout.xml" value="0.128" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_black_back_layout.xml" value="0.129" />
+        <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_calendar_foreground.xml" value="0.142" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_done_disable.xml" value="0.129" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_done_foreground.xml" value="0.129" />
         <entry key="..\:/UIT/HKII-2022/NMUDDD2/Daily Health/app/src/main/res/drawable/ic_launcher_background.xml" value="0.129" />

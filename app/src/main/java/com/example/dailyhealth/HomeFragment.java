@@ -184,6 +184,24 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
                 Integer nguMT = cursor.getInt(4);
                 Integer tapluyenMT = cursor.getInt(5);
 
+                int nguPercent = Math.round((float)ngu / nguMT * 100);
+                if (nguPercent > 100) {
+                    nguPercent = 100;
+                }
+                sleepPercentTV.setText(nguPercent + "%");
+
+                int drinkPercent = Math.round((float)nuoc / nuocMT * 100);
+                if (drinkPercent > 100) {
+                    drinkPercent = 100;
+                }
+                drinkPercentTV.setText(drinkPercent + "%");
+
+                int exercisePercent = Math.round((float)tapluyen / tapluyenMT * 100);
+                if (exercisePercent > 100) {
+                    exercisePercent = 100;
+                }
+                exercisePercentTV.setText(exercisePercent + "%");
+
                 sleepPB.setMax(nguMT);
                 sleepPB.setProgress(ngu);
                 drinkPB.setMax(nuocMT);
@@ -191,12 +209,12 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
                 exercisePB.setMax(tapluyenMT);
                 exercisePB.setProgress(tapluyen);
                 allPB.setMax(100);
-                allPB.setProgress(Math.round((float)ngu / nguMT * 100 + (float)nuoc / nuocMT * 100 + (float)tapluyen / tapluyenMT * 100) / 3);
+                allPB.setProgress(Math.round((float)(nguPercent + drinkPercent + exercisePercent) / 3));
 
-                sleepPercentTV.setText(Integer.toString(Math.round((float)ngu / nguMT * 100)) + "%");
-                drinkPercentTV.setText(Integer.toString(Math.round((float)nuoc / nuocMT * 100)) + "%");
-                exercisePercentTV.setText(Integer.toString(Math.round((float)tapluyen / tapluyenMT * 100)) + "%");
-                allGoalPercentTV.setText(Integer.toString(Math.round((float)ngu / nguMT * 100 + (float)nuoc / nuocMT * 100 + (float)tapluyen / tapluyenMT * 100) / 3) + "%");
+                if (Math.round((float)(nguPercent + drinkPercent + exercisePercent) / 3) > 100)
+                    allGoalPercentTV.setText("100%");
+                else
+                    allGoalPercentTV.setText(Integer.toString(Math.round((float)(nguPercent + drinkPercent + exercisePercent) / 3)) + "%");
             }
         }
     }
