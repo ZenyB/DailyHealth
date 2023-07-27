@@ -150,7 +150,7 @@ public class ScheduleCalendar extends AppCompatActivity implements CalendarAdapt
         setWeekView();
         scheduleEvents.clear();
 
-        String query = "SELECT * FROM schedule";
+        String query = "SELECT * FROM schedule ORDER BY TIENG, TONGPHUT";
         Cursor cursor = scheduleHelper.GetData(query);
 
         if (cursor.getCount() > 0){

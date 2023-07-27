@@ -127,6 +127,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -147,10 +152,10 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 
 
-public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener
-{
+public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener {
     private TextView monthYearText, cycleText, moonCycleText;
     private RecyclerView calendarRecyclerView;
     private Button startBtn;
@@ -163,8 +168,7 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moon_calendar);
         startBtn = findViewById(R.id.moonStartButton);
@@ -176,23 +180,19 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         String query = "SELECT HANHKINH, TRUNGBINHKINHNGUYET, TRUNGBINHCHUKY FROM MOON WHERE ID = '1'";
         Cursor cursor = moonHelper.GetData(query);
 
-        if(cursor.getCount() > 0)
-        {
-            while (cursor.moveToNext()){
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
                 mooning = cursor.getInt(0);
                 cc = cursor.getInt(2);
                 mc = cursor.getInt(1);
             }
         }
         cycleText.setText(cc + " ngày");
-        moonCycleText.setText(mc +" ngày");
-        if(mooning == 0)
-        {
+        moonCycleText.setText(mc + " ngày");
+        if (mooning == 0) {
             endBtn.setVisibility(View.GONE);
             startBtn.setVisibility(View.VISIBLE);
-        }
-        else
-        {
+        } else {
             startBtn.setVisibility(View.GONE);
             endBtn.setVisibility(View.VISIBLE);
         }
@@ -206,15 +206,13 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         setMonthView();
     }
 
-    private void initWidgets()
-    {
+    private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.moonCalendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void setMonthView()
-    {
+    private void setMonthView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
 
@@ -225,33 +223,28 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void previousMonthAction(View view)
-    {
+    public void previousMonthAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
         setMonthView();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void nextMonthAction(View view)
-    {
+    public void nextMonthAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
         setMonthView();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onItemClick(int position, LocalDate date)
-    {
-        if(date != null)
-        {
+    public void onItemClick(int position, LocalDate date) {
+        if (date != null) {
             CalendarUtils.selectedDate = date;
             setMonthView();
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void onStartBtn(View view)
-    {
+    public void onStartBtn(View view) {
         LocalDate today = LocalDate.now();
         CalendarUtils.startButtonDate = today;
         moonHelper = new MoonHelper(this);
@@ -271,15 +264,14 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void onEndBtn(View view)
-    {
+    public void onEndBtn(View view) {
         ArrayList<LocalDate> daysInMonth = daysInMonthArray(startDate);
         CalendarUtils.daysMooningArray().clear();
         CalendarUtils.daysInMoonArray().clear();
         calendarAdapter.notifyItemRangeChanged(daysInMonth.indexOf(startDate.plusDays(cycleDays)), moonDays);
         int temp = (int) DAYS.between(startDate, CalendarUtils.startButtonDate);
         cycleDays = (cycleDays + temp + 1) / 2;
-        int tempo = (int)DAYS.between(startButtonDate, LocalDate.now());
+        int tempo = (int) DAYS.between(startButtonDate, LocalDate.now());
         Log.i("tempo", Integer.toString(tempo));
         moonDays = (moonDays + tempo + 1) / 2;
         startDate = startButtonDate;
@@ -295,30 +287,38 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         moonHelper.QueryData(query);
         query = "UPDATE MOON SET (TRUNGBINHCHUKY) = " + cycleDays + " WHERE ID = '1'";
         moonHelper.QueryData(query);
+        int nhactruoc = 0;
+        query = "SELECT THOIGIANNHACTRUOC FROM MOON WHERE ID = '1'";
+        Cursor cursor = moonHelper.GetData(query);
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                nhactruoc = cursor.getInt(0);
+            }
+        }
         mc = moonDays;
         cc = cycleDays;
         cycleText.setText(cc + " ngày");
-        moonCycleText.setText(mc +" ngày");
+        moonCycleText.setText(mc + " ngày");
         CalendarUtils.mooning = 0;
         calendarAdapter.notifyItemChanged(daysInMonth.indexOf(startDate));
         setMonthView();
-        Toast.makeText(getBaseContext(), "Ket thuc", Toast.LENGTH_SHORT).show();
-        MoonReceiver.scheduleNotification(getBaseContext(), "03/08/2023", 2);
+        LocalDate noticeDay = (startDate.plusDays(cycleDays)).minusDays(nhactruoc);
+        Log.i("nhac truoc", Integer.toString(nhactruoc));
+        scheduleNotification(noticeDay.getDayOfMonth(), noticeDay.getMonthValue(), noticeDay.getYear());
         endBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
     }
 
-    public void goBackBtn(View view)
-    {
+    public void goBackBtn(View view) {
         Intent intent = new Intent(getBaseContext(), NavigationActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public void restartSetting(View view)
-    {
+    public void restartSetting(View view) {
         showExitConfirmationDialog();
     }
+
     private void showExitConfirmationDialog() {
         // Xây dựng hộp thoại thông báo
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -350,5 +350,31 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         // Hiển thị hộp thoại
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private void scheduleNotification(int ngay, int thang, int nam) {
+        // Tạo Calendar để lên lịch vào 12:00 AM hàng ngày
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.YEAR, nam);
+        calendar.set(Calendar.MONTH, thang - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, ngay);
+        calendar.set(Calendar.HOUR_OF_DAY, 6);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+//        // Nếu thời gian đã qua 12:00 AM hôm nay, lên lịch vào ngày mai
+        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+//         Intent để gửi tới BroadcastReceiver
+        Intent intent = new Intent(getBaseContext(), TestReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+//         Lấy AlarmManager
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 }

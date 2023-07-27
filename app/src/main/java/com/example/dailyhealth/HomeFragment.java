@@ -241,13 +241,14 @@ public class HomeFragment extends Fragment implements HorizontalExerciseAdapter.
 
     @Override
     public void onScheduleClick(int position) {
-        MainExercise i = arrayList.get(position);
+        ScheduleEvent i = schedules.get(position);
         //Navigate qua màn hình schedule
-//        Intent intent1 = new Intent(this, ExerciseMainActivity.class);
-////        intent1.putExtra("Title", new String(i.getName()));
-////                    intent1.putExtra("Name", new String(s.getName()));
-////                    intent1.putExtra("Students", new Integer(s.getStudents()));
-//        startActivity(intent1);
+        ScheduleEventSetting.idSave = i.getId();
+        Intent intent1 = new Intent(getActivity(), ScheduleEventSetting.class);
+//        intent1.putExtra("Title", new String(i.getName()));
+//                    intent1.putExtra("Name", new String(s.getName()));
+//                    intent1.putExtra("Students", new Integer(s.getStudents()));
+        startActivity(intent1);
     }
 
     private void createNotificationChannel() {
