@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -267,6 +269,7 @@ public class SleepManagement extends AppCompatActivity {
                                     pulseAnimation.stop();
                                     handler.removeCallbacksAndMessages(null);
                                     stopAlarm();
+                                    saveTime();
                                 }
 
                             }
@@ -326,9 +329,11 @@ public class SleepManagement extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Xử lý sự kiện khi trạng thái của checkbox thay đổi
                 if (isChecked) {
-                    // Checkbox được chọn
+                    // Checkbox được chọn, hiển thị thông báo khi ngủ
+                    showSleepNotification();
                 } else {
-                    // Checkbox không được chọn
+                    // Checkbox không được chọn, hủy thông báo khi ngủ
+                    cancelNotification();
                 }
             }
         });
@@ -628,6 +633,9 @@ public class SleepManagement extends AppCompatActivity {
         if (textClock != null)
             textClock.setVisibility(View.GONE);
 
+
+    }
+    private void saveTime(){
         Calendar calendar = Calendar.getInstance();
 
         SharedPreferences sharedPref = getSharedPreferences(SplashScreen.PREFS_NAME, Context.MODE_PRIVATE);
@@ -635,9 +643,10 @@ public class SleepManagement extends AppCompatActivity {
 
 
         // Tính thời gian
-        int timeInMillis = (int) (calendar.getTimeInMillis() - startTime);
-        int hoursSlept = timeInMillis / (60 * 60 * 1000);
-        int minutesSlept = (timeInMillis % (60 * 60 * 1000)) / (60 * 1000);
+        long timeInMillis = (calendar.getTimeInMillis() - startTime);
+        //int hoursSlept = timeInMillis / (60 * 60 * 1000);
+        int minutesSlept = (int) ((timeInMillis % (60 * 60 * 1000)) / (60 * 1000));
+        Log.i("minute slept: ", Integer.toString(minutesSlept));
 
         UserHelper helper = new UserHelper(this);
         String query_temp = "SELECT * FROM users";
@@ -648,6 +657,7 @@ public class SleepManagement extends AppCompatActivity {
                 String id = cursor.getString(0);
                 int currentGionguHangNgay = cursor.getInt(7);
                 int newGionguHangNgay = currentGionguHangNgay + minutesSlept;
+                Log.i("minute slept: ", Integer.toString(newGionguHangNgay));
                 String updateQuery = "UPDATE users SET GIONGUHOMNAY = " + newGionguHangNgay + " WHERE ID = '"+ id + "'"  ; // Thay "your_user_id" bằng ID của người dùng đang sử dụng ứng dụng
                 helper.QueryData(updateQuery);            }
         }
@@ -668,7 +678,48 @@ public class SleepManagement extends AppCompatActivity {
         });
         colorAnimation.start();
     }
+    private static final int NOTIFICATION_ID = 1;
+    private static final String NOTIFICATION_CHANNEL_ID = "SleepNotificationChannel";
 
+    private void showSleepNotification() {
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    NOTIFICATION_CHANNEL_ID,
+                    "Sleep Notification",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            channel.setDescription("Notification channel for sleep reminders");
+            channel.enableLights(true);
+            channel.setLightColor(Color.BLUE);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        Intent intent = new Intent(this, SleepManagement.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setContentTitle("Đã vào trạng thái ngủ")
+                .setContentText("Chúc bạn có giấc ngủ ngon!")
+                .setSmallIcon(R.drawable.icon_sleep)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build();
+
+        notificationManager.notify(NOTIFICATION_ID, notification);
+    }
+    private void cancelNotification() {
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(NOTIFICATION_ID);
+    }
     // Thực hiện chuyển đổi màu nền của màn hình về màu trắng trong 1 giây
     private void animateToDayMode() {
         stopAlarm();

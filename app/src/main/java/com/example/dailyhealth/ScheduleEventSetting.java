@@ -224,9 +224,11 @@ public class ScheduleEventSetting extends AppCompatActivity {
         }
 
 //         Intent để gửi tới BroadcastReceiver
-        Intent intent = new Intent(getBaseContext(), TestReceiver.class);
+        Intent intent = new Intent(getBaseContext(), ScheduleReceiver.class);
 
         intent.putExtra("id", id);
+        intent.putExtra("title", titleEventText.getText());
+        intent.putExtra("detail",detailEventText.getText());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
 //         Lấy AlarmManager
