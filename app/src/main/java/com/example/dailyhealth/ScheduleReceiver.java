@@ -27,7 +27,14 @@ public class ScheduleReceiver extends BroadcastReceiver {
         String title = "";
         String detail = "";
         String id = intent.getStringExtra("id");
-        String query = "SELECT  TIEUDE, GHICHU FROM SCHEDULE WHERE ID = " + id;
+        if (intent.hasExtra("id")) {
+            id = intent.getStringExtra("id");
+            Log.i("receiveID", id);
+            // Xử lý giá trị id ở đây
+        } else {
+            Log.i("receiveID", "No ID found in intent.");
+        }
+        String query = "SELECT TIEUDE, GHICHU FROM SCHEDULE WHERE ID = " + id;
         ScheduleHelper scheduleHelper = new ScheduleHelper(context);
         Cursor cursor = scheduleHelper.GetData(query);
         if (cursor.getCount() > 0) {

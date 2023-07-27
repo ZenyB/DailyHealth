@@ -45,6 +45,7 @@ public class ScheduleEventSetting extends AppCompatActivity {
     private EditText timeEventText;
     private EditText locationEventText;
     private EditText detailEventText;
+    protected static String id;
 
     private ScheduleEventAdapter scheduleEventAdapter;
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -79,7 +80,7 @@ public class ScheduleEventSetting extends AppCompatActivity {
                 if (idSave.isEmpty()) {
                     String query = "SELECT * FROM schedule";
                     Cursor cursor = scheduleHelper.GetData(query);
-                    String id = "00001";
+                    id = "00001";
 
                     if (cursor.getCount() > 0) {
                         while (cursor.moveToNext()) {
@@ -225,8 +226,8 @@ public class ScheduleEventSetting extends AppCompatActivity {
         calendar.set(Calendar.YEAR, nam);
         calendar.set(Calendar.MONTH, thang - 1);
         calendar.set(Calendar.DAY_OF_MONTH, ngay);
-        calendar.set(Calendar.HOUR_OF_DAY, 6);
-        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, hours);
+        calendar.set(Calendar.MINUTE, totalMinutes % 60);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
@@ -238,10 +239,10 @@ public class ScheduleEventSetting extends AppCompatActivity {
 
 //         Intent để gửi tới BroadcastReceiver
         Intent intent = new Intent(getBaseContext(), ScheduleReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 1, intent, PendingIntent.FLAG_IMMUTABLE);
 
         Log.i("receiveID", id);
-       // intent.putExtra("id", id);
+       intent.putExtra("id", id);
 //        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
 //         Lấy AlarmManager

@@ -100,6 +100,9 @@ public class SplashScreen extends AppCompatActivity {
             sleepHelper.QueryData(query);
 
 
+            createNotificationChannel("Thông báo kinh nguyệt", "Thông báo kinh nguyệt", "444");
+            createNotificationChannel("Thông báo lịch trình", "Thông báo lịch trình", "1111");
+
             query = "INSERT INTO giacngu (DANGNGU,GIODINGU,PHUTDINGU,NHACNGU, ID)" +
             " VALUES (0,22,0,0,1)";
             sleepHelper.QueryData(query);
@@ -212,8 +215,6 @@ public class SplashScreen extends AppCompatActivity {
             //User đã cài đặt thông tin ban đầu => Home
             // Start home activity
        //     Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
-            createNotificationChannel("Thông báo kinh nguyệt", "Thông báo kinh nguyệt", "444");
-            createNotificationChannel("Thông báo lịch trình", "Thông báo lịch trình", "1111");
 
             startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
             startUpdatingTime();
