@@ -303,11 +303,8 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
         calendarAdapter.notifyItemChanged(daysInMonth.indexOf(startDate));
         setMonthView();
         LocalDate noticeDay = (startDate.plusDays(cycleDays)).minusDays(nhactruoc);
-        if (noticeDay.isBefore(LocalDate.now())) {
-
-        } else {
-            scheduleNotification(noticeDay.getDayOfMonth(), noticeDay.getMonthValue(), noticeDay.getYear());
-        }
+        Log.i("nhac truoc", Integer.toString(nhactruoc));
+        scheduleNotification(noticeDay.getDayOfMonth(), noticeDay.getMonthValue(), noticeDay.getYear());
         endBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
     }
@@ -374,7 +371,6 @@ public class MoonCalendar extends AppCompatActivity implements CalendarAdapter.O
 
 //         Intent để gửi tới BroadcastReceiver
         Intent intent = new Intent(getBaseContext(), TestReceiver.class);
-        intent.putExtra("id", "123");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
 //         Lấy AlarmManager

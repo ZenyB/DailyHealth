@@ -30,6 +30,7 @@
         <receiver android:name=".AlarmReceiver" />
         <receiver android:name=".NewDayBroadcastReceiver" />
         <receiver android:name=".receiver.MoonReceiver"/>
+        <receiver android:name=".ScheduleReceiver"/>
         <activity
             android:name=".NavigationActivity"
             android:exported="false" />

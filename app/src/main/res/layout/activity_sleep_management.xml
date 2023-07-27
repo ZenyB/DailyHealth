@@ -186,6 +186,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/reminder"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -274,7 +275,7 @@
                 android:layout_height="wrap_content"
                 android:text="Chọn nhạc"
                 android:layout_marginTop="8dp"
-                android:onClick="pickRingtone" />
+                 />
 
             <!-- Add alarm volume setting -->
             <TextView
@@ -297,6 +298,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/goalSetting"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"

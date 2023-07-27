@@ -213,6 +213,8 @@ public class SplashScreen extends AppCompatActivity {
             // Start home activity
        //     Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             createNotificationChannel("Thông báo kinh nguyệt", "Thông báo kinh nguyệt", "444");
+            createNotificationChannel("Thông báo lịch trình", "Thông báo lịch trình", "1111");
+
             startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
             startUpdatingTime();
             return;
@@ -412,7 +414,7 @@ public class SplashScreen extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String CHANNEL_ID = "SPLASH_SCREEN";
             CharSequence name = "Thông báo ngày mới";
-            String description = "Notification channel for Splash Screen";
+            String description = "thông báo về ngày mới";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
