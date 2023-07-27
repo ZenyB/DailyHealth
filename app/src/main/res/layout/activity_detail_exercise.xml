@@ -170,13 +170,13 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="300dp"
+                        android:layout_width="280dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="@dimen/small_ex_item_width"
+                            android:layout_width="280dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:fontFamily="@font/lato_bold_2"
@@ -186,7 +186,7 @@
                             android:textSize="@dimen/title_font_size" />
 
                         <TextView
-                            android:layout_width="@dimen/small_ex_item_width"
+                            android:layout_width="300dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:layout_marginTop="5dp"
@@ -198,13 +198,14 @@
                     </LinearLayout>
                     <TextView
                         android:id="@+id/relaxTimeTV"
-                        android:layout_width="match_parent"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:text="15 giây"
                         android:fontFamily="@font/lato_bold_2"
                         android:textSize="20sp"
                         android:textAlignment="center"
                         android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
                         />
                 </LinearLayout>
 
