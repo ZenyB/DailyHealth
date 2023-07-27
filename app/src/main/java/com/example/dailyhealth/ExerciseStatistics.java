@@ -234,22 +234,16 @@ public class ExerciseStatistics extends AppCompatActivity {
         }
         // Cập nhật TextView thể hiện thời gian ngủ trung bình
         TextView averageTimeTextView = findViewById(R.id.textAverage);
-        int hour = (int) averageExerciseTime; // Giá trị giờ
-        int minute = (int) ((averageExerciseTime - hour) * 60); // Giá trị phút
-        averageTimeTextView.setText(String.format(hour + "h" + String.format(Locale.getDefault(), "%02d", minute)));
+        averageTimeTextView.setText(SleepStatistics.convertToHourAndMinuteFormat(averageExerciseTime));
 
         //Cập nhật TextView thể hiện thời gian ngủ nhiều nhất
         TextView maxTimeTextView = findViewById(R.id.textMax);
-        hour = (int) maxExerciseTime; // Giá trị giờ
-        minute = (int) ((maxExerciseTime - hour) * 60); // Giá trị phút
-        maxTimeTextView.setText(hour + "h" + String.format(Locale.getDefault(), "%02d", minute));
+        maxTimeTextView.setText(SleepStatistics.convertToHourAndMinuteFormat(maxExerciseTime));
 
 
         //Cập nhật TextView thể hiện thời gian ngủ ít nhất
         TextView minTimeTextView = findViewById(R.id.textMin);
-        hour = (int) minExerciseTime; // Giá trị giờ
-        minute = (int) ((minExerciseTime - hour) * 60); // Giá trị phút
-        minTimeTextView.setText(String.format(hour + "h" + String.format(Locale.getDefault(), "%02d", minute)));
+        minTimeTextView.setText(SleepStatistics.convertToHourAndMinuteFormat(minExerciseTime));
 
 
         // Cập nhật ImageView dựa trên giá trị trung bình

@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -142,10 +140,10 @@ public class SleepStatistics extends AppCompatActivity {
         return valueY;
     }
 
-    public static float convertToHourMinuteFormat(int totalMinutes) {
+    public static int convertToHourMinuteFormat(int totalMinutes) {
         int hours = totalMinutes / 60;
         int minutes = totalMinutes % 60;
-        return hours + (minutes / 60f);
+        return (int) (hours + (minutes / 60f));
     }
     private void populateBarChart() {
         List<BarEntry> entries = new ArrayList<>();
@@ -256,22 +254,16 @@ public class SleepStatistics extends AppCompatActivity {
         }
         // Cập nhật TextView thể hiện thời gian ngủ trung bình
         TextView averageTimeTextView = findViewById(R.id.textAverage);
-        int hour = (int) averageSleepTime; // Giá trị giờ
-        int minute = (int) ((averageSleepTime - hour) * 60); // Giá trị phút
-        averageTimeTextView.setText(String.format(hour + "h" + String.format(Locale.getDefault(), "%02d", minute)));
+        averageTimeTextView.setText(convertToHourAndMinuteFormat(averageSleepTime));
 
         //Cập nhật TextView thể hiện thời gian ngủ nhiều nhất
         TextView maxTimeTextView = findViewById(R.id.textMax);
-        hour = (int) maxSleepTime; // Giá trị giờ
-        minute = (int) ((maxSleepTime - hour) * 60); // Giá trị phút
-        maxTimeTextView.setText(hour + "h" + String.format(Locale.getDefault(), "%02d", minute));
+        maxTimeTextView.setText(convertToHourAndMinuteFormat(maxSleepTime));
 
 
         //Cập nhật TextView thể hiện thời gian ngủ ít nhất
         TextView minTimeTextView = findViewById(R.id.textMin);
-        hour = (int) minSleepTime; // Giá trị giờ
-        minute = (int) ((minSleepTime - hour) * 60); // Giá trị phút
-        minTimeTextView.setText(String.format(hour + "h" + String.format(Locale.getDefault(), "%02d", minute)));
+        minTimeTextView.setText(convertToHourAndMinuteFormat(minSleepTime));
 
 
         // Cập nhật ImageView dựa trên giá trị trung bình
@@ -286,6 +278,15 @@ public class SleepStatistics extends AppCompatActivity {
         } else {
             imageView.setImageResource(R.drawable.image_high_sleep);
         }
+    }
+    public static String convertToHourAndMinuteFormat(float totalMinutes) {
+        float hours = totalMinutes / 60;
+        float minutes = totalMinutes % 60;
+
+        String hourText = (hours > 0) ? hours + "h " : "";
+        String minuteText = (minutes > 0) ? minutes + "p" : "";
+
+        return hourText + minuteText;
     }
 }
 
