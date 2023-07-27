@@ -138,7 +138,7 @@ public class WaterStatistics extends AppCompatActivity {
     }
 
     private void populateBarChart() {
-        List<BarEntry> entries = new ArrayList<>();
+        List<BarEntry> entriesInMilliliters = new ArrayList<>();
         boolean isNew = true;
 
         WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
@@ -153,23 +153,15 @@ public class WaterStatistics extends AppCompatActivity {
                 int showable = cursor.getInt(5);
                 if (showable == 1){
                     isNew = false;
-                    entries.add(new BarEntry(i, SleepStatistics.convertToHourMinuteFormat(num)));
+                    entriesInMilliliters.add(new BarEntry(i, num));
                 }
                 else {
-                    entries.add(new BarEntry(i, 0));
+                    entriesInMilliliters.add(new BarEntry(i, 0));
                 }
                 i ++;
             }
         }
         // Tạo một danh sách mới để lưu trữ giá trị Y của các cột đã chuyển đổi sang ml
-        List<BarEntry> entriesInMilliliters = new ArrayList<>();
-
-        // Duyệt qua danh sách các giá trị Y của các cột ban đầu và chuyển đổi sang ml
-        for (BarEntry entry : entries) {
-            float valueInLiters = entry.getY();
-            float valueInMilliliters = convertToMilliliters(valueInLiters);
-            entriesInMilliliters.add(new BarEntry(entry.getX(), valueInMilliliters));
-        }
 
         BarDataSet dataSet = new BarDataSet(entriesInMilliliters, "Nước uống");
         dataSet.setColor(Color.BLUE);
@@ -193,7 +185,7 @@ public class WaterStatistics extends AppCompatActivity {
         float minWater =0f;
         float maxWater = 0f;
 
-        query = "SELECT AVG(GIONGU) AS AVG_GIONGU, MAX(GIONGU) AS MAX_GIONGU, MIN(GIONGU) AS MIN_GIONGU FROM weekInfo WHERE SHOWABLE=1";
+        query = "SELECT AVG(LUONGNUOC) AS AVG_GIONGU, MAX(LUONGNUOC) AS MAX_GIONGU, MIN(LUONGNUOC) AS MIN_GIONGU FROM weekInfo WHERE SHOWABLE=1";
         cursor = weekInfoHelper.GetData(query);
         if (cursor.getCount() > 0){
             while (cursor.moveToNext()){
@@ -208,7 +200,7 @@ public class WaterStatistics extends AppCompatActivity {
         cursor = userHelper.GetData(query);
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                muctieu = cursor.getInt(10);
+                muctieu = cursor.getInt(9);
                 Log.i("","Muc tieu: " + Float.toString(muctieu));
             }
         }
@@ -224,7 +216,7 @@ public class WaterStatistics extends AppCompatActivity {
 
         else {
             if (averageWater < muctieu) {
-                textView.setText("Cảnh báo: Uống quá ít nước");
+                textView.setText("Bạn nên uống nước thêm");
                 textView.setTextSize(28); // Đặt kích thước chữ là 18
                 textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
                 textView.setTextColor(Color.RED);

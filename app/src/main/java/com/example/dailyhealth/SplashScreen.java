@@ -18,11 +18,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.dailyhealth.database.MoonHelper;
 import com.example.dailyhealth.database.ScheduleHelper;
+import com.example.dailyhealth.database.SleepHelper;
 import com.example.dailyhealth.database.UserHelper;
 import com.example.dailyhealth.database.WeekInfoHelper;
 
@@ -33,6 +35,10 @@ public class SplashScreen extends AppCompatActivity {
     public String databaseName = "DAILYHEATH";
     public static final String PREFS_NAME = "MyPrefsFile";
     public static final String KEY_LAST_NEW_DAY_TIME = "lastNewDayTime";
+    public static final String KEY_LAST_GET_IN = "lastNewDayTime";
+
+    private Handler timeHandler = new Handler();
+    private Runnable updateTimeRunnable;
     private static final String WORK_TAG = "newDayCheckWorker";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +87,22 @@ public class SplashScreen extends AppCompatActivity {
 
             WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
             weekInfoHelper.QueryData(query);
+
+            // Tạo bảng sleep
+            query = "CREATE TABLE IF NOT EXISTS giacngu (" +
+                    "    DANGNGU INTEGER ," +
+                    "    GIODINGU INTEGER," +
+                    "    PHUTDINGU INTEGER," +
+                    "    NHACNGU INTEGER," +
+                    "    ID INTEGER PRIMARY KEY"+
+                    ")";
+            SleepHelper sleepHelper = new SleepHelper(this);
+            sleepHelper.QueryData(query);
+
+
+            query = "INSERT INTO giacngu (DANGNGU,GIODINGU,PHUTDINGU,NHACNGU, ID)" +
+            " VALUES (0,22,0,0,1)";
+            sleepHelper.QueryData(query);
 
             String[] days = {"THU HAI", "THU BA", "THU TU", "THU NAM", "THU SAU", "THU BAY", "CHU NHAT"};
             for (int i = 0; i < days.length; i++) {
@@ -191,7 +213,10 @@ public class SplashScreen extends AppCompatActivity {
             // Start home activity
        //     Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             createNotificationChannel("Thông báo kinh nguyệt", "Thông báo kinh nguyệt", "444");
+            createNotificationChannel("Thông báo lịch trình", "Thông báo lịch trình", "1111");
+
             startActivity(new Intent(SplashScreen.this, NavigationActivity.class));
+            startUpdatingTime();
             return;
         }
         else {
@@ -202,11 +227,54 @@ public class SplashScreen extends AppCompatActivity {
             editor.apply();
           //  Toast.makeText(this, "Test SplashScreen", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SplashScreen.this, GetStart.class));
+            startUpdatingTime();
             return;
         }
 
     }
 
+    private void startUpdatingTime() {
+        updateTimeRunnable = new Runnable() {
+            @Override
+            public void run() {
+                updateClockTime();
+                timeHandler.postDelayed(this, 5000); // Cập nhật sau mỗi 5 giây
+            }
+        };
+        timeHandler.post(updateTimeRunnable);
+    }
+    private void updateClockTime(){
+        SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        long lastNewDayTime = sharedPref.getLong(KEY_LAST_NEW_DAY_TIME, 0);
+        Log.i("","" + lastNewDayTime);
+        long currentTime = System.currentTimeMillis();
+        Log.i(""," " + currentTime);
+        if (isNewDay(lastNewDayTime, currentTime)) {
+            Log.i("","True, reset data");
+            // Nếu đã qua ngày mới, thực hiện công việc kiểm tra ngày mới ở đây
+            // Ví dụ: lưu trữ dữ liệu mới cho ngày mới, cập nhật thông tin ứng dụng, ...
+            // Sau đó cập nhật lại mốc thời gian ngày mới bắt đầu
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putLong(KEY_LAST_NEW_DAY_TIME, currentTime);
+            editor.apply();
+
+            // Hiển thị thông báo màn hình SplashScreen
+            showSplashScreenNotification();
+            // Lưu thông tin vào bảng weekInfo trước khi reset
+            savePreviousDayData();
+
+            // Reset các thông số về 0 trong bảng users
+            resetUserData();
+
+            // Cập nhật lại mốc thời gian ngày mới bắt đầu sau khi hiển thị thông báo
+            currentTime = System.currentTimeMillis();
+            sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            editor = sharedPref.edit();
+            editor.putLong(KEY_LAST_NEW_DAY_TIME, currentTime);
+            editor.apply();
+        }
+
+    }
     public static Boolean isTableExist(SQLiteDatabase db, String table) {
         Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{table});
         boolean tableExist = (cursor.getCount() != 0);
@@ -267,11 +335,20 @@ public class SplashScreen extends AppCompatActivity {
                     Cursor checkCursor = db.rawQuery(checkQuery, null);
                     WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
                     if (checkCursor.getCount() > 0) {
-                        // Ngày hiện tại đã tồn tại trong bảng weekInfo, thực hiện cập nhật giá trị
-                        String updateQuery = "UPDATE weekInfo SET LUONGNUOC=" + luongNuocHomNay +
-                                ", GIONGU=" + giongUHomNay + ", TAPLUYEN=" + tapLuyenHomNay +
-                                ", SHOWABLE=1 WHERE THU='" + previousDay + "'";
-                        weekInfoHelper.QueryData(updateQuery);
+                        Calendar calendar = Calendar.getInstance();
+                        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+                        if (dayOfWeek == Calendar.TUESDAY) {
+                            // Nếu ngày hiện tại là thứ 2 (qua tuần mới), reset tất cả các hàng trừ thứ 2
+                            String resetQuery = "UPDATE weekInfo SET LUONGNUOC = 0, GIONGU = 0, TAPLUYEN = 0 ,SHOWABLE = 0 ";
+                            Log.i("reset" , "Reset everything");
+                            weekInfoHelper.QueryData(resetQuery);
+                        }
+                            // Ngày hiện tại đã tồn tại trong bảng weekInfo, thực hiện cập nhật giá trị
+                            String updateQuery = "UPDATE weekInfo SET LUONGNUOC=" + luongNuocHomNay +
+                                    ", GIONGU=" + giongUHomNay + ", TAPLUYEN=" + tapLuyenHomNay +
+                                    ", SHOWABLE=1 WHERE THU='" + previousDay + "'";
+                            weekInfoHelper.QueryData(updateQuery);
                     } else {
                         // Kiểm tra xem ngày hiện tại đã là thứ 2 chưa
                         Calendar calendar = Calendar.getInstance();
@@ -279,7 +356,8 @@ public class SplashScreen extends AppCompatActivity {
 
                         if (dayOfWeek == Calendar.TUESDAY) {
                             // Nếu ngày hiện tại là thứ 2 (qua tuần mới), reset tất cả các hàng trừ thứ 2
-                            String resetQuery = "UPDATE weekInfo SET LUONGNUOC = 0, GIONGU = 0, TAPLUYEN = 0 ,SHOWABLE = 0 WHERE THU != 'THU HAI'";
+                            String resetQuery = "UPDATE weekInfo SET LUONGNUOC = 0, GIONGU = 0, TAPLUYEN = 0 ,SHOWABLE = 0 ";
+                            Log.i("reset" , "Reset everything");
                             weekInfoHelper.QueryData(resetQuery);
                         }
                         // Ngày hiện tại chưa tồn tại trong bảng weekInfo, thêm hàng mới
@@ -309,18 +387,34 @@ public class SplashScreen extends AppCompatActivity {
         db.close();
     }
     public String getDayOfWeekBeforeReset() {
+//        Calendar calendar = Calendar.getInstance();
+//        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+//        String[] days = {"CHU NHAT", "THU HAI", "THU BA", "THU TU", "THU NAM", "THU SAU", "THU BAY"};
+//        return days[dayOfWeek - 2]; // Trừ 2 vì ngày trong tuần bắt đầu từ thứ 2
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         String[] days = {"CHU NHAT", "THU HAI", "THU BA", "THU TU", "THU NAM", "THU SAU", "THU BAY"};
-        return days[dayOfWeek - 2]; // Trừ 2 vì ngày trong tuần bắt đầu từ thứ 2
+
+        // Trừ 1 vì ngày trong tuần bắt đầu từ Chủ Nhật (value = 1)
+        // và mảng days bắt đầu từ Chủ Nhật (index = 0)
+        int index = dayOfWeek - 2;
+        if (index < 0) {
+            if (index == -2)
+                index = 5;
+            else
+            // Nếu index nhỏ hơn 0 (xảy ra khi dayOfWeek = 1, tức là Chủ Nhật),
+            // ta cần gán index = 6 để lấy thứ 7 từ mảng days.
+            index = 6;
+        }
+        return days[index];
     }
 
     private void showSplashScreenNotification() {
         // Tạo channel cho notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String CHANNEL_ID = "SPLASH_SCREEN";
-            CharSequence name = "Splash Screen";
-            String description = "Notification channel for Splash Screen";
+            CharSequence name = "Thông báo ngày mới";
+            String description = "thông báo về ngày mới";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
@@ -334,18 +428,71 @@ public class SplashScreen extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SPLASH_SCREEN")
-                .setSmallIcon(R.drawable.icon_sleep)
-                .setContentTitle("Ngày mới")
-                .setContentText("Ngày mới vui vẻ")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setAutoCancel(true);
+        // Kiểm tra xem đã qua tuần mới hay chưa
+        SQLiteDatabase db = openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        if (dayOfWeek == Calendar.MONDAY){
+            WeekInfoHelper weekInfoHelper = new WeekInfoHelper(this);
+            String query;
+            query = "SELECT AVG(LUONGNUOC) AS AVG_GIONGU, AVG(GIONGU) AS MAX_GIONGU, AVG(TAPLUYEN) AS MIN_GIONGU FROM weekInfo WHERE SHOWABLE=1";
+            Cursor cursor = weekInfoHelper.GetData(query);
+            if (cursor.getCount() > 0){
+                while (cursor.moveToNext()){
+                    String content  = "";
+                    int averageWater = cursor.getInt(0);
+                    int averageSleep = cursor.getInt(1);
+                    int averageExercise = cursor.getInt(2);
+                    UserHelper userHelper = new UserHelper(this);
+                    String query_temp = "SELECT * FROM users";
+                    Cursor cursor1 = userHelper.GetData(query_temp);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        int notificationId = (int) System.currentTimeMillis();
-        notificationManager.notify(notificationId, builder.build());
+                    if (cursor1.getCount() > 0) {
+                        while (cursor1.moveToNext()) {
+                            int luongnuocmuctieu = cursor1.getInt(9);
+                            int ngumuctieu = cursor1.getInt(10);
+                            int tapluyenmuctieu = cursor1.getInt(11);
+
+                            if (averageWater < luongnuocmuctieu){ content += "Bạn uống nước rất tốt! \n";}
+                            else{content += "Bạn cần uống nước nhiều hơn! \n";}
+                            if (averageSleep < ngumuctieu){content += "Bạn đã ngủ đủ giấc! \n";}
+                            else{content += "Bạn cần ngủ nhiều hơn! \n";}
+                            if (averageExercise < tapluyenmuctieu){content += "Bạn đã tập luyện rất tốt! \n";}
+                            else{content += "Bạn cần tập luyện nhiều hơn! \n";}
+                            content += "Hãy tiếp tục kiên trì nhé!";
+
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SPLASH_SCREEN")
+                                    .setSmallIcon(R.drawable.icon_sleep)
+                                    .setContentTitle("Thống kê tuần vừa qua")
+                                    .setContentText(content)
+                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                    .setContentIntent(pendingIntent)
+                                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                    .setAutoCancel(true);
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                            int notificationId = (int) System.currentTimeMillis();
+                            notificationManager.notify(notificationId, builder.build());
+
+                        }
+                    }
+                }
+            }
+
+        }
+        else {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SPLASH_SCREEN")
+                    .setSmallIcon(R.drawable.icon_sleep)
+                    .setContentTitle("Ngày mới")
+                    .setContentText("Ngày mới vui vẻ")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            int notificationId = (int) System.currentTimeMillis();
+            notificationManager.notify(notificationId, builder.build());
+
+        }
     }
 
     private void createNotificationChannel(CharSequence name, String description, String id) {

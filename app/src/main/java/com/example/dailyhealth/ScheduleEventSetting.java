@@ -3,9 +3,13 @@ package com.example.dailyhealth;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -88,18 +92,22 @@ public class ScheduleEventSetting extends AppCompatActivity {
                     //ScheduleCalendar.schedule.add(new ScheduleEvent(id, titleEventText.getText().toString(),detailEventText.getText().toString(), locationEventText.getText().toString(), day, month, year , hours, totalMinutes));
 
                     query = "INSERT INTO schedule (ID, TIEUDE, GHICHU, DIADIEM, NGAY, THANG, NAM, TIENG, TONGPHUT) " +
-                            "VALUES ('" + id + "', '" + titleEventText.getText().toString() + "', '" + detailEventText.getText().toString() + "', '" + locationEventText.getText().toString() + "', " + day + ", " + (month + 1) + ", " + year + ", " + hours + ", " + totalMinutes + ")";
+                            "VALUES ('" + id + "', '" + titleEventText.getText().toString() + "', '" + detailEventText.getText().toString() + "', '" + locationEventText.getText().toString() + "', " + day + ", " + month + ", " + year + ", " + hours + ", " + totalMinutes + ")";
                     scheduleHelper.QueryData(query);
+                    scheduleNotification(day , month, year, id);
                     finish();
                 }
                 else {
                     String query = "UPDATE schedule SET TIEUDE = '" + titleEventText.getText().toString() + "', " +
                             "GHICHU = '" + detailEventText.getText().toString() + "', " +
                             "DIADIEM = '" + locationEventText.getText().toString() + "', " +
-                            "NGAY = " + day + ", THANG = " + (month + 1) + ", NAM = " + year + ", " +
+                            "NGAY = " + day + ", THANG = " + month + ", NAM = " + year + ", " +
                             "TIENG = " + hours + ", TONGPHUT = " + totalMinutes + " WHERE ID = '" + idSave + "'";
                     scheduleHelper.QueryData(query);
+                    LocalDate temp = LocalDate.of(year,month,day);
+                    scheduleNotification(day,month, year, idSave);
                     idSave = "";
+
                     finish();
                 }
 
@@ -180,12 +188,12 @@ public class ScheduleEventSetting extends AppCompatActivity {
 
         Calendar cal = Calendar.getInstance();
         year = CalendarUtils.selectedDate.getYear();
-        month = CalendarUtils.selectedDate.getMonthValue()-1;
+        month = CalendarUtils.selectedDate.getMonthValue();
         day = CalendarUtils.selectedDate.getDayOfMonth();
 
         int style = AlertDialog.THEME_HOLO_LIGHT;
 
-        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
+        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month - 1, day);
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
 
         //Time Picker
@@ -208,6 +216,37 @@ public class ScheduleEventSetting extends AppCompatActivity {
     private String makeDateString(int day, int month, int year)
     {
         return day + " " + getMonthFormat(month) + " " + year;
+    }
+    private void scheduleNotification(int ngay, int thang, int nam, String id) {
+        // Tạo Calendar để lên lịch vào 12:00 AM hàng ngày
+        Log.i("noti", "TRUE");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.YEAR, nam);
+        calendar.set(Calendar.MONTH, thang - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, ngay);
+        calendar.set(Calendar.HOUR_OF_DAY, 6);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+
+//        // Nếu thời gian đã qua 12:00 AM hôm nay, lên lịch vào ngày mai
+        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+//         Intent để gửi tới BroadcastReceiver
+        Intent intent = new Intent(getBaseContext(), ScheduleReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        Log.i("receiveID", id);
+       // intent.putExtra("id", id);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+//         Lấy AlarmManager
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 
     private String getMonthFormat(int month)

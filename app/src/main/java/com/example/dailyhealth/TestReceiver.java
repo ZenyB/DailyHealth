@@ -23,7 +23,7 @@ public class TestReceiver extends BroadcastReceiver {
         // Ví dụ: Sử dụng NotificationManagerCompat để hiển thị thông báo
         // hoặc sử dụng các cách hiển thị thông báo khác
         int nhactruoc = 0;
-        String query = "SELECT THOIGIANNHACTRUOC FROM MOON";
+        String query = "SELECT THOIGIANNHACTRUOC FROM MOON WHERE ID = '1'";
         MoonHelper moonHelper = new MoonHelper(context);
         Cursor cursor = moonHelper.GetData(query);
         if (cursor.getCount() > 0) {
@@ -31,7 +31,7 @@ public class TestReceiver extends BroadcastReceiver {
                 nhactruoc = cursor.getInt(0);
             }
         }
-        String ngay = "hôm nay.";
+        String ngay = "Kỳ kinh nguyệt sẽ đến trong hôm nay.";
         if (nhactruoc != 0) {
             ngay = "Kỳ kinh nguyệt sẽ đến trong " + nhactruoc + " ngày nữa.";
         }
@@ -43,7 +43,8 @@ public class TestReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.icon_menstruation)
                 .setContentTitle("Dự đoán kinh nguyệt")
                 .setContentText(ngay)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setAutoCancel(true);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

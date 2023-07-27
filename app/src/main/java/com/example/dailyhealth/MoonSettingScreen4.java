@@ -102,7 +102,8 @@ public class MoonSettingScreen4 extends AppCompatActivity {
                 nhactruoc = cursor.getInt(0);
             }
         }
-        LocalDate noticeDay = (startDate.plusDays(cycleDays)).minusDays(nhactruoc);
+        LocalDate temp = LocalDate.of(MoonSettingScreen1.pickYear, MoonSettingScreen1.pickMonth, MoonSettingScreen1.pickDay );
+        LocalDate noticeDay = (temp.plusDays(MoonSettingScreen2.cycle)).minusDays(nhactruoc);
         if (noticeDay.isBefore(LocalDate.now())) {
 
         } else {

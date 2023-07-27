@@ -2,9 +2,16 @@ package com.example.dailyhealth;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.os.Build;
+import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +22,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dailyhealth.database.ScheduleHelper;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdapter.ViewHolder> {
     Activity activity;
@@ -95,6 +106,7 @@ public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdap
         int finalPosition = position;
         String id = scheduleEvent.getId();
         holder.delBut.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
 //                Toast.makeText(activity, Integer.toString(holder.getPosition()), Toast.LENGTH_SHORT).show();
@@ -104,6 +116,49 @@ public class ScheduleEventAdapter extends RecyclerView.Adapter<ScheduleEventAdap
                 scheduleHelper.QueryData(query);
                 notifyItemRemoved(holder.getPosition());
                 notifyItemRangeChanged(holder.getPosition(), scheduleEvents.size() - holder.getPosition());
+//                // Lấy danh sách các thông báo đã đăng ký trong NotificationManagerCompat
+//                NotificationManager notificationManager = NotificationManagerCompat.from(v.getContext());
+//                Notification[] activeNotifications = notificationManager.getActiveNotifications();
+//
+//// ID của thông báo cần kiểm tra
+//                int notificationIdToCheck = YOUR_NOTIFICATION_ID;
+//
+//// Kiểm tra xem thông báo có tồn tại không
+//                boolean isNotificationActive = false;
+//
+//                for (Notification notification : activeNotifications) {
+//                    if (notification.getId() == notificationIdToCheck) {
+//                        isNotificationActive = true;
+//                        break;
+//                    }
+//                }
+//
+//// Kiểm tra kết quả
+//                if (isNotificationActive) {
+//                    // Thông báo cụ thể có tồn tại trong NotificationManagerCompat
+//                    // Thực hiện các hành động bạn muốn tại đây
+//                } else {
+//                    // Thông báo cụ thể không tồn tại trong NotificationManagerCompat
+//                    // Thực hiện các hành động khác nếu cần thiết
+//                }
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis() + 5000);
+//                calendar.add(Calendar.SECOND, 5);
+                Log.i("CALENDAR", calendar.toString());
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancel(Integer.parseInt(id));
+//                Intent intent = new Intent(v.getContext(),ScheduleReceiver.class);
+//                intent.putExtra("isDelete",true);
+//                intent.setAction("is_delete");
+//
+//                PendingIntent pendingIntent = PendingIntent.getBroadcast(v.getContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+//                // Cài đặt thông báo
+//                AlarmManager alarmManager = (AlarmManager) v.getContext().getSystemService(Context.ALARM_SERVICE);
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+//                } else {
+//                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+//                }
             }
         });
 
