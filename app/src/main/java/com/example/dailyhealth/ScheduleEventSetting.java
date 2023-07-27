@@ -108,6 +108,7 @@ public class ScheduleEventSetting extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setSchedule(){
         Log.i("Cccc", idSave);
         if (!idSave.isEmpty()){
@@ -130,6 +131,13 @@ public class ScheduleEventSetting extends AppCompatActivity {
                     ((Button)findViewById(R.id.timeEventTV)).setText(time);
                 }
             }
+        } else {
+            titleEventText.setText("");
+            detailEventText.setText("");
+            locationEventText.setText("");
+
+            dateButton.setText(getTodaysDate());
+            ((Button)findViewById(R.id.timeEventTV)).setText(getNowTime());
         }
     }
 
@@ -234,7 +242,10 @@ public class ScheduleEventSetting extends AppCompatActivity {
 
 
     public void cancelBtn(View view) {
+
         finish();
+        if (!idSave.isEmpty())
+            idSave = "";
     }
 
     public void openEventDatePicker(View view) {

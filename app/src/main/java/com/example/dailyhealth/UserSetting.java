@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dailyhealth.database.UserHelper;
 
+import java.text.DecimalFormat;
+
 public class UserSetting extends AppCompatActivity {
 
     private UserHelper userHelper = new UserHelper(this);
@@ -27,6 +29,7 @@ public class UserSetting extends AppCompatActivity {
     protected static RadioButton male, female;
     protected int gender;
     protected TextView save;
+    private TextView bmi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class UserSetting extends AppCompatActivity {
         male = findViewById(R.id.userGenderMale);
         female = findViewById(R.id.userGenderFemale);
         save = findViewById(R.id.saveButton);
+        bmi = findViewById(R.id.userbmi);
         ImageButton backButton = findViewById(R.id.btnBack);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +123,8 @@ public class UserSetting extends AppCompatActivity {
             query = "UPDATE USERS SET GIOITINH = '" + 1 + "' WHERE TEN = '" + name.getHint() + "'";
             userHelper.QueryData(query);
         }
+
+        loadBMI();
     }
 
     private void loadData(){
@@ -140,6 +146,19 @@ public class UserSetting extends AppCompatActivity {
         } else {
             female.setChecked(true);
         }
+
+        loadBMI();
+    }
+
+    private void loadBMI(){
+        DecimalFormat df = new DecimalFormat("#.##");
+        String result = df.format(calbmi(Integer.parseInt(weight.getHint().toString()), Integer.parseInt(height.getHint().toString())));
+
+        bmi.setText(result);
+    }
+
+    private float calbmi(int weight, int height){
+        return (float) weight / (((float)height/100) * ((float)height / 100));
     }
 
     private int luongNuoc(int weight, float height){
